@@ -1,14 +1,9 @@
-"use client";
-
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Fragment, useRef, useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
+import { NavLink } from "react-router-dom";
 
 const SidePanel = ({ isOpen }) => {
-  const pathname = usePathname();
-
   const navLinks = [
     {
       categorySlug: "discipline",
@@ -104,14 +99,12 @@ const SidePanel = ({ isOpen }) => {
           {navLinks?.map((links, index) => (
             <Fragment key={index}>
               <li className="border-b text-lg font-ador flex w-full justify-between">
-                <Link
-                  href={`/category/${links?.categorySlug}`}
-                  className={`${
-                    pathname === "/404" ? "text-primary" : ""
-                  } hover:text-primary p-2 grow`}
+                <NavLink
+                  to={`/category/${links?.categorySlug}`}
+                  className={`hover:text-primary p-2 grow`}
                 >
                   {links?.category}
-                </Link>
+                </NavLink>
                 {links?.subCategories?.length > 0 && (
                   <button
                     onClick={() => handleCollapse(index)}
@@ -142,17 +135,12 @@ const SidePanel = ({ isOpen }) => {
                   <ul className="pl-4">
                     {links?.subCategories?.map((subLinks, index) => (
                       <li key={index}>
-                        <Link
-                          href={`/category/${links?.categorySlug}/${subLinks?.subCategorySlug}`}
-                          className={`px-3 py-2 font-ador hover:text-primary duration-300 block border-b ${
-                            pathname ===
-                            `/category/${links?.categorySlug}/${subLinks?.subCategorySlug}`
-                              ? "text-primary"
-                              : ""
-                          }`}
+                        <NavLink
+                          to={`/category/${links?.categorySlug}/${subLinks?.subCategorySlug}`}
+                          className={`px-3 py-2 font-ador hover:text-primary duration-300 block border-b`}
                         >
                           {subLinks?.subCategory}
-                        </Link>
+                        </NavLink>
                       </li>
                     ))}
                   </ul>

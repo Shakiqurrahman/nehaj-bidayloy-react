@@ -1,18 +1,13 @@
-"use client";
-
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
-import { usePathname } from "next/navigation";
+import { NavLink } from "react-router-dom";
 import SidePanel from "./SidePanel";
-import Logo from "/public/nehaz-bidyalay-logo.jpg";
+import Logo from "/nehaz-bidyalay-logo.jpg";
 
 const Navbar = () => {
-  const pathname = usePathname();
   const navLinks = [
     {
       categorySlug: "discipline",
@@ -89,39 +84,32 @@ const Navbar = () => {
     <>
       <nav className="bg-white  shadow sticky top-0 w-full">
         <div className="max-width flex items-center justify-between py-3 bg-white relative z-[999999999]">
-          <Link href={"/"} className="shrink-0">
-            <Image
+          <NavLink to={"/"} className="shrink-0">
+            <img
               src={Logo}
               alt="Nehaj Bidyaloy Logo"
               className="w-[100px] sm:w-[170px]"
-              priority
             />
-          </Link>
+          </NavLink>
           <nav className="flex sm:hidden gap-4 py-2 sm:text-lg ml-auto mr-3">
-            <Link
+            <NavLink
               href={"/about-us"}
-              className={`${
-                pathname === "/about-us" ? "text-primary" : ""
-              } hover:text-primary duration-300 font-ador`}
+              className={` hover:text-primary duration-300 font-ador`}
             >
               পরিচয়
-            </Link>
-            <Link
-              href={"/notice"}
-              className={`${
-                pathname === "/notice" ? "text-primary" : ""
-              } hover:text-primary duration-300 font-ador`}
+            </NavLink>
+            <NavLink
+              to={"/notice"}
+              className={` hover:text-primary duration-300 font-ador`}
             >
               বিজ্ঞপ্তি
-            </Link>
-            <Link
-              href={"/contact"}
-              className={`${
-                pathname === "/contact" ? "text-primary" : ""
-              } hover:text-primary duration-300 font-ador`}
+            </NavLink>
+            <NavLink
+              to={"/contact"}
+              className={` hover:text-primary duration-300 font-ador`}
             >
               যোগাযোগ
-            </Link>
+            </NavLink>
           </nav>
           <div className="flex items-center justify-end sm:hidden w-5">
             <button
@@ -139,33 +127,25 @@ const Navbar = () => {
             <ul className="hidden sm:flex items-center gap-1">
               {navLinks?.map((links, index) => (
                 <li key={index} className="group relative">
-                  <Link
-                    href={`/${links?.categorySlug}`}
-                    className={`${
-                      pathname === `/category/${links?.categorySlug}`
-                        ? "text-primary"
-                        : ""
-                    } px-3 py-2 text-lg font-ador hover:bg-gray-100 flex items-center justify-between gap-2 hover:text-primary duration-300`}
+                  <NavLink
+                    to={`/${links?.categorySlug}`}
+                    className={`px-3 py-2 text-lg font-ador hover:bg-gray-100 flex items-center justify-between gap-2 hover:text-primary duration-300`}
                   >
                     {links?.category}{" "}
                     {links?.subCategories?.length > 0 && (
                       <MdKeyboardArrowDown />
                     )}
-                  </Link>
+                  </NavLink>
                   {links?.subCategories?.length > 0 && (
-                    <ul className="absolute top-full right-0 w-[200px] pl-4 py-2 bg-white shadow opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-300 z-[99]">
+                    <ul className="absolute top-full right-0 w-[200px] pl-4 py-2 bg-primary shadow opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-300 z-[99]">
                       {links?.subCategories?.map((subLinks, index) => (
                         <li key={index}>
-                          <Link
-                            href={`/category/${links?.categorySlug}/${subLinks?.subCategorySlug}`}
-                            className={`${
-                              pathname === `/${subLinks?.subCategorySlug}`
-                                ? "text-primary"
-                                : ""
-                            } px-3 text-lg py-2 block w-full font-ador hover:text-primary hover:pl-5 duration-300`}
+                          <NavLink
+                            to={`/category/${links?.categorySlug}/${subLinks?.subCategorySlug}`}
+                            className={` px-3 text-lg py-2 block w-full font-ador hover:text-primary hover:pl-5 duration-300`}
                           >
                             {subLinks?.subCategory}
-                          </Link>
+                          </NavLink>
                         </li>
                       ))}
                     </ul>
@@ -173,14 +153,12 @@ const Navbar = () => {
                 </li>
               ))}
               <li>
-                <Link
-                  href={"/author"}
-                  className={`${
-                    pathname === "/author" ? "text-primary" : ""
-                  } px-3 py-2 text-lg font-ador hover:bg-gray-100 flex items-center justify-between gap-2 hover:text-primary duration-300`}
+                <NavLink
+                  to={"/author"}
+                  className={`px-3 py-2 text-lg font-ador hover:bg-gray-100 flex items-center justify-between gap-2 hover:text-primary duration-300`}
                 >
                   লেখক
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </div>

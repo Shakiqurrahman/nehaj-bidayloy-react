@@ -1,6 +1,4 @@
-"use client";
-
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 export const SearchBox = ({ isOpen }) => {
   const searchBoxRef = useRef(null);
@@ -13,13 +11,7 @@ export const SearchBox = ({ isOpen }) => {
     <form
       className={`${
         isOpen ? "w-[280px]" : "w-0"
-      } overflow-hidden duration-1000 absolute top-0 right-0 z-0`}
-      ref={searchBoxRef}
-      // style={{
-      //   width: isOpen ? "280px" : 0,
-      //   overflow: "hidden",
-      //   transition: "width 1s ease",
-      // }}
+      } overflow-hidden duration-300 absolute top-0 right-0 z-0`}
     >
       <input
         type="text"
