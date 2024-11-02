@@ -1,0 +1,7 @@
+/* Regular (Normal) weight */
+@font-face {
+    font-family: "ador";
+    src: url("./LiAdorNoirritVR-VF.ttf") format("truetype");
+    font-weight: 100 900;
+    font-style: normal;
+}

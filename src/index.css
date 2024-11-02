@@ -1,0 +1,125 @@
+@import url("./assets/fonts/fonts.css");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    font-family: "Noto Serif Bengali", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+/* Additonal custom styles */
+.max-width {
+    @apply max-w-[1280px] mx-auto px-4;
+}
+
+.font-ador {
+    font-family: "ador", serif;
+}
+
+/* dashboard css  */
+
+/* Humbuger Icon */
+
+.hamburger {
+    background-color: white;
+    display: inline-block;
+    left: 0px;
+    position: relative;
+    top: 3px;
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+    width: 26px;
+    z-index: 999;
+}
+
+.hamburger .line {
+    background: #b22945;
+    display: block;
+    height: 3px;
+    border-radius: 3px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    margin-left: auto;
+    width: 22px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.hamburger .line:nth-child(1) {
+    width: 20px;
+}
+
+.hamburger .line:nth-child(2) {
+    width: 26px;
+}
+
+.hamburger .line:nth-child(3) {
+    width: 22px;
+}
+
+.hamburger:hover {
+    cursor: pointer;
+}
+
+.hamburger:hover .line {
+    width: 26px;
+}
+
+/* 
+   .hamburger.active {
+     left: 60px;
+   }
+   */
+
+.hamburger.active .line:nth-child(1),
+.hamburger.active .line:nth-child(3) {
+    width: 10px;
+    height: 2px;
+}
+
+.hamburger.active .line:nth-child(2) {
+    -webkit-transform: translateX(-0px);
+    transform: translateX(-0px);
+    width: 22px;
+    height: 2px;
+}
+
+.hamburger.active .line:nth-child(1) {
+    -webkit-transform: translateY(4px) rotate(45deg);
+    transform: translateY(4px) rotate(45deg);
+}
+
+.hamburger.active .line:nth-child(3) {
+    -webkit-transform: translateY(-4px) rotate(-45deg);
+    transform: translateY(-4px) rotate(-45deg);
+}
+
+/* Hide password reveal icon across various browsers */
+
+/* For Microsoft Edge */
+input[type="password"]::-ms-reveal {
+    display: none;
+}
+
+/* For Chrome, Edge (WebKit-based browsers) */
+input[type="password"]::-webkit-reveal,
+input[type="password"]::-webkit-clear-button {
+    display: none;
+}
+
+/* For Firefox */
+input[type="password"]::-moz-reveal {
+    display: none;
+}
+
+/* General rule: hide any sibling div or icon used to reveal password */
+input[type="password"] + div {
+    display: none;
+}
