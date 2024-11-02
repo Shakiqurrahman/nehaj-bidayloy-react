@@ -11,7 +11,7 @@ const AdminRoute = ({ children }) => {
         // const token = Cookies.get("authToken");
         if (!isAdmin) {
             // dispatch(logout());
-            navigate("/not-found");
+            // navigate("/not-found");
         }
     }, [isAdmin, navigate, dispatch]);
 

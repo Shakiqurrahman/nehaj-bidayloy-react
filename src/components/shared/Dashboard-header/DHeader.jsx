@@ -7,6 +7,7 @@ import Logo from "/public/nehaz-bidyalay-logo.jpg";
 const DHeader = () => {
     const dispatch = useDispatch();
     const { activeHamburger } = useSelector((state) => state.utils);
+    const { user } = useSelector((state) => state.user);
     console.log(activeHamburger);
 
     const handleHamburgerMenu = () => {
@@ -51,6 +52,11 @@ const DHeader = () => {
                         Login
                         <CircleUserRound className="ml-2 size-6" />
                     </Button> */}
+                    <img
+                        className="flex-shrink-0 size-12 rounded-full bg-primary-300 object-center overflow-hidden"
+                        src={user?.avatar}
+                        alt={user?.fullName}
+                    />
                 </div>
             </div>
         </header>

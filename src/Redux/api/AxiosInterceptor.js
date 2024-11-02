@@ -1,8 +1,8 @@
-import { API_URL } from "@/utils/config";
 import axios from "axios";
 import { setAccessToken } from "../features/userSlice";
 import { store } from "../store";
-// import Cookies from 'js-cookie'; // For managing cookies
+import { API_URL } from "../../utils/config";
+// import Cookies from 'js-cookie'; 
 
 const axiosInstance = axios.create({
     baseURL: API_URL,
