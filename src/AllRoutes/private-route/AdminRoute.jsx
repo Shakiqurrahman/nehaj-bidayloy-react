@@ -3,19 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const AdminRoute = ({ children }) => {
-  // const { user } = useSelector((state) => state.user);
-  // const isAuthorized = ["ADMIN", "SUPER_ADMIN"].includes(user?.role);  
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   const token = Cookies.get('authToken');
-  //   if (!isAuthorized || !token) {
-  //     dispatch(logout());
-  //     navigate("/not-found");
-  //   }
-  // }, [isAuthorized, navigate, dispatch]);
+    const { user, token } = useSelector((state) => state.user);
+    const isAdmin = user?.role === "ADMIN";
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    useEffect(() => {
+        // const token = Cookies.get("authToken");
+        if (!isAdmin) {
+            // dispatch(logout());
+            navigate("/not-found");
+        }
+    }, [isAdmin, navigate, dispatch]);
 
-  // return children;
+    return children;
 };
 
 export default AdminRoute;
