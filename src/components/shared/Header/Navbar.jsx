@@ -137,7 +137,7 @@ const Navbar = () => {
                     )}
                   </NavLink>
                   {links?.subCategories?.length > 0 && (
-                    <ul className="absolute top-full right-0 w-[200px] pl-4 py-2 bg-primary shadow opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-300 z-[99]">
+                    <ul className="absolute top-full right-0 w-[200px] pl-4 py-2 bg-white shadow opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-300 z-[99]">
                       {links?.subCategories?.map((subLinks, index) => (
                         <li key={index}>
                           <NavLink

@@ -7,6 +7,7 @@ import Author from "../pages/Author";
 import HomePage from "../pages/HomePage";
 import NehajAdminLogin from "../pages/NehajAdminLogin";
 import Notice from "../pages/Notice";
+import DashboardPage from "../pages/Dashboard/DashboardPage";
 
 export const router = createBrowserRouter([
   {
@@ -43,7 +44,7 @@ export const router = createBrowserRouter([
         path: "/admin-dashboard",
         element: (
           // <PrivateRoute>
-          <h1>Hello dashboard page</h1>
+          <DashboardPage />
           // </PrivateRoute>
         ),
       },
