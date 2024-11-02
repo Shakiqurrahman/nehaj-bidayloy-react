@@ -11,49 +11,49 @@ import Notice from "../pages/Notice";
 import AdminRoute from "./private-route/AdminRoute";
 
 export const router = createBrowserRouter([
-    {
+  {
+    path: "/",
+    element: <PublicLayout />,
+    children: [
+      {
         path: "/",
-        element: <PublicLayout />,
-        children: [
-            {
-                path: "/",
-                element: <HomePage />,
-            },
-            {
-                path: "/nehaj-admin-login",
-                element: <NehajAdminLogin />,
-            },
-            {
-                path: "/about-us",
-                element: <AboutUs />,
-            },
-            {
-                path: "/author",
-                element: <Author />,
-            },
-            {
-                path: "/notice",
-                element: <Notice />,
-            },
-        ],
-    },
-    {
+        element: <HomePage />,
+      },
+      {
+        path: "/nehaj-admin-login",
+        element: <NehajAdminLogin />,
+      },
+      {
+        path: "/about-us",
+        element: <AboutUs />,
+      },
+      {
+        path: "/author",
+        element: <Author />,
+      },
+      {
+        path: "/notice",
+        element: <Notice />,
+      },
+    ],
+  },
+  {
+    path: "/admin-dashboard",
+    element: (
+      <AdminRoute>
+        <DashboardLayout />
+      </AdminRoute>
+    ),
+    children: [
+      {
         path: "/admin-dashboard",
-        element: <DashboardLayout />,
-        children: [
-            {
-                path: "/admin-dashboard",
-                element: (
-                    <AdminRoute>
-                        <DashboardPage />
-                    </AdminRoute>
-                ),
-            },
-        ],
-    },
-    {
-        path: "*",
-        // element: <ErrorPage />,
-        element: <h1>Error Page...</h1>,
-    },
+        element: <DashboardPage />,
+      },
+    ],
+  },
+  {
+    path: "*",
+    // element: <ErrorPage />,
+    element: <h1>Error Page...</h1>,
+  },
 ]);
