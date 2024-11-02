@@ -15,7 +15,6 @@ const DashboardLayout = () => {
                 </div>
             </div>
             <ScrollRestoration />
-            <Toaster position="top-center" />
         </>
     );
 };
