@@ -5,55 +5,55 @@ import PublicLayout from "../Layouts/PublicLayout";
 import AboutUs from "../pages/AboutUs";
 import Author from "../pages/Author";
 import DashboardPage from "../pages/Dashboard/DashboardPage";
+import ErrorPage from "../pages/ErrorPage";
 import HomePage from "../pages/HomePage";
 import NehajAdminLogin from "../pages/NehajAdminLogin";
 import Notice from "../pages/Notice";
 import AdminRoute from "./private-route/AdminRoute";
 
 export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <PublicLayout />,
-    children: [
-      {
+    {
         path: "/",
-        element: <HomePage />,
-      },
-      {
-        path: "/nehaj-admin-login",
-        element: <NehajAdminLogin />,
-      },
-      {
-        path: "/about-us",
-        element: <AboutUs />,
-      },
-      {
-        path: "/author",
-        element: <Author />,
-      },
-      {
-        path: "/notice",
-        element: <Notice />,
-      },
-    ],
-  },
-  {
-    path: "/admin-dashboard",
-    element: (
-      <AdminRoute>
-        <DashboardLayout />
-      </AdminRoute>
-    ),
-    children: [
-      {
+        element: <PublicLayout />,
+        children: [
+            {
+                path: "/",
+                element: <HomePage />,
+            },
+            {
+                path: "/nehaj-admin-login",
+                element: <NehajAdminLogin />,
+            },
+            {
+                path: "/about-us",
+                element: <AboutUs />,
+            },
+            {
+                path: "/author",
+                element: <Author />,
+            },
+            {
+                path: "/notice",
+                element: <Notice />,
+            },
+        ],
+    },
+    {
         path: "/admin-dashboard",
-        element: <DashboardPage />,
-      },
-    ],
-  },
-  {
-    path: "*",
-    // element: <ErrorPage />,
-    element: <h1>Error Page...</h1>,
-  },
+        element: (
+            <AdminRoute>
+                <DashboardLayout />
+            </AdminRoute>
+        ),
+        children: [
+            {
+                path: "/admin-dashboard",
+                element: <DashboardPage />,
+            },
+        ],
+    },
+    {
+        path: "*",
+        element: <ErrorPage />,
+    },
 ]);
