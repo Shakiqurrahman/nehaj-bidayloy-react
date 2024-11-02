@@ -1,13 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useFetchUserDataQuery } from "../../../Redux/api/userApiSlice";
 import { setActiveHamburgerD } from "../../../Redux/features/utilsSlice";
-import Logo from "/public/nehaz-bidyalay-logo.jpg";
+import Logo from "/nehaz-bidyalay-logo.jpg";
 
 const DHeader = () => {
     const dispatch = useDispatch();
     const { activeHamburger } = useSelector((state) => state.utils);
     const { user } = useSelector((state) => state.user);
+    const { data: userData } = useFetchUserDataQuery();
+    console.log("userData", userData);
+
     console.log(activeHamburger);
 
     const handleHamburgerMenu = () => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import Logo from "/public/nehaj-logo-transparent.png";
+import Logo from "/nehaj-logo-transparent.png";
 
 const Footer = () => {
     return (
