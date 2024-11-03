@@ -10,7 +10,7 @@ const DSideBar = () => {
     const dispatch = useDispatch();
     const { activeHamburger } = useSelector((state) => state.utils);
     return (
-        <aside className="lg:w-[240px] relative">
+        <aside className="lg:w-[240px] relative flex-shrink-0">
             <ul
                 className={`text-black bg-white w-full md:w-[250px]  left-0  fixed top-24 h-full pt-4  shadow-lg lg:translate-x-0 ${
                     activeHamburger
