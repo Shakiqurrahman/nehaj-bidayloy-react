@@ -33,7 +33,7 @@ const DSideBar = () => {
                         onClick={() => dispatch(setActiveHamburgerD(false))}
                     >
                         <FaBookOpen size={25} />
-                        Stories
+                        Writings
                     </li>
                 </NavLink>
                 <NavLink to="/admin-dashboard/authors">

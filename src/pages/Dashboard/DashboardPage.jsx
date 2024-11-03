@@ -49,7 +49,7 @@ const DashboardPage = () => {
                         <h2 className="text-[32px] font-bold mb-2 text-center">
                             230
                         </h2>
-                        <p className="text-base font-medium">Total Stories</p>
+                        <p className="text-base font-medium">Total Writings</p>
                     </div>
                     <div>
                         <FaBookOpen className="text-primary" size={50} />
@@ -80,7 +80,7 @@ const DashboardPage = () => {
                 <div className=" mt-10">
                     <div className="flex gap-2 justify-between items-center">
                         <h2 className="text-xl font-medium leading-none">
-                            Stories
+                            Writings
                         </h2>
                         <Link
                             to="/admin-dashboard/stories"
