@@ -12,7 +12,7 @@ const Author = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
         <Link
           to={"/"}
-          className="p-4 text-center bg-white text-black shadow-box hover:shadow-box-lg duration-500 group hover:bg-accent"
+          className="p-4 text-center bg-white text-black shadow-box hover:shadow-box-lg duration-500 group hover:bg-black rounded-lg"
         >
           <img
             src={author1}
@@ -26,7 +26,7 @@ const Author = () => {
         </Link>
         <Link
           href={"/"}
-          className="p-4 text-center bg-white text-black shadow-box hover:shadow-box-lg duration-500 group hover:bg-accent"
+          className="p-4 text-center bg-white text-black shadow-box hover:shadow-box-lg duration-500 group hover:bg-black rounded-lg"
         >
           <img
             src={author2}
@@ -40,7 +40,7 @@ const Author = () => {
         </Link>
         <Link
           href={"/"}
-          className="p-4 text-center bg-white text-black shadow-box hover:shadow-box-lg duration-500 group hover:bg-accent"
+          className="p-4 text-center bg-white text-black shadow-box hover:shadow-box-lg duration-500 group hover:bg-black rounded-lg"
         >
           <img
             placeholder="blur"
