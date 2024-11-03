@@ -10,7 +10,7 @@ const DSideBar = () => {
     const dispatch = useDispatch();
     const { activeHamburger } = useSelector((state) => state.utils);
     return (
-        <aside className="lg:w-[240px] relative">
+        <aside className="lg:w-[240px] relative flex-shrink-0">
             <ul
                 className={`text-black bg-white w-full md:w-[250px]  left-0  fixed top-24 h-full pt-4  shadow-lg lg:translate-x-0 ${
                     activeHamburger
@@ -33,7 +33,7 @@ const DSideBar = () => {
                         onClick={() => dispatch(setActiveHamburgerD(false))}
                     >
                         <FaBookOpen size={25} />
-                        Stories
+                        Writings
                     </li>
                 </NavLink>
                 <NavLink to="/admin-dashboard/authors">

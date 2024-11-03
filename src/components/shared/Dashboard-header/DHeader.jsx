@@ -52,15 +52,17 @@ const DHeader = () => {
                             placeholder="Search here..."
                         />
                     </div>
-                    {/* <Button variant="login" size="md">
-                        Login
-                        <CircleUserRound className="ml-2 size-6" />
-                    </Button> */}
-                    <img
-                        className="flex-shrink-0 size-12 rounded-full bg-primary-300 object-center overflow-hidden"
-                        src={user?.avatar}
-                        alt={user?.fullName}
-                    />
+
+                    <div className="flex gap-2 items-center">
+                        <h2 className="hidden md:block font-medium text-sm max-w-[200px] truncate">
+                            {user?.fullName}
+                        </h2>
+                        <img
+                            className="flex-shrink-0 size-12 rounded-full bg-primary-300 object-center overflow-hidden"
+                            src={user?.avatar}
+                            alt={user?.fullName}
+                        />
+                    </div>
                 </div>
             </div>
         </header>
