@@ -63,7 +63,7 @@ const SidePanel = ({ isOpen }) => {
     },
   ];
 
-  const dropdownRef = useRef(null);
+  const dropdownsRef = useRef([]);
 
   const [isCollapse, setIsCollapse] = useState(null);
 
@@ -122,11 +122,11 @@ const SidePanel = ({ isOpen }) => {
               </li>
               {links?.subCategories?.length > 0 && (
                 <li
-                  ref={dropdownRef}
+                  ref={(el) => (dropdownsRef.current[index] = el)}
                   style={{
                     height:
                       isCollapse === index
-                        ? dropdownRef.current.scrollHeight
+                        ? dropdownsRef.current[index].scrollHeight
                         : 0,
                     overflow: "hidden",
                     transition: "height 0.3s ease",
