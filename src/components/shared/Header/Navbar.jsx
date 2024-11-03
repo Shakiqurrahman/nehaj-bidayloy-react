@@ -57,10 +57,6 @@ const Navbar = () => {
         },
       ],
     },
-    {
-      categorySlug: "study-circle",
-      category: "পাঠচক্র",
-    },
   ];
 
   const [openSidePanel, setOpenSidePanel] = useState(false);
@@ -152,6 +148,14 @@ const Navbar = () => {
                   )}
                 </li>
               ))}
+              <li>
+                <NavLink
+                  to={"/study-circle"}
+                  className={`px-3 py-2 text-lg font-ador hover:bg-gray-100 flex items-center justify-between gap-2 hover:text-primary duration-300`}
+                >
+                  পাঠচক্র
+                </NavLink>
+              </li>
               <li>
                 <NavLink
                   to={"/author"}

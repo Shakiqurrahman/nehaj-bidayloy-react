@@ -53,14 +53,6 @@ const SidePanel = ({ isOpen }) => {
         },
       ],
     },
-    {
-      categorySlug: "study-circle",
-      category: "পাঠচক্র",
-    },
-    {
-      categorySlug: "author",
-      category: "লেখক",
-    },
   ];
 
   const dropdownsRef = useRef([]);
@@ -75,7 +67,7 @@ const SidePanel = ({ isOpen }) => {
 
   return (
     <div
-      className={`sm:hidden absolute top-full left-0  w-full bg-white duration-500 border-t z-[99999] ${
+      className={`sm:hidden absolute top-full left-0 shadow w-full bg-white duration-500 border-t z-[99999] ${
         isOpen
           ? "opacity-100 visible translate-y-0"
           : "opacity-0 invisible -translate-y-full"
@@ -101,7 +93,7 @@ const SidePanel = ({ isOpen }) => {
               <li className="border-b text-lg font-ador flex w-full justify-between">
                 <NavLink
                   to={`/category/${links?.categorySlug}`}
-                  className={`hover:text-primary p-2 grow`}
+                  className={`hover:text-primary duration-300 p-2 grow`}
                 >
                   {links?.category}
                 </NavLink>
@@ -148,6 +140,22 @@ const SidePanel = ({ isOpen }) => {
               )}
             </Fragment>
           ))}
+          <li className="border-b text-lg font-ador flex w-full justify-between">
+            <NavLink
+              to={`/study-circle`}
+              className={`hover:text-primary duration-300 p-2 grow`}
+            >
+              পাঠচক্র
+            </NavLink>
+          </li>
+          <li className="text-lg font-ador flex w-full justify-between">
+            <NavLink
+              to={`/author`}
+              className={`hover:text-primary duration-300 p-2 grow`}
+            >
+              লেখক
+            </NavLink>
+          </li>
         </ul>
       )}
     </div>
