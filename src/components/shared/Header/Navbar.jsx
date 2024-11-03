@@ -89,7 +89,7 @@ const Navbar = () => {
           </NavLink>
           <nav className="flex sm:hidden gap-4 py-2 sm:text-lg ml-auto mr-3">
             <NavLink
-              href={"/about-us"}
+              to={"/about-us"}
               className={` hover:text-primary duration-300 font-ador`}
             >
               পরিচয়
