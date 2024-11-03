@@ -126,7 +126,7 @@ const SidePanel = ({ isOpen }) => {
                   style={{
                     height:
                       isCollapse === index
-                        ? dropdownsRef.current[index].scrollHeight
+                        ? dropdownsRef?.current[index]?.scrollHeight
                         : 0,
                     overflow: "hidden",
                     transition: "height 0.3s ease",
