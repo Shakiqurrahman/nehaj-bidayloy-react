@@ -10,6 +10,7 @@ import HomePage from "../pages/HomePage";
 import NehajAdminLogin from "../pages/NehajAdminLogin";
 import Notice from "../pages/Notice";
 import AdminRoute from "./private-route/AdminRoute";
+import UnAuthenticatedRoute from "./private-route/UnAuthenticatedRoute";
 
 export const router = createBrowserRouter([
     {
@@ -22,7 +23,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/nehaj-admin-login",
-                element: <NehajAdminLogin />,
+                element: (
+                    <UnAuthenticatedRoute>
+                        <NehajAdminLogin />
+                    </UnAuthenticatedRoute>
+                ),
             },
             {
                 path: "/about-us",

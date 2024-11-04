@@ -41,7 +41,7 @@ const NehajAdminLogin = () => {
                     "Login successful:",
                     result,
                     "token",
-                    result?.token
+                    result?.accessToken
                 );
                 toast.success("Login successful!");
             } catch (error) {

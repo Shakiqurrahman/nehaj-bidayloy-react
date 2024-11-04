@@ -78,7 +78,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-white  shadow sticky top-0 w-full z-[999999999999]">
+      <nav className="bg-white  shadow sticky top-0 w-full z-[999]">
         <div className="max-width flex items-center justify-between py-3 bg-white relative z-[999999999]">
           <NavLink to={"/"} className="shrink-0">
             <img

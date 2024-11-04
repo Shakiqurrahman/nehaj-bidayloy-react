@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useFetchUserDataQuery } from "../../../Redux/api/userApiSlice";
 import { setUserData } from "../../../Redux/features/userSlice";
 import { setActiveHamburgerD } from "../../../Redux/features/utilsSlice";
+import DropdownProfile from "../../Dashboard/DropdownProfile";
 import Logo from "/nehaz-bidyalay-logo.jpg";
 
 const DHeader = () => {
@@ -11,6 +12,7 @@ const DHeader = () => {
     const { activeHamburger } = useSelector((state) => state.utils);
     const { user } = useSelector((state) => state.user);
     const { data: userData } = useFetchUserDataQuery();
+    const [openProfile, setOpenProfile] = useState(false);
 
     const handleHamburgerMenu = () => {
         dispatch(setActiveHamburgerD(!activeHamburger));
@@ -57,15 +59,21 @@ const DHeader = () => {
                         />
                     </div>
 
-                    <div className="flex gap-2 items-center">
+                    <div className="flex gap-2 items-center relative">
                         <h2 className="hidden md:block font-medium text-sm max-w-[200px] truncate">
                             {user?.fullName}
                         </h2>
                         <img
-                            className="flex-shrink-0 size-12 rounded-full bg-primary-300 object-center overflow-hidden"
+                            className="flex-shrink-0 size-12 rounded-full bg-primary-300 object-center overflow-hidden  cursor-pointer"
+                            onClick={() => setOpenProfile(!openProfile)}
                             src={user?.avatar}
                             alt={user?.fullName}
                         />
+                        {openProfile && (
+                            <DropdownProfile
+                                close={() => setOpenProfile(false)}
+                            />
+                        )}
                     </div>
                 </div>
             </div>

@@ -19,7 +19,7 @@ const userPersistConfig = {
     version: 1,
     storage,
     // transforms: [encryptor],
-    whitelist: ["user"],
+    // whitelist: ["user"],
 };
 
 // Persisted reducers

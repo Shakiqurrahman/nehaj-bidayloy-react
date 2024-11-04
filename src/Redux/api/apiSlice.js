@@ -6,7 +6,9 @@ const baseQuery = fetchBaseQuery({
     baseUrl: `${API_URL}`,
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
-        const token = getState()?.user?.accessToken;
+        const token =
+            getState()?.user?.accessToken ||
+            localStorage.getItem("accessToken");
         if (token) {
             headers.set("authorization", `Bearer ${token}`);
         }
@@ -20,7 +22,6 @@ const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
 
     // Check for a 403 response, meaning token may be expired
     if (result?.error?.status === 403) {
-
         try {
             // Request a new token from the refresh endpoint
             const refreshResult = await fetch(`${API_URL}/auth/refresh-token`, {
@@ -40,7 +41,6 @@ const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
                 console.log(
                     "Refresh token not found or invalid. Redirecting to login..."
                 );
-                // Optional: Dispatch a logout action here or handle unauthorized state
             }
         } catch (error) {
             console.error("Failed to refresh token:", error);
