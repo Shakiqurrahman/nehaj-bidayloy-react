@@ -6,7 +6,7 @@ const baseQuery = fetchBaseQuery({
     baseUrl: `${API_URL}`,
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
-        const token = getState().user.token;
+        const token = getState()?.user?.accessToken;
         if (token) {
             headers.set("authorization", `Bearer ${token}`);
         }
@@ -14,28 +14,36 @@ const baseQuery = fetchBaseQuery({
     },
 });
 
-const baseQueryWithReauth = async (args, api, extraOptions) => {
+const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
+    // Attempt the initial request
     let result = await baseQuery(args, api, extraOptions);
-    console.log(result);
-    
 
-    if (result?.error?.originalStatus === 403) {
-        console.log("sending refresh token");
-        // send refresh token to get new access token
-        const refreshResult = await baseQuery(
-            "/auth/refresh",
-            api,
-            extraOptions
-        );
-        console.log(refreshResult);
-        if (refreshResult?.data) {
-            // store the new token
-            api.dispatch(setAccessToken({ ...refreshResult.data }));
-            // retry the original query with new access token
-            result = await baseQuery(args, api, extraOptions);
-        } else {
-            // api.dispatch(logOut())
-            console.log("successfully logged out");
+    // Check for a 403 response, meaning token may be expired
+    if (result?.error?.status === 403) {
+
+        try {
+            // Request a new token from the refresh endpoint
+            const refreshResult = await fetch(`${API_URL}/auth/refresh-token`, {
+                method: "POST",
+                credentials: "include",
+            });
+
+            const data = await refreshResult.json();
+
+            // If a new token is provided, dispatch it to the Redux store
+            if (data?.token) {
+                api.dispatch(setAccessToken(data?.token));
+
+                // Retry the original request with the new token
+                result = await baseQuery(args, api, extraOptions);
+            } else {
+                console.log(
+                    "Refresh token not found or invalid. Redirecting to login..."
+                );
+                // Optional: Dispatch a logout action here or handle unauthorized state
+            }
+        } catch (error) {
+            console.error("Failed to refresh token:", error);
         }
     }
 
@@ -43,6 +51,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 };
 
 export const apiSlice = createApi({
-    baseQuery: baseQueryWithReauth,
-    endpoints: (builder) => ({}),
+    reducerPath: "api",
+    baseQuery: baseQueryWithRefreshToken,
+    endpoints: () => ({}),
 });

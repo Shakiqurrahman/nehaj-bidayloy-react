@@ -1,22 +1,10 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { API_URL } from "../../utils/config";
-export const userApiSlice = createApi({
-    reducerPath: "userApi",
-    baseQuery: fetchBaseQuery({
-        baseUrl: `${API_URL}`,
-        credentials: "include",
-        prepareHeaders: (headers, { getState }) => {
-            const token = getState().user.accessToken;
+import { apiSlice } from "./apiSlice";
 
-            if (token) {
-                headers.set("Authorization", `Bearer ${token}`);
-            }
-            return headers;
-        },
-    }),
+const userApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         fetchUserData: builder.query({
             query: () => "/user",
+            transformResponse: (response) => response?.user,
         }),
 
         loginUser: builder.mutation({

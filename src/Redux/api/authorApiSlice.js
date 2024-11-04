@@ -10,7 +10,7 @@ export const authorApiSlice = createApi({
             const token = getState().user.accessToken;
 
             if (token) {
-                headers.set("Authorization", `Bearer ${token}`);
+                headers.set("authorization", `Bearer ${token}`);
             }
             return headers;
         },

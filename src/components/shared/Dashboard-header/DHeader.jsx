@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useFetchUserDataQuery } from "../../../Redux/api/userApiSlice";
+import { setUserData } from "../../../Redux/features/userSlice";
 import { setActiveHamburgerD } from "../../../Redux/features/utilsSlice";
 import Logo from "/nehaz-bidyalay-logo.jpg";
 
@@ -10,13 +11,16 @@ const DHeader = () => {
     const { activeHamburger } = useSelector((state) => state.utils);
     const { user } = useSelector((state) => state.user);
     const { data: userData } = useFetchUserDataQuery();
-    console.log("userData", userData);
-
-    console.log(activeHamburger);
 
     const handleHamburgerMenu = () => {
         dispatch(setActiveHamburgerD(!activeHamburger));
     };
+
+    useEffect(() => {
+        if (userData) {
+            dispatch(setUserData(userData));
+        }
+    }, [userData, dispatch]);
 
     return (
         <header className="h-24">

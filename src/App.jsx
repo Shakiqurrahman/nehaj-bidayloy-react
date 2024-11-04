@@ -1,10 +1,10 @@
 import React from "react";
+import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./AllRoutes/Routes";
 import PublicLayout from "./Layouts/PublicLayout";
-import { store } from "./Redux/store";
-import { Toaster } from "react-hot-toast";
+import store from "./Redux/store";
 
 function App() {
     return (
