@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_URL } from "../../utils/config";
-import { setAccessToken } from "../features/userSlice";
+import { logout, setAccessToken } from "../features/userSlice";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: `${API_URL}`,
@@ -38,6 +38,7 @@ const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
                 // Retry the original request with the new token
                 result = await baseQuery(args, api, extraOptions);
             } else {
+                api.dispatch(logout());
                 console.log(
                     "Refresh token not found or invalid. Redirecting to login..."
                 );

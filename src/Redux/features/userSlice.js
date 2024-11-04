@@ -21,6 +21,7 @@ const userSlice = createSlice({
         logout: (state, action) => {
             state.user = null;
             state.accessToken = null;
+            localStorage.removeItem("persist:Nehaj-user");
         },
     },
 });
