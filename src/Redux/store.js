@@ -15,7 +15,7 @@ import utilsSlice from "./features/utilsSlice";
 
 // Persist configs
 const userPersistConfig = {
-    key: "user",
+    key: "Nehaj-user",
     version: 1,
     storage,
     // transforms: [encryptor],

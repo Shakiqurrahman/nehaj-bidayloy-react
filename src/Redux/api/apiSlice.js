@@ -6,9 +6,9 @@ const baseQuery = fetchBaseQuery({
     baseUrl: `${API_URL}`,
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
-        const token =
-            getState()?.user?.accessToken ||
-            localStorage.getItem("accessToken");
+        const token = getState()?.user?.accessToken;
+        console.log(token);
+
         if (token) {
             headers.set("authorization", `Bearer ${token}`);
         }
@@ -53,5 +53,8 @@ const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
 export const apiSlice = createApi({
     reducerPath: "api",
     baseQuery: baseQueryWithRefreshToken,
+    keepUnusedDataFor: 60,
+    // refetchOnFocus: true,
+    refetchOnMountOrArgChanges: true,
     endpoints: () => ({}),
 });
