@@ -3,34 +3,30 @@ import { Link } from "react-router-dom";
 import thumbnail from "../assets/images/images-alt.jpg";
 
 const HomePage = () => {
-  const genreCategories = {
-    categorySlug: "genre",
-    category: "ধরণ",
-    subCategories: [
-      {
-        subCategorySlug: "article",
-        subCategory: "প্রবন্ধ",
-      },
-      {
-        subCategorySlug: "notes",
-        subCategory: "নোটস",
-      },
-      {
-        subCategorySlug: "translation",
-        subCategory: "অনুবাদ",
-      },
-    ],
-  };
+  const genre = [
+    {
+      genreSlug: "article",
+      genreName: "প্রবন্ধ",
+    },
+    {
+      genreSlug: "notes",
+      genreName: "নোটস",
+    },
+    {
+      genreSlug: "translation",
+      genreName: "অনুবাদ",
+    },
+  ];
   return (
     <div className="max-width my-20">
-      {genreCategories?.subCategories?.length > 0 &&
-        genreCategories?.subCategories?.map((genre, index) => (
+      {genre?.length > 0 &&
+        genre?.map((item, index) => (
           <div key={index} className="mb-10 group/parent">
             <Link
-              to={"/"}
+              to={`/${item?.genreSlug}`}
               className="text-2xl font-ador mb-10 inline-block border-b-2 border-black hover:border-primary hover:text-primary duration-300"
             >
-              {genre.subCategory}
+              {item.genreName}
             </Link>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
               <div className="border-t-[3px] border-primary pt-5">

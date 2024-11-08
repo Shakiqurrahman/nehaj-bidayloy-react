@@ -8,54 +8,44 @@ import SidePanel from "./SidePanel";
 import Logo from "/nehaz-bidyalay-logo.jpg";
 
 const Navbar = () => {
-  const navLinks = [
+  const categories = [
     {
-      categorySlug: "discipline",
-      category: "বিষয়",
-      subCategories: [
-        {
-          subCategorySlug: "thought",
-          subCategory: "চিন্তা",
-        },
-        {
-          subCategorySlug: "history",
-          subCategory: "ইতিহাস",
-        },
-        {
-          subCategorySlug: "literary",
-          subCategory: "সাহিত্য",
-        },
-        {
-          subCategorySlug: "art",
-          subCategory: "শিল্প",
-        },
-        {
-          subCategorySlug: "cinema",
-          subCategory: "সিনেমা",
-        },
-        {
-          subCategorySlug: "theology",
-          subCategory: "ধর্মতত্ত্ব",
-        },
-      ],
+      categorySlug: "thought",
+      categoryName: "চিন্তা",
     },
     {
-      categorySlug: "genre",
-      category: "ধরণ",
-      subCategories: [
-        {
-          subCategorySlug: "article",
-          subCategory: "প্রবন্ধ",
-        },
-        {
-          subCategorySlug: "notes",
-          subCategory: "নোটস",
-        },
-        {
-          subCategorySlug: "translation",
-          subCategory: "অনুবাদ",
-        },
-      ],
+      categorySlug: "history",
+      categoryName: "ইতিহাস",
+    },
+    {
+      categorySlug: "literary",
+      categoryName: "সাহিত্য",
+    },
+    {
+      categorySlug: "art",
+      categoryName: "শিল্প",
+    },
+    {
+      categorySlug: "cinema",
+      categoryName: "সিনেমা",
+    },
+    {
+      categorySlug: "theology",
+      categoryName: "ধর্মতত্ত্ব",
+    },
+  ];
+  const genre = [
+    {
+      genreSlug: "article",
+      genreName: "প্রবন্ধ",
+    },
+    {
+      genreSlug: "notes",
+      genreName: "নোটস",
+    },
+    {
+      genreSlug: "translation",
+      genreName: "অনুবাদ",
     },
   ];
 
@@ -121,33 +111,48 @@ const Navbar = () => {
           </div>
           <div className="flex items-center">
             <ul className="hidden sm:flex items-center gap-1">
-              {navLinks?.map((links, index) => (
-                <li key={index} className="group relative">
-                  <NavLink
-                    to={`/${links?.categorySlug}`}
-                    className={`px-3 py-2 text-lg font-ador hover:bg-gray-100 flex items-center justify-between gap-2 hover:text-primary duration-300`}
-                  >
-                    {links?.category}{" "}
-                    {links?.subCategories?.length > 0 && (
-                      <MdKeyboardArrowDown />
-                    )}
-                  </NavLink>
-                  {links?.subCategories?.length > 0 && (
-                    <ul className="absolute top-full right-0 w-[200px] py-2 bg-white shadow opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-300 z-[9999999999]">
-                      {links?.subCategories?.map((subLinks, index) => (
-                        <li key={index}>
-                          <NavLink
-                            to={`/category/${links?.categorySlug}/${subLinks?.subCategorySlug}`}
-                            className={` px-6 text-lg py-2 block w-full font-ador hover:text-primary hover:pl-8 duration-300`}
-                          >
-                            {subLinks?.subCategory}
-                          </NavLink>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
+              <li className="group relative cursor-pointer">
+                <div
+                  className={`px-3 py-2 text-lg font-ador hover:bg-gray-100 flex items-center justify-between gap-2 hover:text-primary duration-300`}
+                >
+                  বিষয় {categories?.length > 0 && <MdKeyboardArrowDown />}
+                </div>
+                {categories?.length > 0 && (
+                  <ul className="absolute top-full right-0 w-[200px] py-2 bg-white shadow opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-300 z-[9999999999]">
+                    {categories?.map((category, index) => (
+                      <li key={index}>
+                        <NavLink
+                          to={`/category/${category?.categorySlug}`}
+                          className={` px-6 text-lg py-2 block w-full font-ador hover:text-primary hover:pl-8 duration-300`}
+                        >
+                          {category?.categoryName}
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+              <li className="group relative cursor-pointer">
+                <div
+                  className={`px-3 py-2 text-lg font-ador hover:bg-gray-100 flex items-center justify-between gap-2 hover:text-primary duration-300`}
+                >
+                  ধরণ {genre?.length > 0 && <MdKeyboardArrowDown />}
+                </div>
+                {genre?.length > 0 && (
+                  <ul className="absolute top-full right-0 w-[200px] py-2 bg-white shadow opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-300 z-[9999999999]">
+                    {genre?.map((item, index) => (
+                      <li key={index}>
+                        <NavLink
+                          to={`/${item?.genreSlug}`}
+                          className={` px-6 text-lg py-2 block w-full font-ador hover:text-primary hover:pl-8 duration-300`}
+                        >
+                          {item?.genreName}
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
               <li>
                 <NavLink
                   to={"/study-circle"}
