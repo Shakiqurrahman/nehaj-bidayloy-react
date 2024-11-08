@@ -143,7 +143,7 @@ const Navbar = () => {
                     {genre?.map((item, index) => (
                       <li key={index}>
                         <NavLink
-                          to={`/${item?.genreSlug}`}
+                          to={`/genre/${item?.genreSlug}`}
                           className={` px-6 text-lg py-2 block w-full font-ador hover:text-primary hover:pl-8 duration-300`}
                         >
                           {item?.genreName}

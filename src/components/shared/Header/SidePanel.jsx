@@ -204,7 +204,7 @@ const SidePanel = ({ isOpen }) => {
               {genre?.map((item, index) => (
                 <li key={index}>
                   <NavLink
-                    to={`/${item?.genreSlug}`}
+                    to={`/genre/${item?.genreSlug}`}
                     className={`px-3 py-2 font-ador hover:text-primary duration-300 block border-b`}
                   >
                     {item?.genreName}
