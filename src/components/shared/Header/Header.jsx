@@ -18,13 +18,13 @@ const Header = () => {
             পরিচয়
           </NavLink>
           <NavLink
-            to={"/authors"}
+            to={"/notice"}
             className={`hover:text-primary duration-300 font-ador`}
           >
             বিজ্ঞপ্তি
           </NavLink>
           <NavLink
-            to={"/notice"}
+            to={"/contact"}
             className={`hover:text-primary duration-300 font-ador`}
           >
             যোগাযোগ

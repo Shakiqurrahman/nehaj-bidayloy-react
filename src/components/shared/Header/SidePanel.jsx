@@ -4,57 +4,6 @@ import { IoSearch } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 
 const SidePanel = ({ isOpen }) => {
-  const navLinks = [
-    {
-      categorySlug: "discipline",
-      category: "বিষয়",
-      subCategories: [
-        {
-          subCategorySlug: "thought",
-          subCategory: "চিন্তা",
-        },
-        {
-          subCategorySlug: "history",
-          subCategory: "ইতিহাস",
-        },
-        {
-          subCategorySlug: "literary",
-          subCategory: "সাহিত্য",
-        },
-        {
-          subCategorySlug: "art",
-          subCategory: "শিল্প",
-        },
-        {
-          subCategorySlug: "cinema",
-          subCategory: "সিনেমা",
-        },
-        {
-          subCategorySlug: "theology",
-          subCategory: "ধর্মতত্ত্ব",
-        },
-      ],
-    },
-    {
-      categorySlug: "genre",
-      category: "ধরণ",
-      subCategories: [
-        {
-          subCategorySlug: "article",
-          subCategory: "প্রবন্ধ",
-        },
-        {
-          subCategorySlug: "notes",
-          subCategory: "নোটস",
-        },
-        {
-          subCategorySlug: "translation",
-          subCategory: "অনুবাদ",
-        },
-      ],
-    },
-  ];
-
   const categories = [
     {
       categorySlug: "thought",

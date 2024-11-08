@@ -5,6 +5,7 @@ import PublicLayout from "../Layouts/PublicLayout";
 import AboutUs from "../pages/AboutUs";
 import Author from "../pages/Author";
 import CategoryPage from "../pages/CategoryPage";
+import Contact from "../pages/Contact";
 import DashboardPage from "../pages/Dashboard/DashboardPage";
 import ErrorPage from "../pages/ErrorPage";
 import GenrePage from "../pages/GenrePage";
@@ -13,6 +14,7 @@ import NehajAdminLogin from "../pages/NehajAdminLogin";
 import Notice from "../pages/Notice";
 import SearchResultPage from "../pages/SearchResultPage";
 import SingleStoryPostPage from "../pages/SingleStoryPostPage";
+import StudyCirclePage from "../pages/StudyCirclePage";
 import AdminRoute from "./private-route/AdminRoute";
 import UnAuthenticatedRoute from "./private-route/UnAuthenticatedRoute";
 
@@ -42,8 +44,16 @@ export const router = createBrowserRouter([
         element: <Author />,
       },
       {
+        path: "/study-circle",
+        element: <StudyCirclePage />,
+      },
+      {
         path: "/notice",
         element: <Notice />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
       {
         path: "/genre/:genreSlug",
