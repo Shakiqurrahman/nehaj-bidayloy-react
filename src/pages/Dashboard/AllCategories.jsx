@@ -1,7 +1,7 @@
 import React from "react";
-import { FiPlusCircle } from "react-icons/fi";
+import { FiEdit, FiPlusCircle } from "react-icons/fi";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import StoriesCard from "../../components/Dashboard/StoriesCard";
 
 const AllCategories = () => {
   const stories = [
@@ -22,10 +22,39 @@ const AllCategories = () => {
           </Link>
         </div>
         <span className="block w-full h-px bg-black/20 my-5"></span>
-        <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
-          {stories?.slice(0, 20).map((story, idx) => (
-            <StoriesCard key={idx} storiesData={story} />
-          ))}
+        <div className="bg-white pt-2 px-5">
+          <table className="table-auto w-full" cellPadding={10}>
+            <thead>
+              <tr className="border-b">
+                <th className="w-[10%]">No</th>
+                <th className="w-auto">Category Name</th>
+                <th className="w-[20%] hidden sm:block">Date</th>
+                <th className="w-[20%]">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {stories?.slice(0, 20).map((story, idx) => (
+                <tr key={idx} className="text-center border-b last:border-0">
+                  <td>1</td>
+                  <td>Malcolm Lockyer</td>
+                  <td className=" hidden sm:block">19/01/2024</td>
+                  <td>
+                    <div className="flex items-center gap-2 justify-center">
+                      <Link
+                        to={"edit"}
+                        className="bg-white shadow-box rounded-sm size-8 text-black hover:text-blue-600 flex items-center justify-center text-base hover:shadow-box-lg duration-300"
+                      >
+                        <FiEdit />
+                      </Link>
+                      <button className="bg-white shadow-box rounded-sm size-8 text-black hover:text-red-600 flex items-center justify-center text-base hover:shadow-box-lg duration-300">
+                        <RiDeleteBin6Line />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
     </>
