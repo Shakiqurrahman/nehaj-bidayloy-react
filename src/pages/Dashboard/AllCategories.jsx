@@ -28,7 +28,7 @@ const AllCategories = () => {
               <tr className="border-b">
                 <th className="w-[10%]">No</th>
                 <th className="w-auto">Category Name</th>
-                <th className="w-[20%] hidden sm:block">Date</th>
+                <th className="w-[20%] hidden sm:block mx-auto">Date</th>
                 <th className="w-[20%]">Action</th>
               </tr>
             </thead>
