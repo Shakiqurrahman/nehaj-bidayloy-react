@@ -6,6 +6,9 @@ import AboutUs from "../pages/AboutUs";
 import Author from "../pages/Author";
 import CategoryPage from "../pages/CategoryPage";
 import Contact from "../pages/Contact";
+import AllAuthor from "../pages/Dashboard/AllAuthor";
+import AllCategories from "../pages/Dashboard/AllCategories";
+import AllWritings from "../pages/Dashboard/AllWritings";
 import DashboardPage from "../pages/Dashboard/DashboardPage";
 import ErrorPage from "../pages/ErrorPage";
 import GenrePage from "../pages/GenrePage";
@@ -84,6 +87,18 @@ export const router = createBrowserRouter([
       {
         path: "/admin-dashboard",
         element: <DashboardPage />,
+      },
+      {
+        path: "/admin-dashboard/stories",
+        element: <AllWritings />,
+      },
+      {
+        path: "/admin-dashboard/authors",
+        element: <AllAuthor />,
+      },
+      {
+        path: "/admin-dashboard/categories",
+        element: <AllCategories />,
       },
     ],
   },
