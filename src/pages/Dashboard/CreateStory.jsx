@@ -2,6 +2,36 @@ import React, { useState } from "react";
 import { CgSpinner } from "react-icons/cg";
 import PreviewImage from "../../assets/images/preview.jpg";
 
+// ckeditor dependency file imports
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import {
+  Alignment,
+  BlockQuote,
+  Bold,
+  ClassicEditor,
+  Essentials,
+  FontBackgroundColor,
+  FontColor,
+  FontSize,
+  Heading,
+  Image,
+  ImageCaption,
+  ImageResize,
+  ImageStyle,
+  ImageToolbar,
+  Indent,
+  IndentBlock,
+  Italic,
+  Link,
+  LinkImage,
+  List,
+  MediaEmbed,
+  Mention,
+  Paragraph,
+  Undo,
+} from "ckeditor5";
+import "ckeditor5/ckeditor5.css";
+
 const CreateStory = () => {
   const authors = [
     {
@@ -48,6 +78,92 @@ const CreateStory = () => {
       console.log(form, selectedThumbnail);
     }
   };
+
+  const editorConfig = {
+    toolbar: {
+      items: [
+        "undo",
+        "redo",
+        "|",
+        "heading",
+        "|",
+        "fontsize",
+        "fontColor",
+        "fontBackgroundColor",
+        "|",
+        "bold",
+        "italic",
+        "|",
+        "link",
+        "mediaEmbed",
+        "insertImage",
+        "blockQuote",
+        "|",
+        "alignment",
+        "bulletedList",
+        "numberedList",
+        "outdent",
+        "indent",
+      ],
+      shouldNotGroupWhenFull: false,
+    },
+    heading: {
+      options: [
+        {
+          model: "paragraph",
+          title: "Paragraph",
+          class: "ck-heading_paragraph",
+        },
+        {
+          model: "heading1",
+          view: "h1",
+          title: "Heading 1",
+          class: "ck-heading_heading1",
+        },
+        {
+          model: "heading2",
+          view: "h2",
+          title: "Heading 2",
+          class: "ck-heading_heading2",
+        },
+      ],
+    },
+    fontColor: {
+      colorPicker: {
+        // Use 'hex' format for output instead of 'hsl'.
+        format: "hex",
+      },
+    },
+    plugins: [
+      Bold,
+      Essentials,
+      Italic,
+      Mention,
+      Paragraph,
+      Undo,
+      Heading,
+      FontSize,
+      FontColor,
+      FontBackgroundColor,
+      Link,
+      MediaEmbed,
+      Alignment,
+      List,
+      BlockQuote,
+      Indent,
+      IndentBlock,
+      Image,
+      ImageCaption,
+      ImageResize,
+      ImageStyle,
+      ImageToolbar,
+      LinkImage,
+    ],
+    mention: {
+      // Mention configuration
+    },
+    initialData: "",
+  };
   return (
     <div>
       <form
@@ -66,6 +182,10 @@ const CreateStory = () => {
             onChange={handleChange}
             className="block w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none"
           />
+        </div>
+        <div className="mt-5">
+          <label className="block mb-2">Content</label>
+          <CKEditor editor={ClassicEditor} config={editorConfig} />
         </div>
         <div className="mt-5">
           <input

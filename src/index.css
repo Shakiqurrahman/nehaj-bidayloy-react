@@ -5,6 +5,15 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Overrides the border radius setting in the theme. */
+  --ck-border-radius: 4px;
+}
+
+.ck.ck-editor__main > .ck-editor__editable {
+  min-height: 300px !important;
+}
+
 body {
   max-width: 100%;
   overflow-x: hidden;
