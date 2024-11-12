@@ -9,14 +9,29 @@ const CreateAuthor = () => {
     bio: "",
   });
 
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
+
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+    if (file) {
+      setSelectedAvatar(file);
+      e.target.value = "";
+    }
+  };
+
+  const handleRemoveAvatar = () => {
+    setSelectedAvatar(null);
+  };
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     const { categoryName, categorySlug } = form;
-    if (categoryName && categorySlug) {
-      console.log(form);
+    if (categoryName && categorySlug && selectedAvatar) {
+      console.log(form, selectedAvatar);
     }
   };
   return (
@@ -64,7 +79,39 @@ const CreateAuthor = () => {
             Username
           </label>
         </div>
-        <div className="relative mt-5">{/* @TODO: Avatar Ui design */}</div>
+        <div className="relative mt-5">
+          <input
+            type="file"
+            name="avatar"
+            id="avatar"
+            hidden
+            onChange={handleAvatarChange}
+          />
+          <label
+            htmlFor="avatar"
+            className="flex w-full items-center gap-2 bg-gray-200 cursor-pointer rounded overflow-hidden"
+          >
+            <div className="py-1.5 px-3 bg-primary text-white shrink-0">
+              Choose Avatar
+            </div>
+            <p className="line-clamp-1 font-ador">{selectedAvatar?.name}</p>
+          </label>
+        </div>
+        {selectedAvatar && (
+          <div className="relative mt-5 text-center">
+            <img
+              src={URL.createObjectURL(selectedAvatar)}
+              alt={selectedAvatar?.name}
+              className="mx-auto block size-[200px] rounded-full shadow-box object-cover mb-5"
+            />
+            <button
+              className="px-5 py-2 rounded-lg bg-red-600 text-white font-medium"
+              onClick={handleRemoveAvatar}
+            >
+              Remove
+            </button>
+          </div>
+        )}
         <div className="relative mt-5">
           <textarea
             name="bio"
