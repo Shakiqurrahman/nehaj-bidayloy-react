@@ -6,6 +6,7 @@ import PreviewImage from "../../assets/images/preview.jpg";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import {
   Alignment,
+  AutoImage,
   BlockQuote,
   Bold,
   ClassicEditor,
@@ -15,19 +16,14 @@ import {
   FontSize,
   Heading,
   Image,
-  ImageCaption,
-  ImageResize,
-  ImageStyle,
-  ImageToolbar,
+  ImageInsert,
   Indent,
   IndentBlock,
   Italic,
   Link,
-  LinkImage,
   List,
   MediaEmbed,
   Mention,
-  Paragraph,
   Undo,
 } from "ckeditor5";
 import "ckeditor5/ckeditor5.css";
@@ -85,8 +81,6 @@ const CreateStory = () => {
         "undo",
         "redo",
         "|",
-        "heading",
-        "|",
         "fontsize",
         "fontColor",
         "fontBackgroundColor",
@@ -107,27 +101,27 @@ const CreateStory = () => {
       ],
       shouldNotGroupWhenFull: false,
     },
-    heading: {
-      options: [
-        {
-          model: "paragraph",
-          title: "Paragraph",
-          class: "ck-heading_paragraph",
-        },
-        {
-          model: "heading1",
-          view: "h1",
-          title: "Heading 1",
-          class: "ck-heading_heading1",
-        },
-        {
-          model: "heading2",
-          view: "h2",
-          title: "Heading 2",
-          class: "ck-heading_heading2",
-        },
-      ],
-    },
+    // heading: {
+    //   options: [
+    //     {
+    //       model: "paragraph",
+    //       title: "Paragraph",
+    //       class: "ck-heading_paragraph",
+    //     },
+    //     {
+    //       model: "heading1",
+    //       view: "h1",
+    //       title: "Heading 1",
+    //       class: "ck-heading_heading1",
+    //     },
+    //     {
+    //       model: "heading2",
+    //       view: "h2",
+    //       title: "Heading 2",
+    //       class: "ck-heading_heading2",
+    //     },
+    //   ],
+    // },
     fontColor: {
       colorPicker: {
         // Use 'hex' format for output instead of 'hsl'.
@@ -139,7 +133,6 @@ const CreateStory = () => {
       Essentials,
       Italic,
       Mention,
-      Paragraph,
       Undo,
       Heading,
       FontSize,
@@ -153,11 +146,8 @@ const CreateStory = () => {
       Indent,
       IndentBlock,
       Image,
-      ImageCaption,
-      ImageResize,
-      ImageStyle,
-      ImageToolbar,
-      LinkImage,
+      ImageInsert,
+      AutoImage,
     ],
     mention: {
       // Mention configuration
@@ -200,7 +190,7 @@ const CreateStory = () => {
             className="flex w-full items-center gap-2 bg-gray-200 cursor-pointer rounded overflow-hidden"
           >
             <div className="py-2 px-3 bg-primary text-white shrink-0">
-              Choose Avatar
+              Add Thumbnail
             </div>
             <p className="line-clamp-1 font-ador">{selectedThumbnail?.name}</p>
           </label>

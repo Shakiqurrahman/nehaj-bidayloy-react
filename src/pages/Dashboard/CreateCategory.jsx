@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { CgSpinner } from "react-icons/cg";
 
 const CreateCategory = () => {
+  const [showInfo, setShowInfo] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     categoryName: "",
@@ -51,6 +52,8 @@ const CreateCategory = () => {
             name="categorySlug"
             value={form.categorySlug}
             onChange={handleChange}
+            onFocus={() => setShowInfo(true)}
+            onBlur={() => setShowInfo(false)}
             className="block relative w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none z-[1] peer"
           />
           <label
@@ -63,6 +66,13 @@ const CreateCategory = () => {
             Category Slug
           </label>
         </div>
+        {showInfo && (
+          <p className="mt-5 text-sm text-red-600">
+            Note: Please use small letter for slug and if slug has 2 or many
+            words then use (-) after each word and dont use (space). Example:
+            (history-thought)
+          </p>
+        )}
         <button
           type="submit"
           disabled={isLoading}
