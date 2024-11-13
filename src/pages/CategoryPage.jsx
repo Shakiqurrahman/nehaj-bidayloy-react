@@ -7,6 +7,9 @@ const CategoryPage = () => {
   console.log(categorySlug);
   return (
     <div className="max-width my-10">
+      <div className="text-2xl font-ador mb-10 inline-block border-b-2 border-black hover:border-primary hover:text-primary duration-300">
+        প্রবন্ধ
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
         <div className="border-t-[3px] border-primary pt-5">
           <Link to={""} className="block w-full">

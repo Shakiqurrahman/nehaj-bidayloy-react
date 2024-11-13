@@ -23,7 +23,7 @@ const HomePage = () => {
         genre?.map((item, index) => (
           <div key={index} className="mb-10 group/parent">
             <Link
-              to={`/${item?.genreSlug}`}
+              to={`/genre/${item?.genreSlug}`}
               className="text-2xl font-ador mb-10 inline-block border-b-2 border-black hover:border-primary hover:text-primary duration-300"
             >
               {item.genreName}
