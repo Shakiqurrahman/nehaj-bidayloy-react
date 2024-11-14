@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import defaultAvatar from "../../../assets/images/no-profile-picture.svg";
 import { useFetchUserDataQuery } from "../../../Redux/api/userApiSlice";
 import { setUserData } from "../../../Redux/features/userSlice";
 import { setActiveHamburgerD } from "../../../Redux/features/utilsSlice";
@@ -66,7 +67,7 @@ const DHeader = () => {
                         <img
                             className="flex-shrink-0 size-12 rounded-full bg-primary-300 object-center overflow-hidden  cursor-pointer"
                             onClick={() => setOpenProfile(!openProfile)}
-                            src={user?.avatar}
+                            src={user?.avatar ? user?.avatar : defaultAvatar}
                             alt={user?.fullName}
                         />
                         {openProfile && (
