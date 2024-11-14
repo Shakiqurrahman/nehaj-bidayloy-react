@@ -3,7 +3,6 @@ import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 import storage from "redux-persist/lib/storage";
 import { apiSlice } from "./api/apiSlice";
-import { authorApiSlice } from "./api/authorApiSlice";
 import userSlice from "./features/userSlice";
 import utilsSlice from "./features/utilsSlice";
 // import createEncryptor from "redux-persist-transform-encrypt";
@@ -30,13 +29,12 @@ const store = configureStore({
         user: persistedUserReducer,
         utils: utilsSlice,
         [apiSlice.reducerPath]: apiSlice.reducer,
-        [authorApiSlice.reducerPath]: authorApiSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: false, // To allow non-serializable values
             immutableCheck: false,
-        }).concat(apiSlice.middleware, authorApiSlice.middleware),
+        }).concat(apiSlice.middleware),
 });
 
 export default store;
