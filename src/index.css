@@ -10,7 +10,12 @@
   --ck-border-radius: 4px;
 }
 
-.ck.ck-editor__main > .ck-editor__editable {
+.editor-container .ck-editor__editable ol,
+.editor-container .ck-editor__editable ul {
+  margin-left: 20px !important;
+}
+
+.editor-container .ck-editor__editable {
   min-height: 300px !important;
 }
 

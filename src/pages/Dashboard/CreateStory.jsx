@@ -29,6 +29,7 @@ import {
 import "ckeditor5/ckeditor5.css";
 
 const CreateStory = () => {
+  const genreList = ["প্রবন্ধ", "নোটস", "অনুবাদ"];
   const authors = [
     {
       name: "Shakil Ahmed",
@@ -67,6 +68,9 @@ const CreateStory = () => {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+  const handleContentChange = (e, editor) => {
+    setForm({ ...form, content: editor.getData() });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     const { categoryName, categorySlug } = form;
@@ -101,27 +105,13 @@ const CreateStory = () => {
       ],
       shouldNotGroupWhenFull: false,
     },
-    // heading: {
-    //   options: [
-    //     {
-    //       model: "paragraph",
-    //       title: "Paragraph",
-    //       class: "ck-heading_paragraph",
-    //     },
-    //     {
-    //       model: "heading1",
-    //       view: "h1",
-    //       title: "Heading 1",
-    //       class: "ck-heading_heading1",
-    //     },
-    //     {
-    //       model: "heading2",
-    //       view: "h2",
-    //       title: "Heading 2",
-    //       class: "ck-heading_heading2",
-    //     },
-    //   ],
-    // },
+    list: {
+      properties: {
+        styles: true,
+        startIndex: true,
+        reversed: true,
+      },
+    },
     fontColor: {
       colorPicker: {
         // Use 'hex' format for output instead of 'hsl'.
@@ -175,7 +165,13 @@ const CreateStory = () => {
         </div>
         <div className="mt-5">
           <label className="block mb-2">Content</label>
-          <CKEditor editor={ClassicEditor} config={editorConfig} />
+          <div className="editor-container">
+            <CKEditor
+              editor={ClassicEditor}
+              config={editorConfig}
+              onChange={handleContentChange}
+            />
+          </div>
         </div>
         <div className="mt-5">
           <input
@@ -219,8 +215,16 @@ const CreateStory = () => {
           </div>
           <div className="w-full sm:w-1/2">
             <label className="block mb-2">Genre</label>
-            <select className="block w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none">
-              <option value="">Select a genre</option>
+            <select
+              className="block w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none"
+              onChange={(e) => setSelectedGenre(e.target.value)}
+            >
+              {!selectedGenre && <option value="">Select a genre</option>}
+              {genreList.map((genre, index) => (
+                <option value={genre} key={index}>
+                  {genre}
+                </option>
+              ))}
             </select>
           </div>
         </div>
