@@ -2,10 +2,6 @@ import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import PublicLayout from "../Layouts/PublicLayout";
-import AboutUs from "../pages/AboutUs";
-import Author from "../pages/Author";
-import CategoryPage from "../pages/CategoryPage";
-import Contact from "../pages/Contact";
 import AllAuthor from "../pages/Dashboard/AllAuthor";
 import AllCategories from "../pages/Dashboard/AllCategories";
 import AllWritings from "../pages/Dashboard/AllWritings";
@@ -17,13 +13,8 @@ import EditAuthor from "../pages/Dashboard/EditAuthor";
 import EditCategory from "../pages/Dashboard/EditCategory";
 import EditStory from "../pages/Dashboard/EditStory";
 import ErrorPage from "../pages/ErrorPage";
-import GenrePage from "../pages/GenrePage";
 import HomePage from "../pages/HomePage";
 import NehajAdminLogin from "../pages/NehajAdminLogin";
-import Notice from "../pages/Notice";
-import SearchResultPage from "../pages/SearchResultPage";
-import SingleStoryPostPage from "../pages/SingleStoryPostPage";
-import StudyCirclePage from "../pages/StudyCirclePage";
 import AdminRoute from "./private-route/AdminRoute";
 import UnAuthenticatedRoute from "./private-route/UnAuthenticatedRoute";
 
@@ -43,42 +34,6 @@ export const router = createBrowserRouter([
             <NehajAdminLogin />
           </UnAuthenticatedRoute>
         ),
-      },
-      {
-        path: "/about-us",
-        element: <AboutUs />,
-      },
-      {
-        path: "/author",
-        element: <Author />,
-      },
-      {
-        path: "/study-circle",
-        element: <StudyCirclePage />,
-      },
-      {
-        path: "/notice",
-        element: <Notice />,
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
-      },
-      {
-        path: "/genre/:genreSlug",
-        element: <GenrePage />,
-      },
-      {
-        path: "/category/:categorySlug",
-        element: <CategoryPage />,
-      },
-      {
-        path: "/search",
-        element: <SearchResultPage />,
-      },
-      {
-        path: "/category/:categorySlug/:storySlug",
-        element: <SingleStoryPostPage />,
       },
     ],
   },
