@@ -52,9 +52,9 @@ const EditAuthor = () => {
             className="block relative w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none z-[1] peer"
           />
           <label
-            className={`select-none duration-300 peer-focus-visible:text-xs absolute bg-white -translate-y-1/2 text-sm mx-4 left-0 peer-focus-visible:top-0 leading-none peer-focus-visible:z-[2] peer-focus-visible:text-primary peer-focus-visible:mt-[2px] inline-block ${
+            className={`select-none duration-300 peer-focus-visible:text-xs absolute bg-white -translate-y-1/2 text-sm mx-4 left-0 peer-focus-visible:top-0 leading-none peer-focus-visible:z-[2] peer-focus-visible:text-primary-blue peer-focus-visible:mt-[2px] inline-block ${
               form.name
-                ? "text-xs top-0 z-[2] text-primary mt-[2px]"
+                ? "text-xs top-0 z-[2] text-primary-blue mt-[2px]"
                 : "top-1/2 text-gray-500 z-0 mt-0"
             }`}
           >
@@ -70,9 +70,9 @@ const EditAuthor = () => {
             className="block relative w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none z-[1] peer"
           />
           <label
-            className={`select-none duration-300 peer-focus-visible:text-xs absolute bg-white -translate-y-1/2 text-sm mx-4 left-0 peer-focus-visible:top-0 leading-none peer-focus-visible:z-[2] peer-focus-visible:text-primary peer-focus-visible:mt-[2px] inline-block ${
+            className={`select-none duration-300 peer-focus-visible:text-xs absolute bg-white -translate-y-1/2 text-sm mx-4 left-0 peer-focus-visible:top-0 leading-none peer-focus-visible:z-[2] peer-focus-visible:text-primary-blue peer-focus-visible:mt-[2px] inline-block ${
               form.userName
-                ? "text-xs top-0 z-[2] text-primary mt-[2px]"
+                ? "text-xs top-0 z-[2] text-primary-blue mt-[2px]"
                 : "top-1/2 text-gray-500 z-0 mt-0"
             }`}
           >
@@ -91,7 +91,7 @@ const EditAuthor = () => {
             htmlFor="avatar"
             className="flex w-full items-center gap-2 bg-gray-200 cursor-pointer rounded overflow-hidden"
           >
-            <div className="py-1.5 px-3 bg-primary text-white shrink-0">
+            <div className="py-1.5 px-3 bg-primary-blue text-white shrink-0">
               Choose Avatar
             </div>
             <p className="line-clamp-1 font-ador">{selectedAvatar?.name}</p>
@@ -120,9 +120,9 @@ const EditAuthor = () => {
             className="block relative w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none z-[1] peer resize-y min-h-[120px]"
           ></textarea>
           <label
-            className={`select-none duration-300 peer-focus-visible:text-xs absolute bg-white -translate-y-1/2 text-sm mx-4 left-0 peer-focus-visible:top-0 leading-none peer-focus-visible:z-[2] peer-focus-visible:text-primary peer-focus-visible:mt-[2px] inline-block ${
+            className={`select-none duration-300 peer-focus-visible:text-xs absolute bg-white -translate-y-1/2 text-sm mx-4 left-0 peer-focus-visible:top-0 leading-none peer-focus-visible:z-[2] peer-focus-visible:text-primary-blue peer-focus-visible:mt-[2px] inline-block ${
               form.bio
-                ? "text-xs top-0 z-[2] text-primary mt-[2px]"
+                ? "text-xs top-0 z-[2] text-primary-blue mt-[2px]"
                 : "top-5 text-gray-500 z-0 mt-0"
             }`}
           >
@@ -132,7 +132,7 @@ const EditAuthor = () => {
         <button
           type="submit"
           disabled={isLoading}
-          className="disabled:bg-primary-300 flex items-center justify-center w-full text-center h-11 bg-primary-500 hover:bg-primary-700 text-white font-medium mt-5 duration-300 rounded select-none"
+          className="disabled:bg-primary-blue flex items-center justify-center w-full text-center h-11 bg-primary-blue hover:bg-primary-blue text-white font-medium mt-5 duration-300 rounded select-none"
         >
           {isLoading ? (
             <CgSpinner className="animate-spin text-xl" />

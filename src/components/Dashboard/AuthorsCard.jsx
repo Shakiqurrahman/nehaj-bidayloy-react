@@ -23,7 +23,7 @@ const AuthorsCard = ({ authorsData }) => {
         className="object-cover size-28 rounded-full"
       />
       <div className="space-y-1">
-        <h3 className="text-lg line-clamp-1 font-semibold text-primary">
+        <h3 className="text-lg line-clamp-1 font-semibold text-primary-blue">
           Author Name
         </h3>
         <p className="text-sm text-gray-500 line-clamp-5">

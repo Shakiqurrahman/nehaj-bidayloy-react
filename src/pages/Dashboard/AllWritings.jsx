@@ -15,7 +15,7 @@ const AllWritings = () => {
           <h1 className="text-[28px] font-semibold leading-none">Writings</h1>
           <Link
             to={"create"}
-            className="font-medium px-4 py-2 rounded-[30px] border-primary-500 text-primary border-2 hover:border-primary-700 duration-300 flex items-center gap-1 text-sm hover:bg-primary-700 hover:text-white"
+            className="font-medium px-4 py-2 rounded-[30px] border-primary-blue text-primary-blue border-2 hover:border-primary-blue duration-300 flex items-center gap-1 text-sm hover:bg-primary-blue hover:text-white"
           >
             <FiPlusCircle />
             Create new

@@ -64,9 +64,9 @@ const NehajAdminLogin = () => {
             className="block relative w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none z-[1] peer"
           />
           <label
-            className={`select-none duration-300 peer-focus-visible:text-xs absolute bg-white -translate-y-1/2 text-sm mx-4 left-0 peer-focus-visible:top-0 leading-none peer-focus-visible:z-[2] peer-focus-visible:text-primary peer-focus-visible:mt-[2px] inline-block ${
+            className={`select-none duration-300 peer-focus-visible:text-xs absolute bg-white -translate-y-1/2 text-sm mx-4 left-0 peer-focus-visible:top-0 leading-none peer-focus-visible:z-[2] peer-focus-visible:text-primary-blue peer-focus-visible:mt-[2px] inline-block ${
               form.email
-                ? "text-xs top-0 z-[2] text-primary mt-[2px]"
+                ? "text-xs top-0 z-[2] text-primary-blue mt-[2px]"
                 : "top-1/2 text-gray-500 z-0 mt-0"
             }`}
           >
@@ -82,9 +82,9 @@ const NehajAdminLogin = () => {
             className="block relative w-full py-2.5 px-4 pr-10 border-gray-300 border rounded bg-transparent outline-none z-[1] peer"
           />
           <label
-            className={`select-none duration-300 peer-focus-visible:text-xs absolute bg-white -translate-y-1/2 text-sm mx-4 left-0 peer-focus-visible:top-0 leading-none peer-focus-visible:z-[2] peer-focus-visible:text-primary peer-focus-visible:mt-[2px] inline-block ${
+            className={`select-none duration-300 peer-focus-visible:text-xs absolute bg-white -translate-y-1/2 text-sm mx-4 left-0 peer-focus-visible:top-0 leading-none peer-focus-visible:z-[2] peer-focus-visible:text-primary-blue peer-focus-visible:mt-[2px] inline-block ${
               form.password
-                ? "text-xs top-0 z-[2] text-primary mt-[2px]"
+                ? "text-xs top-0 z-[2] text-primary-blue mt-[2px]"
                 : "top-1/2 text-gray-500 z-0 mt-0"
             }`}
           >
@@ -92,7 +92,7 @@ const NehajAdminLogin = () => {
           </label>
           {form.password && (
             <div
-              className="absolute top-1/2 -translate-y-1/2 right-4 z-10 cursor-pointer text-primary text-xl select-none"
+              className="absolute top-1/2 -translate-y-1/2 right-4 z-10 cursor-pointer text-primary-blue text-xl select-none"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -102,7 +102,7 @@ const NehajAdminLogin = () => {
         <button
           type="submit"
           disabled={isLoggingIn}
-          className="disabled:bg-primary-300 flex items-center justify-center w-full text-center h-11 bg-primary-500 hover:bg-primary-700 text-white font-medium mt-5 duration-300 rounded select-none"
+          className="disabled:bg-primary-blue flex items-center justify-center w-full text-center h-11 bg-primary-blue hover:bg-primary-blue text-white font-medium mt-5 duration-300 rounded select-none"
         >
           {isLoggingIn ? (
             <CgSpinner className="animate-spin text-xl" />

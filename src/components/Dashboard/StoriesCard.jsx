@@ -22,7 +22,7 @@ const StoriesCard = ({ storiesData }) => {
         className="w-full block object-cover"
         alt=""
       />
-      <Link className="line-clamp-1 font-ador text-lg text-primary mt-5">
+      <Link className="line-clamp-1 font-ador text-lg text-primary-blue mt-5">
         হিমুর প্রতিচ্ছবি হিমুর প্রতিচ্ছবি হিমুর প্রতিচ্ছবি হিমুর প্রতি হিমুর
         প্রতিচ্ছবি হিমুর প্রতিচ্ছবি হিমুর প্রতিচ্ছবি হিমুর প্রতি
       </Link>
@@ -42,9 +42,9 @@ const StoriesCard = ({ storiesData }) => {
       </p>
       <span className="h-px w-full bg-black/20 block my-3"></span>
       <div className="flex justify-center gap-2 items-center">
-        <Link className="font-ador text-primary">Shakiqur Rahman</Link>
+        <Link className="font-ador text-primary-blue">Shakiqur Rahman</Link>
         <span className="block w-px h-5 bg-black/20"></span>
-        <Link className="font-ador  text-primary">চিন্তা</Link>
+        <Link className="font-ador  text-primary-blue">চিন্তা</Link>
       </div>
     </div>
   );

@@ -9,27 +9,38 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#b22945",
-          100: "#fce7e8", //button - disabled bg
-          200: "#f8d3d7",
-          300: "#f2afb4",
-          400: "#ea828d",
-          500: "#de5567", //button - default
-          600: "#c9354f",
-          700: "#b22945", //button - hover
-          800: "#8e233d",
-          900: "#7a2138",
+          blue: "#002E5D",
+          white: "#FFFFF0",
+          dark: "#0A0C10",
         },
         secondary: {
-          DEFAULT: "#523633",
+          gray: "#B3B3B3",
+          blue: "#90CAF9",
+          "charcoal-gray": "#444444",
         },
         accent: {
-          DEFAULT: "#C2894C",
+          golden: "#D4AF37",
+          tint: "#FFFDF4",
         },
-      },
-      boxShadow: {
-        box: "0 0 10px 1px rgba(0,0,0,0.1)",
-        "box-lg": "0 0 15px 1px rgba(0,0,0,0.1)",
+        alert: {
+          green: "#4CAF50",
+          orange: "#FF9800",
+          red: "#F44336",
+        },
+        light: {
+          dark: "#424345",
+          grey: "#D8D8D8",
+        },
+        dark: {
+          grey: "#7D7E80",
+        },
+        blue: {
+          grey: "#95A1AD",
+        },
+        ivory: {
+          grey: "#C2BBA8",
+        },
+        grey: "#B9B9B9",
       },
     },
   },

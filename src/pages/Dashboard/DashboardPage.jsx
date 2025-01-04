@@ -12,7 +12,9 @@ const DashboardPage = () => {
     <section className="w-full">
       <div>
         <h1 className="text-[28px] font-semibold leading-none">Dashboard</h1>
-        <p className="text-sm text-primary tracking-[4px]">Nehaj Bidyaloy</p>
+        <p className="text-sm text-primary-blue tracking-[4px]">
+          Nehaj Bidyaloy
+        </p>
       </div>
 
       <div className="mt-10 flex flex-wrap gap-5">
@@ -22,7 +24,7 @@ const DashboardPage = () => {
             <p className="text-base font-medium">Total Authors</p>
           </div>
           <div>
-            <HiMiniUsers className="text-primary" size={50} />
+            <HiMiniUsers className="text-primary-blue" size={50} />
           </div>
         </div>
         <div className="flex items-center justify-between p-8 bg-white w-[300px] rounded-2xl border">
@@ -31,7 +33,7 @@ const DashboardPage = () => {
             <p className="text-base font-medium">Total Categories</p>
           </div>
           <div>
-            <MdCategory className="text-primary" size={50} />
+            <MdCategory className="text-primary-blue" size={50} />
           </div>
         </div>
         <div className="flex items-center justify-between p-8 bg-white w-[300px] rounded-2xl border">
@@ -40,7 +42,7 @@ const DashboardPage = () => {
             <p className="text-base font-medium">Total Writings</p>
           </div>
           <div>
-            <FaBookOpen className="text-primary" size={50} />
+            <FaBookOpen className="text-primary-blue" size={50} />
           </div>
         </div>
       </div>
@@ -50,7 +52,7 @@ const DashboardPage = () => {
           <h2 className="text-xl font-medium leading-none">Authors</h2>
           <Link
             to="/admin-dashboard/authors"
-            className="bg-primary hover:bg-primary-800 duration-300 px-6 py-2 rounded-[30px] text-white font-medium"
+            className="bg-primary-blue hover:bg-primary-blue duration-300 px-6 py-2 rounded-[30px] text-white font-medium"
           >
             See All
           </Link>
@@ -68,7 +70,7 @@ const DashboardPage = () => {
             <h2 className="text-xl font-medium leading-none">Writings</h2>
             <Link
               to="/admin-dashboard/stories"
-              className="bg-primary hover:bg-primary-800 duration-300 px-6 py-2 rounded-[30px] text-white font-medium"
+              className="bg-primary-blue hover:bg-primary-blue duration-300 px-6 py-2 rounded-[30px] text-white font-medium"
             >
               See All
             </Link>
