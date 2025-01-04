@@ -5,12 +5,12 @@ import Header from "../components/shared/Header/Header";
 
 const PublicLayout = () => {
   return (
-    <>
+    <section className="bg-primary-white p-[30px]">
       <Header />
       <Outlet />
       <ScrollRestoration />
       <Footer />
-    </>
+    </section>
   );
 };
 
