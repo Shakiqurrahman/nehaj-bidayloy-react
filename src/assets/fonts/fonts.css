@@ -1,7 +1,87 @@
 /* Regular (Normal) weight */
 @font-face {
-    font-family: "ador";
-    src: url("./LiAdorNoirritVR-VF.ttf") format("truetype");
-    font-weight: 100 900;
-    font-style: normal;
+  font-family: "ador";
+  src: url("./LiAdorNoirritVR-VF.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+/* Niladri font */
+@font-face {
+  font-family: "Niladri";
+  font-style: normal;
+  font-weight: 100 900;
+  src: url("./Li Niladri Rongtuli Unicode.ttf") format("truetype");
+}
+
+/* AbhayaLibre font */
+@font-face {
+  font-family: "AbhayaLibre";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./AbhayaLibre-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "AbhayaLibre";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./AbhayaLibre-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "AbhayaLibre";
+  font-style: normal;
+  font-weight: 800;
+  src: url("./AbhayaLibre-ExtraBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "AbhayaLibre";
+  font-style: normal;
+  font-weight: 500;
+  src: url("./AbhayaLibre-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "AbhayaLibre";
+  font-style: normal;
+  font-weight: 600;
+  src: url("./AbhayaLibre-SemiBold.ttf") format("truetype");
+}
+
+/* Blinker font */
+@font-face {
+  font-family: "Blinker";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./Blinker-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Blinker";
+  font-style: normal;
+  font-weight: 900;
+  src: url("./Blinker-Black.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Blinker";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./Blinker-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Blinker";
+  font-style: normal;
+  font-weight: 800;
+  src: url("./Blinker-ExtraBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Blinker";
+  font-style: normal;
+  font-weight: 600;
+  src: url("./Blinker-SemiBold.ttf") format("truetype");
+}
+
+/* Lexend font */
+@font-face {
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 100 900;
+  src: url("./Lexend-VariableFont_wght.ttf") format("truetype");
 }

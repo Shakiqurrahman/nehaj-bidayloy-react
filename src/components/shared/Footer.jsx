@@ -21,7 +21,7 @@ const Footer = () => {
             </p>
           </div>
           <div className="w-auto shrink-0 flex flex-col gap-[25px]">
-            <h1 className="text-2xl">বিষয়</h1>
+            <h1 className="text-2xl font-niladri">বিষয়</h1>
             <ul className="flex flex-col gap-[10px]">
               <li>
                 <Link
@@ -74,7 +74,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="w-auto shrink-0 flex flex-col gap-[25px]">
-            <h1 className="text-2xl">ধরণ</h1>
+            <h1 className="text-2xl font-niladri">ধরণ</h1>
             <ul className="flex flex-col gap-[10px]">
               <li>
                 <Link
@@ -103,7 +103,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="w-auto shrink-0 flex flex-col gap-[25px]">
-            <h1 className="text-2xl">গুরুত্বপূর্ণ লিংক</h1>
+            <h1 className="text-2xl font-niladri">গুরুত্বপূর্ণ লিংক</h1>
             <ul className="flex flex-col gap-[10px]">
               <li>
                 <Link
@@ -132,7 +132,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="w-auto shrink-0 flex flex-col gap-[25px]">
-            <h1 className="text-2xl">সোশ্যাল মিডিয়া</h1>
+            <h1 className="text-2xl font-niladri">সোশ্যাল মিডিয়া</h1>
             <ul className="flex flex-col gap-[10px]">
               <li>
                 <Link
@@ -161,7 +161,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="w-auto shrink-0 flex flex-col gap-[25px]">
-            <h1 className="text-2xl">নেহাজের লেখকগন</h1>
+            <h1 className="text-2xl font-niladri">নেহাজের লেখকগন</h1>
             <img
               src={AuthorLogo}
               alt="Nehaj Footer Author Logo"
@@ -169,7 +169,7 @@ const Footer = () => {
             />
           </div>
           <div className="w-auto shrink-0 flex flex-col gap-[25px]">
-            <h1 className="text-2xl">নেহাজ মাসকুট</h1>
+            <h1 className="text-2xl font-niladri">নেহাজ মাসকুট</h1>
             <img
               src={MaskutLogo}
               alt="Nehaj Footer Maskut Logo"
@@ -178,7 +178,7 @@ const Footer = () => {
           </div>
         </div>
         <hr className="w-full h-px my-[60px] bg-white" />
-        <div className="flex items-center justify-between text-lg">
+        <div className="flex items-center justify-between text-lg font-syne-mono">
           <p>copyright 2024 @nehaj-bidyaloy All Right Reserved</p>
           <p>developed by flytech IT</p>
           <p>coa 2024 @ibnsums All Right Reserved</p>
