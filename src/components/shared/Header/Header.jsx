@@ -8,11 +8,11 @@ const Header = () => {
     <header className="w-full absolute top-[75px] left-0 z-[99999999]">
       <nav className="max-width">
         <div className="rounded-[100px] bg-primary-white flex items-center justify-between px-6 py-[10px] lg:p-[30px]">
-          <Link to={"/"}>
+          <Link to={"/"} className="shrink-0">
             <img
               src={Logo}
               alt="Nehaj Bidyaloy Logo"
-              className="w-[165px] object-contain shrink-0"
+              className="w-[165px] object-contain"
             />
           </Link>
           <ul className="hidden lg:flex items-center gap-10">
