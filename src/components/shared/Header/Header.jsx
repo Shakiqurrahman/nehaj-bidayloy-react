@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header className="w-full absolute top-[75px] left-0 z-[99999999]">
       <nav className="max-width font-niladri">
-        <div className="rounded-[100px] bg-primary-white flex items-center justify-between px-6 py-[10px] lg:p-[30px]">
+        <div className="rounded-[100px] bg-primary-white flex items-center justify-between px-6 py-[10px] lg:px-[30px] lg:py-4 border">
           <Link to={"/"} className="shrink-0">
             <img
               src={Logo}
@@ -19,7 +19,7 @@ const Header = () => {
             <li>
               <NavLink
                 to={"/category"}
-                className="text-lg text-primary-blue hover:text-alert-orange duration-300"
+                className="text-lg text-primary-blue hover:text-primary-golden duration-300"
               >
                 বিষয়
               </NavLink>
@@ -27,7 +27,7 @@ const Header = () => {
             <li>
               <NavLink
                 to={"/genre"}
-                className="text-lg text-primary-blue hover:text-alert-orange duration-300"
+                className="text-lg text-primary-blue hover:text-primary-golden duration-300"
               >
                 ধরণ
               </NavLink>
@@ -35,7 +35,7 @@ const Header = () => {
             <li>
               <NavLink
                 to={"/study-circle"}
-                className="text-lg text-primary-blue hover:text-alert-orange duration-300"
+                className="text-lg text-primary-blue hover:text-primary-golden duration-300"
               >
                 পাঠচক্র
               </NavLink>
@@ -43,7 +43,7 @@ const Header = () => {
             <li>
               <NavLink
                 to={"/author"}
-                className="text-lg text-primary-blue hover:text-alert-orange duration-300"
+                className="text-lg text-primary-blue hover:text-primary-golden duration-300"
               >
                 লেখক
               </NavLink>
@@ -51,7 +51,7 @@ const Header = () => {
             <li>
               <NavLink
                 to={"/about-us"}
-                className="text-lg text-primary-blue hover:text-alert-orange duration-300"
+                className="text-lg text-primary-blue hover:text-primary-golden duration-300"
               >
                 পরিচয়
               </NavLink>
@@ -60,20 +60,20 @@ const Header = () => {
           <div className="flex items-center gap-[15px] lg:gap-[50px]">
             <NavLink
               to={"/notice"}
-              className="text-lg text-primary-blue hover:text-alert-orange duration-300"
+              className="text-lg text-primary-blue hover:text-primary-golden duration-300"
             >
               বিজ্ঞপ্তি
             </NavLink>
             <NavLink
               to={"/contact"}
-              className="text-lg text-primary-blue hover:text-alert-orange duration-300"
+              className="text-lg text-primary-blue hover:text-primary-golden duration-300"
             >
               যোগাযোগ
             </NavLink>
             <button className="shrink-0 block lg:hidden">
-              <GiHamburgerMenu className="w-[18px] h-4 text-primary-blue hover:text-alert-orange duration-300" />
+              <GiHamburgerMenu className="w-[18px] h-4 text-primary-blue hover:text-primary-golden duration-300" />
             </button>
-            <button className="shrink-0 px-10 py-[15px] rounded-[40px] bg-primary-blue text-white hover:bg-alert-orange duration-300">
+            <button className="shrink-0 px-10 py-[15px] rounded-[40px] bg-primary-blue text-white hover:bg-primary-golden duration-300">
               খুঁজুন
             </button>
           </div>

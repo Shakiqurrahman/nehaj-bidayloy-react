@@ -12,6 +12,7 @@ export default {
           blue: "#002E5D",
           white: "#FFFFF0",
           dark: "#0A0C10",
+          golden : "#BA7901"
         },
         secondary: {
           gray: "#B3B3B3",

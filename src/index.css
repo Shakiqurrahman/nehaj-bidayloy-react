@@ -35,7 +35,7 @@ body {
 }
 
 .active {
-  @apply text-alert-orange;
+  @apply text-primary-golden;
 }
 
 .font-ador {
