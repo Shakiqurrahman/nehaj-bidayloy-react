@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import PublicLayout from "../Layouts/PublicLayout";
 import AboutUs from "../pages/AboutUs";
+import AuthorsPage from "../pages/AuthorsPage";
 import AllAuthor from "../pages/Dashboard/AllAuthor";
 import AllCategories from "../pages/Dashboard/AllCategories";
 import AllWritings from "../pages/Dashboard/AllWritings";
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
             <NehajAdminLogin />
           </UnAuthenticatedRoute>
         ),
+      },
+      {
+        path: "/author",
+        element: <AuthorsPage />,
       },
       {
         path: "/about-us",
