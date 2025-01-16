@@ -49,12 +49,12 @@ const NehajAdminLogin = () => {
   };
 
   return (
-    <div className="max-width my-20 font-poppins">
+    <div className="max-width font-poppins flex flex-col justify-center items-center h-screen">
       <form
-        className="max-w-[500px] mx-auto p-8 py-10 bg-white shadow-box rounded-lg"
+        className="max-w-[500px] w-full mx-auto p-8 py-10 bg-white shadow-box rounded-lg"
         onSubmit={handleSubmit}
       >
-        <h1 className="text-center text-xl font-semibold select-none">Login</h1>
+        <h1 className="text-center text-3xl font-semibold select-none">Login</h1>
         <div className="relative mt-5">
           <input
             type="text"
@@ -107,7 +107,7 @@ const NehajAdminLogin = () => {
           {isLoggingIn ? (
             <CgSpinner className="animate-spin text-xl" />
           ) : (
-            "Submit"
+            "Login"
           )}
         </button>
       </form>

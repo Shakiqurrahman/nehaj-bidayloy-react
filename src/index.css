@@ -46,6 +46,10 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+.section_title {
+  @apply font-niladri text-[22px] sm:text-[30px] text-primary-blue mb-5;
+}
+
 /* dashboard css  */
 
 /* Humbuger Icon */

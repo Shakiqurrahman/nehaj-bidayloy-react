@@ -3,9 +3,7 @@ import HomeCategoryCard from "../components/Cards/HomeCategoryCard";
 import HomeSinglePostCard from "../components/Cards/HomeSinglePostCard";
 import Hero from "../components/shared/Header/Hero";
 
-import patcokroCard1 from "../assets/images/patchokro-cards/patcokro-card-1.png";
-import patcokroCard2 from "../assets/images/patchokro-cards/patcokro-card-2.png";
-import patcokroCard3 from "../assets/images/patchokro-cards/patcokro-card-3.png";
+import RecentEventBanner from "../components/RecentEventBanner";
 
 const HomePage = () => {
   const categoryCardsData = [
@@ -82,36 +80,12 @@ const HomePage = () => {
       </div>
 
       {/* সাম্প্রতিক পাঠচক্র section */}
-      <div className="bg-primary-blue rounded-[40px] pt-[70px] pb-[100px] mb-[120px]">
-        <div className="max-width text-white">
-          <h2 className="text-xl font-niladri text-center">
-            সাম্প্রতিক পাঠচক্র
-          </h2>
-          <p className="text-lg w-[70%] mx-auto mb-[60px] mt-5 text-center">
-            নেহাজ প্রতি পাক্ষিকে একটা করে পাঠচক্রের আয়োজন করে। আগ্রহীগন
-            পাঠচক্রের বিজ্ঞপ্তি মোতাবেক নেহাজের উক্ত পাঠচক্রে যুক্ত হইতে
-            পারবেন। বিজ্ঞপ্তিতে ক্লিকের মাধ্যমে আপনি এক্টিভ সেশনের জুম লিংক-এ
-            যেতে পারবে।
-          </p>
-          <div className="grid gap-5 grid-cols-3">
-            <img
-              src={patcokroCard1}
-              alt="Patcokro Card Image"
-              className="w-full rounded-[50px] block"
-            />
-            <img
-              src={patcokroCard2}
-              alt="Patcokro Card Image"
-              className="w-full rounded-[50px] block"
-            />
-            <img
-              src={patcokroCard3}
-              alt="Patcokro Card Image"
-              className="w-full rounded-[50px] block"
-            />
-          </div>
-        </div>
-      </div>
+      <RecentEventBanner
+        title="সাম্প্রতিক পাঠচক্র"
+        subTitle="নেহাজ প্রতি পাক্ষিকে একটা করে পাঠচক্রের আয়োজন করে। আগ্রহীগন
+          পাঠচক্রের বিজ্ঞপ্তি মোতাবেক নেহাজের উক্ত পাঠচক্রে যুক্ত হইতে পারবেন।
+          বিজ্ঞপ্তিতে ক্লিকের মাধ্যমে আপনি এক্টিভ সেশনের জুম লিংক-এ যেতে পারবে।"
+      />
     </>
   );
 };

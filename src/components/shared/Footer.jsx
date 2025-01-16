@@ -6,7 +6,7 @@ import WhiteLogo from "/public/nehaj-logo-white.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary-blue rounded-[30px] text-white pt-[78px] pb-[33px]">
+    <footer className="bg-primary-blue rounded-[30px] mt-32 text-white pt-[78px] pb-[33px]">
       <div className="max-width">
         <div className="flex items-start justify-between">
           <div className="w-auto shrink-0 flex flex-col gap-[25px]">
