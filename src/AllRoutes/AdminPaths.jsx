@@ -11,7 +11,7 @@ import EditAuthor from "../pages/Dashboard/EditAuthor";
 import EditCategory from "../pages/Dashboard/EditCategory";
 import EditStory from "../pages/Dashboard/EditStory";
 
-export const AdminRoutes = [
+export const AdminPaths = [
   {
     path: "/admin-dashboard",
     element: <DashboardPage />,

@@ -8,7 +8,7 @@ import ErrorPage from "../pages/ErrorPage";
 import HomePage from "../pages/HomePage";
 import NehajAdminLogin from "../pages/NehajAdminLogin";
 import Notice from "../pages/Notice";
-import { AdminRoutes } from "./AdminRoutes";
+import { AdminPaths } from "./AdminPaths";
 import AdminRoute from "./private-route/AdminRoute";
 import UnAuthenticatedRoute from "./private-route/UnAuthenticatedRoute";
 
@@ -50,7 +50,7 @@ export const router = createBrowserRouter([
         <DashboardLayout />
       </AdminRoute>
     ),
-    children: AdminRoutes,
+    children: AdminPaths,
   },
   {
     path: "*",
