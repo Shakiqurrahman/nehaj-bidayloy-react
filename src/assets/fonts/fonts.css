@@ -14,6 +14,14 @@
   src: url("./Li Niladri Rongtuli Unicode.ttf") format("truetype");
 }
 
+/* Mainak Signature font */
+@font-face {
+  font-family: "Mainak";
+  font-style: normal;
+  font-weight: 100 900;
+  src: url("./Li Mainak Signature Unicode.ttf") format("truetype");
+}
+
 /* AbhayaLibre font */
 @font-face {
   font-family: "AbhayaLibre";

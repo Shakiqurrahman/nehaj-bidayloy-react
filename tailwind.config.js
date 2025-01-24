@@ -12,7 +12,7 @@ export default {
           blue: "#002E5D",
           white: "#FFFFF0",
           dark: "#0A0C10",
-          golden : "#BA7901"
+          golden: "#BA7901",
         },
         secondary: {
           gray: "#B3B3B3",
@@ -45,6 +45,7 @@ export default {
       },
       fontFamily: {
         niladri: ['"Niladri", sans-serif'],
+        "mainak-signature": ['"Mainak", sans-serif'],
         notoserif: ['"Noto Serif Bengali", sans-serif'],
         abhaya: ['"AbhayaLibre", sans-serif'],
         blinker: ['"Blinker", sans-serif'],
