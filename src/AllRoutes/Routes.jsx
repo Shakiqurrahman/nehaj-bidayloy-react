@@ -4,7 +4,9 @@ import DashboardLayout from "../Layouts/DashboardLayout";
 import PublicLayout from "../Layouts/PublicLayout";
 import AboutUs from "../pages/AboutUs";
 import AuthorsPage from "../pages/AuthorsPage";
+import CategoryPage from "../pages/CategoryPage";
 import ErrorPage from "../pages/ErrorPage";
+import GenrePage from "../pages/GenrePage";
 import HomePage from "../pages/HomePage";
 import NehajAdminLogin from "../pages/NehajAdminLogin";
 import Notice from "../pages/Notice";
@@ -32,6 +34,14 @@ export const router = createBrowserRouter([
       {
         path: "/notice",
         element: <Notice />,
+      },
+      {
+        path: "/category",
+        element: <CategoryPage />,
+      },
+      {
+        path: "/genre/:genreType",
+        element: <GenrePage />,
       },
     ],
   },

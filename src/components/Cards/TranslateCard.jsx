@@ -10,8 +10,8 @@ const TranslateCard = ({ bgImage, title, desc, link }) => {
         alt=""
         className="min-h-[600px] w-full rounded-[30px] object-cover"
       />
-      <div className="absolute bottom-0 left-0 w-full py-5 bg-primary-blue rounded-[30px] px-[50px]">
-        <div className="flex items-center gap-5">
+      <div className="absolute bottom-0 left-0 w-full py-10 bg-primary-blue rounded-[30px] px-[50px]">
+        <div className="flex items-center justify-between gap-5">
           <div className="text-white">
             <h1 className="font-niladri mb-2 text-xl">{title}</h1>
             <p className="line-clamp-2">{desc}</p>

@@ -7,6 +7,8 @@ const CategoryCardWithButton = ({
   desc,
   link,
   darkMode = true,
+  categoryName,
+  genreType,
 }) => {
   return (
     <div className={darkMode ? `text-white` : ``}>
@@ -15,6 +17,12 @@ const CategoryCardWithButton = ({
         alt=""
         className="rounded-[30px] h-[350px] w-full object-cover shadow"
       />
+      {(categoryName || genreType) && (
+        <div className="flex items-center gap-5 text-grey mt-5">
+          <p>{categoryName}</p>
+          <p>{genreType}</p>
+        </div>
+      )}
       <h1 className="font-niladri my-3 text-2xl" title={title}>
         {title}
       </h1>

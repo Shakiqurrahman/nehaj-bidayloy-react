@@ -268,7 +268,7 @@ const HomePage = () => {
           {articlesArray?.map((item, i) => (
             <div key={i}>
               <div
-                className="rounded-[30px] text-white pt-10 pb-20 text-center px-[100px]"
+                className="rounded-[30px] text-white pt-10 pb-20 text-center px-[100px] bg-cover"
                 style={{
                   backgroundImage: `url(${item?.bgImage}), linear-gradient(to right, rgba(0,46,93,0.6), rgba(0,46,93,0.6)`,
                 }}
