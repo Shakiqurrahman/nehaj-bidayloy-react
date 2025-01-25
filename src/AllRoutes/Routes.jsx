@@ -10,6 +10,7 @@ import GenrePage from "../pages/GenrePage";
 import HomePage from "../pages/HomePage";
 import NehajAdminLogin from "../pages/NehajAdminLogin";
 import Notice from "../pages/Notice";
+import SingleBlogPost from "../pages/SingleBlogPost";
 import { AdminPaths } from "./AdminPaths";
 import AdminRoute from "./private-route/AdminRoute";
 import UnAuthenticatedRoute from "./private-route/UnAuthenticatedRoute";
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: "/genre/:genreType",
         element: <GenrePage />,
+      },
+      {
+        path: "/story",
+        element: <SingleBlogPost />,
       },
     ],
   },
