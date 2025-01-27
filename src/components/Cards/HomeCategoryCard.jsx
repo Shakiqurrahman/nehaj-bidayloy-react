@@ -14,7 +14,7 @@ const HomeCategoryCard = ({ data }) => {
           <BsArrowUpRight className="text-xl" />
         </Link>
       </div>
-      <ul className="flex items-center gap-4 mt-[40px] mb-[10px] text-secondary-gray font-medium">
+      <ul className="flex items-center gap-1 xl:gap-4 mt-[40px] mb-[10px] text-secondary-gray font-medium text-sm xl:text-base">
         <li className="shrink-0">{data?.article} হাজার প্রবন্ধ</li>
         <li className="shrink-0">{data?.translation} হাজার অনুবাদ</li>
         <li className="shrink-0">{data?.notes} হাজার নোটস</li>
