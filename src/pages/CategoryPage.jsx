@@ -8,7 +8,6 @@ import quotesImg from "../assets/images/quotesImg.png";
 import CategoryCard from "../components/Cards/CategoryCard";
 import CategoryCardWithButton from "../components/Cards/CategoryCardWithButton";
 import TranslateCard from "../components/Cards/TranslateCard";
-import Pagination from "../components/Pagination";
 
 const CategoryPage = () => {
   const quotesArray = [
@@ -259,11 +258,6 @@ const CategoryPage = () => {
               link={item?.link}
             />
           ))}
-        </div>
-        {/* pagination section */}
-        <div className="mt-20">
-          <span className="block w-full h-px bg-secondary-gray mb-10"></span>
-          <Pagination />
         </div>
       </div>
 
