@@ -148,7 +148,7 @@ const HomePage = () => {
         <h2 className="text-lg lg:text-3xl font-niladri text-center text-primary-blue mb-2">
           চিন্তা
         </h2>
-        <h1 className="lg:w-[70%] mx-auto text-2xl md:text-3xl md:text-[46px] font-niladri text-center mb-10 md:mb-[76px]">
+        <h1 className="lg:w-[70%] mx-auto text-center text-2xl md:text-3xl lg:text-[40px] lg:leading-[60px] xl:text-[60px] xl:leading-[80px] font-niladri mb-10">
           চিন্তার দৈন্যদশা থেইকা আমাদের মুক্তির সংগ্রাম বুদ্ধিবৃত্তিক, কায়িক না
         </h1>
         <HomeSinglePostCard />
