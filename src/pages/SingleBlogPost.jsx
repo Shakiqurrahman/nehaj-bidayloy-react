@@ -74,7 +74,7 @@ const SingleBlogPost = () => {
           <span className="size-2 rounded-full bg-accent-golden shrink-0 block"></span>
           <span>{convertToBanglaDate(new Date())}</span>
         </div>
-        <h1 className="text-[60px] font-niladri text-primary-blue">
+        <h1 className="text-xl md:text-3xl lg:text-[60px] font-niladri text-primary-blue">
           চিন্তার ভিতর ঘুমন্ত ঘুঘু এবং অন্যান্য ফুলের কথা
         </h1>
         <img
@@ -84,16 +84,16 @@ const SingleBlogPost = () => {
         />
       </div>
       {/* author details section */}
-      <div className="bg-[#F1F8FF] py-[50px]">
+      <div className="bg-[#F1F8FF] py-[50px] w-[calc(100%_+_20px)] sm:w-[calc(100%_+_60px)] -ml-[10px] sm:-ml-[30px] px-[10px] sm:px-[30px]">
         <div className="max-width">
-          <div className="flex items-center gap-10">
+          <div className="flex flex-wrap sm:flex-nowrap items-center gap-10">
             <img
               src={authorImg}
               alt="Author Image"
-              className="w-[220px] object-cover rounded-[20px] shrink-0"
+              className="mx-auto sm:ml-0 w-[220px] object-cover rounded-[20px] shrink-0"
             />
             <div>
-              <h1 className="text-2xl font-niladri text-primary-blue mb-3">
+              <h1 className="text-center sm:text-left text-lg sm:text-2xl font-niladri text-primary-blue mb-3">
                 আবুল হুকুম
               </h1>
               <p>
@@ -124,7 +124,7 @@ const SingleBlogPost = () => {
 
       <div className="max-width">
         {/* all comments section */}
-        <div className="my-20">
+        <div className="my-[60px] sm:my-20">
           <div>
             <h1 className="text-2xl font-niladri text-primary-blue">
               সাম্প্রতিক মন্তব্যসমূহ
@@ -133,14 +133,14 @@ const SingleBlogPost = () => {
           </div>
           {comments?.map((item, i) => (
             <div key={i} className="mt-5">
-              <div className="flex items-center gap-10 p-[10px] rounded-[20px] border border-dark-grey">
+              <div className="flex flex-wrap sm:flex-nowrap items-center gap-5 sm:gap-10 p-4 sm:p-[10px] rounded-[20px] border border-dark-grey">
                 <img
                   src={item?.avatar}
                   alt="Comment Avatar"
-                  className="w-[110px] object-cover rounded-[15px]"
+                  className="sm:ml-0 mx-auto w-[110px] object-cover rounded-[15px]"
                 />
-                <div className="pr-[100px]">
-                  <h1 className="text-primary-blue text-xl mb-2">
+                <div className="sm:pr-10 md:pr-[100px]">
+                  <h1 className="text-primary-blue text-lg sm:text-xl mb-2 text-center sm:text-left">
                     {item?.writer}
                   </h1>
                   <p>{item?.text}</p>
@@ -154,9 +154,11 @@ const SingleBlogPost = () => {
         <CommentForm />
 
         {/* recent posts section */}
-        <div className="mt-20">
-          <h1 className="text-3xl font-niladri mb-5">আরো লেখা</h1>
-          <div className="grid grid-cols-3 gap-8">
+        <div className="mt-[60px] sm:mt-20">
+          <h1 className=" text-lg sm:text-xl md:text-3xl font-niladri mb-5">
+            আরো লেখা
+          </h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {recentPosts?.map((item, i) => (
               <CategoryCard
                 key={i}

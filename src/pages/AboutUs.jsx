@@ -4,7 +4,7 @@ import image2 from "../assets/images/Devil's love 1.png";
 
 const AboutUs = () => {
   return (
-    <section className="pt-[200px] pb-[70px]">
+    <section className="pt-[200px] sm:pb-[70px]">
       <div className="max-width">
         <div className="flex gap-2 sm:gap-5">
           <div className="w-full rounded-2xl">

@@ -3,7 +3,7 @@ import AuthorCard from "../components/Cards/AuthorCard";
 
 const AuthorsPage = () => {
   return (
-    <section className="pt-[180px] pb-[70px] max-width">
+    <section className="pt-[180px] sm:pb-[70px] max-width">
       <div>
         <h1 className="section_title">নেহাজের লেখকবৃন্দ</h1>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">

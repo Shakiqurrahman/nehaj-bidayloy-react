@@ -51,7 +51,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/login",
+    path: "/nehaj-admin-login",
     element: (
       <UnAuthenticatedRoute>
         <NehajAdminLogin />

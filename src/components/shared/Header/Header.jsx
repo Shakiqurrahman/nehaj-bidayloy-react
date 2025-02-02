@@ -5,7 +5,7 @@ import Logo from "/public/Nehaj_Logo.png";
 
 const Header = () => {
   return (
-    <header className="w-full absolute top-[75px] left-0 z-[99999999] px-[30px]">
+    <header className="w-full absolute top-[75px] left-0 z-[99999999] px-[30px] sm:px-[46px]">
       <nav className="max-width font-niladri">
         <div className="rounded-[100px] bg-primary-white flex items-center justify-between px-2 sm:px-6 py-[10px] lg:px-[30px] lg:py-4 border">
           <Link to={"/"} className="shrink-0">
