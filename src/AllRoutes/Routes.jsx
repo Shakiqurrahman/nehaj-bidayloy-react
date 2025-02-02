@@ -10,6 +10,7 @@ import GenrePage from "../pages/GenrePage";
 import HomePage from "../pages/HomePage";
 import NehajAdminLogin from "../pages/NehajAdminLogin";
 import Notice from "../pages/Notice";
+import PatchokroPage from "../pages/PatchokroPage";
 import SingleBlogPost from "../pages/SingleBlogPost";
 import { AdminPaths } from "./AdminPaths";
 import AdminRoute from "./private-route/AdminRoute";
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: "/notice",
         element: <Notice />,
+      },
+      {
+        path: "/study-circle",
+        element: <PatchokroPage />,
       },
       {
         path: "/category",
