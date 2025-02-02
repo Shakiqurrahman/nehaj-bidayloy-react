@@ -127,7 +127,7 @@ const HomePage = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    className: "articles-slider",
+    className: "quotes-slider",
     autoplay: true,
   };
 
@@ -145,13 +145,20 @@ const HomePage = () => {
       </div>
       {/* Single Category Post section */}
       <div className="max-width mb-[60px] sm:mb-[240px]">
-        <h2 className="text-lg lg:text-3xl font-niladri text-center text-primary-blue mb-2">
-          চিন্তা
-        </h2>
-        <h1 className="lg:w-[70%] mx-auto text-center text-2xl md:text-3xl lg:text-[40px] lg:leading-[60px] xl:text-[60px] xl:leading-[80px] font-niladri mb-10">
-          চিন্তার দৈন্যদশা থেইকা আমাদের মুক্তির সংগ্রাম বুদ্ধিবৃত্তিক, কায়িক না
-        </h1>
-        <HomeSinglePostCard />
+        <Slider {...settings}>
+          {[1, 2, 3, 4]?.map((item, i) => (
+            <div key={i}>
+              <h2 className="text-lg lg:text-3xl font-niladri text-center text-primary-blue mb-2">
+                চিন্তা
+              </h2>
+              <h1 className="lg:w-[70%] mx-auto text-center text-2xl md:text-3xl lg:text-[40px] lg:leading-[60px] xl:text-[60px] xl:leading-[80px] font-niladri mb-10">
+                চিন্তার দৈন্যদশা থেইকা আমাদের মুক্তির সংগ্রাম বুদ্ধিবৃত্তিক,
+                কায়িক না
+              </h1>
+              <HomeSinglePostCard />
+            </div>
+          ))}
+        </Slider>
       </div>
       {/* সাম্প্রতিক পাঠচক্র section */}
       <RecentEventBanner
