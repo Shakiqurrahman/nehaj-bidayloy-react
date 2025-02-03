@@ -45,7 +45,7 @@ const AllQuotes = () => {
         </Link>
       </div>
       <span className="block w-full h-px bg-black/20 my-5"></span>
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
         {articlesArray?.map((item, i) => (
           <div key={i}>
             <div
