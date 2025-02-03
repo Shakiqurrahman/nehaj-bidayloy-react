@@ -11,6 +11,7 @@ import CreateStory from "../pages/Dashboard/CreateStory";
 import DashboardPage from "../pages/Dashboard/DashboardPage";
 import EditAuthor from "../pages/Dashboard/EditAuthor";
 import EditCategory from "../pages/Dashboard/EditCategory";
+import EditQuotes from "../pages/Dashboard/EditQuotes";
 import EditStory from "../pages/Dashboard/EditStory";
 
 export const AdminPaths = [
@@ -61,5 +62,9 @@ export const AdminPaths = [
   {
     path: "/admin-dashboard/quotes/create",
     element: <CreateQuotes />,
+  },
+  {
+    path: "/admin-dashboard/quotes/edit",
+    element: <EditQuotes />,
   },
 ];
