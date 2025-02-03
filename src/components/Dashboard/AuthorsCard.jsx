@@ -2,6 +2,7 @@ import React from "react";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import authorLogo from "../../assets/images/authors/author1.jpg";
 
 const AuthorsCard = ({ authorsData }) => {
   return (
@@ -18,9 +19,9 @@ const AuthorsCard = ({ authorsData }) => {
         </button>
       </div>
       <img
-        src="https://via.placeholder.com/150x150"
+        src={authorLogo}
         alt="Author Image"
-        className="object-cover size-28 rounded-full"
+        className="object-cover size-28 rounded-full shrink-0 object-top"
       />
       <div className="space-y-1">
         <h3 className="text-lg line-clamp-1 font-semibold text-primary-blue">

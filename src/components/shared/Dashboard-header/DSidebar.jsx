@@ -2,6 +2,7 @@ import React from "react";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { FaBookOpen } from "react-icons/fa";
 import { MdCategory, MdDashboard } from "react-icons/md";
+import { PiQuotesFill } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { setActiveHamburgerD } from "../../../Redux/features/utilsSlice";
@@ -52,6 +53,15 @@ const DSideBar = () => {
           >
             <MdCategory size={25} />
             Categories
+          </li>
+        </NavLink>
+        <NavLink to="/admin-dashboard/quotes">
+          <li
+            className={` flex items-center gap-4 text-[#7e7e7e] text-xl  px-8 py-5 hover:text-primary-blue duration-300`}
+            onClick={() => dispatch(setActiveHamburgerD(false))}
+          >
+            <PiQuotesFill size={25} />
+            Quotes
           </li>
         </NavLink>
       </ul>

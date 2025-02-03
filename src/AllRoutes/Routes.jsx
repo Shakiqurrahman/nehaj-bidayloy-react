@@ -13,7 +13,6 @@ import Notice from "../pages/Notice";
 import PatchokroPage from "../pages/PatchokroPage";
 import SingleBlogPost from "../pages/SingleBlogPost";
 import { AdminPaths } from "./AdminPaths";
-import AdminRoute from "./private-route/AdminRoute";
 import UnAuthenticatedRoute from "./private-route/UnAuthenticatedRoute";
 
 export const router = createBrowserRouter([
@@ -66,9 +65,9 @@ export const router = createBrowserRouter([
   {
     path: "/admin-dashboard",
     element: (
-      <AdminRoute>
-        <DashboardLayout />
-      </AdminRoute>
+      // <AdminRoute>
+      <DashboardLayout />
+      // </AdminRoute>
     ),
     children: AdminPaths,
   },

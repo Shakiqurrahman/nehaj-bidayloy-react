@@ -31,7 +31,20 @@ import { useGetCategoriesQuery } from "../../Redux/api/categoryApiSlice";
 
 const CreateStory = () => {
   const { data: categoryList } = useGetCategoriesQuery();
-  const genreList = ["প্রবন্ধ", "নোটস", "অনুবাদ"];
+  const genreList = [
+    {
+      name: "প্রবন্ধ",
+      value: "article",
+    },
+    {
+      name: "নোটস",
+      value: "notes",
+    },
+    {
+      name: "অনুবাদ",
+      value: "translate",
+    },
+  ];
   const authors = [
     {
       name: "Shakil Ahmed",
@@ -42,6 +55,8 @@ const CreateStory = () => {
   const [form, setForm] = useState({
     title: "",
     content: "",
+    bio: "",
+    isFeatured: false,
   });
   const [selectedThumbnail, setSelectedThumbnail] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -68,15 +83,21 @@ const CreateStory = () => {
   };
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+  const handleCheck = (e) => {
+    setForm((prev) => ({ ...prev, isFeatured: e.target.checked }));
+  };
+
   const handleContentChange = (e, editor) => {
     setForm({ ...form, content: editor.getData() });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { categoryName, categorySlug } = form;
-    if (categoryName && categorySlug && selectedThumbnail) {
+    const { categoryName, categorySlug, content, title } = form;
+    if (categoryName && categorySlug && selectedThumbnail && content && title) {
       console.log(form, selectedThumbnail);
     }
   };
@@ -160,10 +181,20 @@ const CreateStory = () => {
           <input
             type="text"
             name="title"
-            value={form.title}
+            value={form?.title}
             onChange={handleChange}
             className="block w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none"
           />
+        </div>
+        <div className="mt-5">
+          <label className="block mb-2">Short Description</label>
+          <textarea
+            type="text"
+            name="bio"
+            value={form?.bio}
+            onChange={handleChange}
+            className="block w-full h-[150px] py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none resize-none"
+          ></textarea>
         </div>
         <div className="mt-5">
           <label className="block mb-2">Content</label>
@@ -211,7 +242,10 @@ const CreateStory = () => {
         <div className="mt-5 flex items-center gap-3 flex-wrap sm:flex-nowrap">
           <div className="w-full sm:w-1/2">
             <label className="block mb-2">Category</label>
-            <select className="block w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none">
+            <select
+              className="block w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none"
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
               <option value="">Select a category</option>
               {categoryList?.map((category, index) => (
                 <option value={category?.category} key={index}>
@@ -228,8 +262,8 @@ const CreateStory = () => {
             >
               {!selectedGenre && <option value="">Select a genre</option>}
               {genreList.map((genre, index) => (
-                <option value={genre} key={index}>
-                  {genre}
+                <option value={genre.value} key={index}>
+                  {genre.name}
                 </option>
               ))}
             </select>
@@ -245,7 +279,7 @@ const CreateStory = () => {
             >
               <option value="">Select author</option>
               {authors?.map((author, index) => (
-                <option value={author.name} key={index}>
+                <option value={author?.name} key={index}>
                   {author?.name}
                 </option>
               ))}
@@ -264,6 +298,19 @@ const CreateStory = () => {
               </h1>
             </div>
           </div>
+        </div>
+        <div className="mt-5">
+          <input
+            type="checkbox"
+            name="featured"
+            id="featured"
+            checked={form?.isFeatured}
+            onChange={handleCheck}
+            className="cursor-pointer"
+          />
+          <label htmlFor="featured" className="ml-2 cursor-pointer">
+            Featured
+          </label>
         </div>
         <button
           type="submit"

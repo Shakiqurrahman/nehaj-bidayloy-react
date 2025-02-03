@@ -2,9 +2,11 @@ import React from "react";
 
 import AllAuthor from "../pages/Dashboard/AllAuthor";
 import AllCategories from "../pages/Dashboard/AllCategories";
+import AllQuotes from "../pages/Dashboard/AllQuotes";
 import AllWritings from "../pages/Dashboard/AllWritings";
 import CreateAuthor from "../pages/Dashboard/CreateAuthor";
 import CreateCategory from "../pages/Dashboard/CreateCategory";
+import CreateQuotes from "../pages/Dashboard/CreateQuotes";
 import CreateStory from "../pages/Dashboard/CreateStory";
 import DashboardPage from "../pages/Dashboard/DashboardPage";
 import EditAuthor from "../pages/Dashboard/EditAuthor";
@@ -51,5 +53,13 @@ export const AdminPaths = [
   {
     path: "/admin-dashboard/categories/edit",
     element: <EditCategory />,
+  },
+  {
+    path: "/admin-dashboard/quotes",
+    element: <AllQuotes />,
+  },
+  {
+    path: "/admin-dashboard/quotes/create",
+    element: <CreateQuotes />,
   },
 ];
