@@ -1,4 +1,5 @@
 import React from "react";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const Pagination = ({
   totalItems,
@@ -28,15 +29,19 @@ const Pagination = ({
     } else {
       // Show first page, last page, and some middle pages
       if (currentPage <= 3) {
-        // Show first 5 pages
-        for (let i = 1; i <= 5; i++) {
+        // Show first 3 pages
+        for (let i = 1; i <= 3; i++) {
           pageNumbers.push(i);
         }
         pageNumbers.push("...");
+        pageNumbers.push(totalPages - 2);
+        pageNumbers.push(totalPages - 1);
         pageNumbers.push(totalPages);
       } else if (currentPage >= totalPages - 2) {
         // Show last 5 pages
         pageNumbers.push(1);
+        pageNumbers.push(2);
+        pageNumbers.push(3);
         pageNumbers.push("...");
         for (let i = totalPages - 4; i <= totalPages; i++) {
           pageNumbers.push(i);
@@ -57,53 +62,41 @@ const Pagination = ({
   generatePageNumbers();
 
   return (
-    <div className="pagination">
-      {/* First Button */}
-      <button
-        className="first"
-        onClick={() => handlePageClick(1)}
-        disabled={currentPage === 1}
-      >
-        First
-      </button>
-
+    <div className="flex gap-3 flex-wrap sm:flex-nowrap justify-center items-center sm:justify-between">
       {/* Previous Button */}
       <button
-        className="prev"
+        className="text-sm flex gap-2 items-center text-[#667085] hover:text-primary-blue duration-300 disabled:text-[#667085]/50"
         onClick={() => handlePageClick(currentPage - 1)}
         disabled={currentPage === 1}
       >
-        &lt; Prev
+        <FaArrowLeft /> Prev
       </button>
 
       {/* Page Numbers with Ellipsis */}
-      {pageNumbers.map((page, index) => (
-        <button
-          key={index}
-          className={`page-btn ${page === currentPage ? "active" : ""}`}
-          onClick={() => typeof page === "number" && handlePageClick(page)}
-          disabled={page === "..."}
-        >
-          {page}
-        </button>
-      ))}
+      <div className="flex items-center">
+        {pageNumbers.map((page, index) => (
+          <button
+            key={index}
+            className={`size-8 text-sm rounded-full flex items-center justify-center duration-300 hover:bg-[#B3B3B3] hover:text-primary-blue disabled:bg-transparent ${
+              page === currentPage
+                ? "bg-[#B3B3B3] text-primary-blue"
+                : "text-[#667085]"
+            }`}
+            onClick={() => typeof page === "number" && handlePageClick(page)}
+            disabled={page === "..."}
+          >
+            {page}
+          </button>
+        ))}
+      </div>
 
       {/* Next Button */}
       <button
-        className="next"
+        className="text-sm flex gap-2 items-center text-[#667085] hover:text-primary-blue duration-300 disabled:text-[#667085]/50"
         onClick={() => handlePageClick(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        Next &gt;
-      </button>
-
-      {/* Last Button */}
-      <button
-        className="last"
-        onClick={() => handlePageClick(totalPages)}
-        disabled={currentPage === totalPages}
-      >
-        Last
+        Next <FaArrowRight />
       </button>
     </div>
   );

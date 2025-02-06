@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import AuthorCard from "../components/Cards/AuthorCard";
+import Pagination from "../components/Pagination";
 
 const AuthorsPage = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
     <section className="pt-[180px] sm:pb-[70px] max-width">
       <div>
@@ -11,6 +18,13 @@ const AuthorsPage = () => {
             <AuthorCard key={i} />
           ))}
         </div>
+        <hr className="bg-[#EAECF0] mb-5 mt-10" />
+        <Pagination
+          currentPage={currentPage}
+          itemsPerPage={10}
+          onPageChange={handlePageChange}
+          totalItems={100}
+        />
       </div>
     </section>
   );

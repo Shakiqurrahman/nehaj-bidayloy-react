@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import CardthumbnailImg from "../assets/images/noticeImage.png";
 import PatchokroCard from "../components/Cards/PatchokroCard";
+import Pagination from "../components/Pagination";
 import RecentEventBanner from "../components/RecentEventBanner";
 
 const PatchokroPage = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   const allPosts = [
     {
       thumbnail: CardthumbnailImg,
@@ -75,6 +82,13 @@ const PatchokroPage = () => {
             />
           ))}
         </div>
+        <hr className="bg-[#EAECF0] mb-5 mt-10" />
+        <Pagination
+          currentPage={currentPage}
+          itemsPerPage={10}
+          onPageChange={handlePageChange}
+          totalItems={100}
+        />
       </div>
     </div>
   );

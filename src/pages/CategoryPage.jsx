@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 import CardthumbnailImg from "../assets/images/Cardthumbnail.png";
 import cardThumbnail from "../assets/images/cardImg.png";
@@ -8,8 +8,15 @@ import quotesImg from "../assets/images/quotesImg.png";
 import CategoryCard from "../components/Cards/CategoryCard";
 import CategoryCardWithButton from "../components/Cards/CategoryCardWithButton";
 import TranslateCard from "../components/Cards/TranslateCard";
+import Pagination from "../components/Pagination";
 
 const CategoryPage = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   const quotesArray = [
     {
       thumbnail: quotesImg,
@@ -261,6 +268,13 @@ const CategoryPage = () => {
             />
           ))}
         </div>
+        <hr className="bg-[#EAECF0] mb-5 mt-10" />
+        <Pagination
+          currentPage={currentPage}
+          itemsPerPage={10}
+          onPageChange={handlePageChange}
+          totalItems={100}
+        />
       </div>
 
       {/* অনুবাদ card section */}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Slider from "react-slick";
 import CardthumbnailImg from "../assets/images/Cardthumbnail.png";
@@ -9,11 +9,18 @@ import quotesImg from "../assets/images/quotesImg.png";
 import CategoryCard from "../components/Cards/CategoryCard";
 import CategoryCardWithButton from "../components/Cards/CategoryCardWithButton";
 import TranslateCard from "../components/Cards/TranslateCard";
+import Pagination from "../components/Pagination";
 
 const GenrePage = () => {
   const location = useLocation();
   const path = location?.pathname;
   const pathName = path.split("/").pop();
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   const quotesArray = [
     {
@@ -278,6 +285,13 @@ const GenrePage = () => {
             />
           ))}
         </div>
+        <hr className="bg-[#EAECF0] mb-5 mt-10" />
+        <Pagination
+          currentPage={currentPage}
+          itemsPerPage={10}
+          onPageChange={handlePageChange}
+          totalItems={100}
+        />
       </div>
     </>
   );
