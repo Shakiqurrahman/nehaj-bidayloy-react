@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useFetchUserDataQuery } from "../../../Redux/api/userApiSlice";
@@ -9,6 +9,7 @@ import DropdownProfile from "../../Dashboard/DropdownProfile";
 import Logo from "/public/Nehaj_Logo.png";
 
 const DHeader = () => {
+  const profileRef = useRef(null);
   const dispatch = useDispatch();
   const { activeHamburger } = useSelector((state) => state.utils);
   const { user } = useSelector((state) => state.user);
@@ -24,6 +25,15 @@ const DHeader = () => {
       dispatch(setUserData(userData));
     }
   }, [userData, dispatch]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!profileRef.current?.contains(e.target)) setOpenProfile(false);
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <header className="h-24">
@@ -58,7 +68,7 @@ const DHeader = () => {
             />
           </div>
 
-          <div className="flex gap-2 items-center relative">
+          <div ref={profileRef} className="flex gap-2 items-center relative">
             <h2 className="hidden md:block font-medium text-sm max-w-[200px] truncate">
               {user?.fullName}
             </h2>

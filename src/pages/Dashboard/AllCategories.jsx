@@ -7,6 +7,8 @@ import {
   useDeleteCategoryMutation,
   useGetCategoriesQuery,
 } from "../../Redux/api/categoryApiSlice";
+import { dateFormatter } from "../../utils/dateFormatter";
+import Loading from "../../utils/Loading";
 
 const AllCategories = () => {
   const { data: categories, isLoading } = useGetCategoriesQuery();
@@ -21,7 +23,9 @@ const AllCategories = () => {
     }
   };
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <>
       <section className="">
         <div className="flex items-center justify-between">
@@ -51,8 +55,7 @@ const AllCategories = () => {
                   <td>{idx + 1}</td>
                   <td>{category?.category}</td>
                   <td className=" hidden sm:block text-sm">
-                    {category?.updatedAt &&
-                      new Date(category?.updatedAt).toLocaleDateString()}
+                    {category?.updatedAt && dateFormatter(category?.updatedAt)}
                   </td>
                   <td>
                     <div className="flex items-center gap-2 justify-center">
