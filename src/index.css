@@ -31,7 +31,7 @@ body {
 
 /* Additonal custom styles */
 .max-width {
-  @apply max-w-[1280px] mx-auto px-4;
+  @apply max-w-[1280px] mx-auto;
 }
 
 .active {
@@ -150,3 +150,47 @@ input[type="password"]::-moz-reveal {
 input[type="password"] + div {
   display: none;
 }
+
+/* Slick Slider Config start */
+.articles-slider .slick-dots,
+.quotes-slider .slick-dots {
+  bottom: 25px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.articles-slider .slick-dots li,
+.quotes-slider .slick-dots li {
+  cursor: default !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.articles-slider .slick-dots li button,
+.quotes-slider .slick-dots li button {
+  @apply !bg-white !rounded-full !size-[10px] hover:!bg-sky-400 !duration-300;
+}
+
+.quotes-slider .slick-dots li button {
+  @apply !bg-grey hover:!bg-primary-blue;
+}
+
+.articles-slider .slick-dots li.slick-active button {
+  @apply !bg-sky-400;
+}
+
+.quotes-slider .slick-dots li.slick-active button {
+  @apply !bg-primary-blue;
+}
+
+.articles-slider .slick-dots li button:before,
+.quotes-slider .slick-dots li button:before {
+  display: none !important;
+}
+
+.quotes-slider .slick-dots {
+  bottom: -30px !important;
+}
+
+/* Slick Slider Config end */

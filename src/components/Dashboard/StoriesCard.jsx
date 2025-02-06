@@ -2,6 +2,7 @@ import React from "react";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import thumbnail from "../../assets/images/Cardthumbnail.png";
 
 const StoriesCard = ({ storiesData }) => {
   return (
@@ -17,11 +18,7 @@ const StoriesCard = ({ storiesData }) => {
           <RiDeleteBin6Line />
         </button>
       </div>
-      <img
-        src="https://via.placeholder.com/150x150"
-        className="w-full block object-cover"
-        alt=""
-      />
+      <img src={thumbnail} className="w-full block object-cover" alt="" />
       <Link className="line-clamp-1 font-ador text-lg text-primary-blue mt-5">
         হিমুর প্রতিচ্ছবি হিমুর প্রতিচ্ছবি হিমুর প্রতিচ্ছবি হিমুর প্রতি হিমুর
         প্রতিচ্ছবি হিমুর প্রতিচ্ছবি হিমুর প্রতিচ্ছবি হিমুর প্রতি

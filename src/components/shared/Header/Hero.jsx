@@ -7,35 +7,35 @@ import heroBannerBg from "../../../assets/images/home-banner-bg.png";
 const Hero = () => {
   return (
     <div
-      className="pt-[263px] pb-[114px] bg-cover bg-center rounded-[40px]"
+      className="pt-[170px] sm:pt-[263px] pb-[80px] sm:pb-[114px] bg-cover bg-center rounded-[40px] px-5"
       style={{
         backgroundImage: `linear-gradient(to left, rgba(0,47,94,0), rgba(0,47,94,0.5) 26%, rgba(0,47,94,1) 65%), url('${heroBannerBg}')`,
       }}
     >
       <div className="max-width">
         <div className="flex items-center">
-          <div className="w-1/2 text-white">
-            <h1 className="text-[60px] leading-[80px] font-niladri">
+          <div className="w-full sm:w-1/2 text-white">
+            <h1 className="text-xl sm:text-[30px] sm:leading-[50px] md:text-[40px] xl:text-[60px] md:leading-[60px] xl:leading-[80px] font-niladri">
               চিন্তার ভরাডুবি থেইকা আমাদের যাত্রাপথ অমীয় সম্ভাবনার অভিমুখে
             </h1>
-            <p className="text-2xl mt-[30px] mb-[50px]">
+            <p className="sm:text-lg md:text-2xl mt-[30px] mb-[50px]">
               এই অমিত সম্ভাবনার বরাতে যে অভিনিবেশ আর লিপ্ততা আমাদের পাঠ আর
               চিন্তা চর্চায়, সত্য অনুসন্ধানে, ওইটারেই &quot;নেহাজ&quot; কই আমরা।
             </p>
             <Link
               to={"/"}
-              className="p-[10px] rounded-[100px] border border-white text-white w-[217px] flex items-center justify-center text-2xl h-[70px] font-niladri duration-300 hover:bg-alert-orange hover:border-alert-orange"
+              className="p-[10px] rounded-[100px] border border-white text-white w-[100px] sm:w-[150px] md:w-[217px] flex items-center justify-center text-base md:text-2xl h-[50px] md:h-[70px] font-niladri duration-300 hover:bg-alert-orange hover:border-alert-orange"
             >
               পড়ুন
             </Link>
           </div>
-          <div className="w-1/2 pl-[100px]">
+          <div className="w-1/2 pl-5 lg:pl-[100px] hidden sm:block">
             <img
               src={heroCardImg}
               alt="Hero Card image"
               className="rounded-[30px] object-cover h-[320px] block mb-[30px]"
             />
-            <div className="rounded-[30px] bg-primary-white p-[50px]">
+            <div className="rounded-[30px] bg-primary-white p-[50px] hidden lg:block">
               <div className="flex items-center justify-between">
                 <div className="font-niladri">
                   <h1 className="text-3xl text-primary-blue">৫০০কে+</h1>

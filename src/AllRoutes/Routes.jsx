@@ -4,12 +4,15 @@ import DashboardLayout from "../Layouts/DashboardLayout";
 import PublicLayout from "../Layouts/PublicLayout";
 import AboutUs from "../pages/AboutUs";
 import AuthorsPage from "../pages/AuthorsPage";
+import CategoryPage from "../pages/CategoryPage";
 import ErrorPage from "../pages/ErrorPage";
+import GenrePage from "../pages/GenrePage";
 import HomePage from "../pages/HomePage";
 import NehajAdminLogin from "../pages/NehajAdminLogin";
 import Notice from "../pages/Notice";
+import PatchokroPage from "../pages/PatchokroPage";
+import SingleBlogPost from "../pages/SingleBlogPost";
 import { AdminPaths } from "./AdminPaths";
-import AdminRoute from "./private-route/AdminRoute";
 import UnAuthenticatedRoute from "./private-route/UnAuthenticatedRoute";
 
 export const router = createBrowserRouter([
@@ -33,10 +36,26 @@ export const router = createBrowserRouter([
         path: "/notice",
         element: <Notice />,
       },
+      {
+        path: "/study-circle",
+        element: <PatchokroPage />,
+      },
+      {
+        path: "/category",
+        element: <CategoryPage />,
+      },
+      {
+        path: "/genre/:genreType",
+        element: <GenrePage />,
+      },
+      {
+        path: "/story",
+        element: <SingleBlogPost />,
+      },
     ],
   },
   {
-    path: "/login",
+    path: "/nehaj-admin-login",
     element: (
       <UnAuthenticatedRoute>
         <NehajAdminLogin />
@@ -46,9 +65,9 @@ export const router = createBrowserRouter([
   {
     path: "/admin-dashboard",
     element: (
-      <AdminRoute>
-        <DashboardLayout />
-      </AdminRoute>
+      // <AdminRoute>
+      <DashboardLayout />
+      // </AdminRoute>
     ),
     children: AdminPaths,
   },

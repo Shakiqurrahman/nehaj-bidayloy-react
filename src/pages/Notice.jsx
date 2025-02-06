@@ -4,7 +4,7 @@ import RecentEventBanner from "../components/RecentEventBanner";
 
 const Notice = () => {
   return (
-    <section className="pt-[200px] pb-[70px]">
+    <section className="pt-[200px] sm:pb-[70px]">
       <RecentEventBanner title="সাম্প্রতিক বিজ্ঞপ্তি" />
 
       {/* Notice section  */}

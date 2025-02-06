@@ -12,7 +12,7 @@ export default {
           blue: "#002E5D",
           white: "#FFFFF0",
           dark: "#0A0C10",
-          golden : "#BA7901"
+          golden: "#BA7901",
         },
         secondary: {
           gray: "#B3B3B3",
@@ -42,9 +42,18 @@ export default {
           grey: "#C2BBA8",
         },
         grey: "#B9B9B9",
+        onubadh: "#3A0B53",
+        probondho: "#005E51",
+        notes: "#646666",
+        history: "#530000",
+        sahitto: "#044607",
+        arts: "#460024",
+        cinema: "#003D4B",
+        "dhormo-tottho": "#482E00",
       },
       fontFamily: {
         niladri: ['"Niladri", sans-serif'],
+        "mainak-signature": ['"Mainak", sans-serif'],
         notoserif: ['"Noto Serif Bengali", sans-serif'],
         abhaya: ['"AbhayaLibre", sans-serif'],
         blinker: ['"Blinker", sans-serif'],
