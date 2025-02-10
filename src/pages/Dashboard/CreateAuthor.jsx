@@ -1,27 +1,44 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { CgSpinner } from "react-icons/cg";
+import { API_URL } from "../../utils/config";
 
 const CreateAuthor = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [form, setForm] = useState({
     name: "",
     userName: "",
     bio: "",
+    avatar: "",
   });
 
   const [selectedAvatar, setSelectedAvatar] = useState(null);
 
-  const handleAvatarChange = (e) => {
+  const handleAvatarChange = async (e) => {
     const file = e.target.files[0];
-    console.log(file);
+    setSelectedAvatar(file);
     if (file) {
-      setSelectedAvatar(file);
+      setIsUploading(true);
+      const formData = new FormData();
+      formData.append("avatar", file);
+      const url = API_URL + "/upload";
+      try {
+        const res = await axios.post(url, formData);
+        setForm((prev) => ({ ...prev, avatar: res.data.imageUrl }));
+      } catch (error) {
+        console.log("error", error);
+      }
+
+      setIsUploading(false);
       e.target.value = "";
     }
   };
+  console.log(form);
 
   const handleRemoveAvatar = () => {
     setSelectedAvatar(null);
+    setForm((prev) => ({ ...prev, avatar: "" }));
   };
 
   const handleChange = (e) => {
@@ -97,12 +114,14 @@ const CreateAuthor = () => {
             <p className="line-clamp-1 font-ador">{selectedAvatar?.name}</p>
           </label>
         </div>
-        {selectedAvatar && (
+        {(selectedAvatar || isUploading) && (
           <div className="relative mt-5 text-center">
             <img
               src={URL.createObjectURL(selectedAvatar)}
               alt={selectedAvatar?.name}
-              className="mx-auto block size-[200px] rounded-full shadow-box object-cover mb-5"
+              className={`mx-auto block size-[200px] rounded-full shadow-box object-cover mb-5 ${
+                isUploading ? "blur" : ""
+              }`}
             />
             <button
               className="px-5 py-2 rounded-lg bg-red-600 text-white font-medium"

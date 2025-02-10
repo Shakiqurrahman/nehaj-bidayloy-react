@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { CgSpinner } from "react-icons/cg";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useUpdateCategoryMutation } from "../../Redux/api/categoryApiSlice";
+import { useUpdateGenreMutation } from "../../Redux/api/genreApiSlice";
 
-const EditCategory = () => {
+const EditGenre = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const [updateCategory, { isLoading }] = useUpdateCategoryMutation();
+  const [updateCategory, { isLoading }] = useUpdateGenreMutation();
   const [showInfo, setShowInfo] = useState(false);
   const [form, setForm] = useState({
-    categoryName: state?.category || "",
-    categorySlug: state?.categorySlug || "",
+    genre: state?.genre || "",
+    genreSlug: state?.genreSlug || "",
   });
 
   const handleChange = (e) => {
@@ -20,25 +20,22 @@ const EditCategory = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { categoryName, categorySlug } = form;
-    if (
-      categoryName !== state?.category ||
-      categorySlug !== state?.categorySlug
-    ) {
+    const { genre, genreSlug } = form;
+    if (genre !== state?.genre || genreSlug !== state?.genreSlug) {
       try {
         const res = await updateCategory({
-          categoryId: state?._id,
-          categoryData: {
+          genreId: state?._id,
+          genreData: {
             ...form,
           },
         }).unwrap();
-        toast.success(res?.message || "Category updated successfully");
-        navigate("/admin-dashboard/categories");
+        toast.success(res?.message || "Genre updated successfully");
+        navigate("/admin-dashboard/genres");
       } catch (error) {
-        toast.error(error?.data?.message || "Failed to update category");
+        toast.error(error?.data?.message || "Failed to update genre");
       }
     } else {
-      navigate("/admin-dashboard/categories");
+      navigate("/admin-dashboard/genres");
       toast.error("Nothing to update");
     }
   };
@@ -48,32 +45,30 @@ const EditCategory = () => {
         className="max-w-[600px] mx-auto bg-white rounded-lg p-8"
         onSubmit={handleSubmit}
       >
-        <h1 className="text-2xl text-center font-medium mb-10">
-          Edit A Category
-        </h1>
+        <h1 className="text-2xl text-center font-medium mb-10">Edit A Genre</h1>
         <div className="relative mt-5">
           <input
             type="text"
-            name="categoryName"
-            value={form.categoryName}
+            name="genre"
+            value={form.genre}
             onChange={handleChange}
             className="block relative w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none z-[1] peer"
           />
           <label
             className={`select-none duration-300 peer-focus-visible:text-xs absolute bg-white -translate-y-1/2 text-sm mx-4 left-0 peer-focus-visible:top-0 leading-none peer-focus-visible:z-[2] peer-focus-visible:text-primary-blue peer-focus-visible:mt-[2px] inline-block ${
-              form.categoryName
+              form.genre
                 ? "text-xs top-0 z-[2] text-primary-blue mt-[2px]"
                 : "top-1/2 text-gray-500 z-0 mt-0"
             }`}
           >
-            Category Name
+            Genre Name
           </label>
         </div>
         <div className="relative mt-5">
           <input
             type="text"
-            name="categorySlug"
-            value={form.categorySlug}
+            name="genreSlug"
+            value={form.genreSlug}
             onChange={handleChange}
             onFocus={() => setShowInfo(true)}
             onBlur={() => setShowInfo(false)}
@@ -81,12 +76,12 @@ const EditCategory = () => {
           />
           <label
             className={`select-none duration-300 peer-focus-visible:text-xs absolute bg-white -translate-y-1/2 text-sm mx-4 left-0 peer-focus-visible:top-0 leading-none peer-focus-visible:z-[2] peer-focus-visible:text-primary-blue peer-focus-visible:mt-[2px] inline-block ${
-              form.categorySlug
+              form.genreSlug
                 ? "text-xs top-0 z-[2] text-primary-blue mt-[2px]"
                 : "top-1/2 text-gray-500 z-0 mt-0"
             }`}
           >
-            Category Slug
+            Genre Slug
           </label>
         </div>
         {showInfo && (
@@ -112,4 +107,4 @@ const EditCategory = () => {
   );
 };
 
-export default EditCategory;
+export default EditGenre;

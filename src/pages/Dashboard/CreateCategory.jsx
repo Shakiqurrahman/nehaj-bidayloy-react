@@ -8,7 +8,6 @@ const CreateCategory = () => {
   const navigate = useNavigate();
   const [CreateCategory, { isLoading }] = useCreateCategoryMutation();
   const [showInfo, setShowInfo] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     category: "",
     categorySlug: "",

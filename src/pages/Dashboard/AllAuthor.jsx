@@ -1,16 +1,15 @@
 import React from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useFetchAuthorsQuery } from "../../Redux/api/authorApiSlice";
 import AuthorsCard from "../../components/Dashboard/AuthorsCard";
+import Loading from "../../utils/Loading";
 
 const AllAuthor = () => {
-  const authors = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24, 25,
-  ];
+  const { data: authors, isLoading } = useFetchAuthorsQuery();
   return (
     <>
-      <section className="">
+      <section className="min-h-[calc(100vh_-_96px)]">
         <div className="flex items-center justify-between">
           <h1 className="text-[28px] font-semibold leading-none">Authors</h1>
           <Link
@@ -23,11 +22,17 @@ const AllAuthor = () => {
         </div>
         <span className="block w-full h-px bg-black/20 my-5"></span>
 
-        <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
-          {authors?.slice(0, 15).map((story, idx) => (
-            <AuthorsCard key={idx} storiesData={story} />
-          ))}
-        </div>
+        {isLoading ? (
+          <Loading />
+        ) : authors?.length > 0 ? (
+          <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
+            {authors?.slice(0, 15).map((story, idx) => (
+              <AuthorsCard key={idx} storiesData={story} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-center">No Data Found!</p>
+        )}
       </section>
     </>
   );

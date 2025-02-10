@@ -2,6 +2,7 @@ import React from "react";
 
 import AllAuthor from "../pages/Dashboard/AllAuthor";
 import AllCategories from "../pages/Dashboard/AllCategories";
+import AllGenres from "../pages/Dashboard/AllGenres";
 import AllQuotes from "../pages/Dashboard/AllQuotes";
 import AllWritings from "../pages/Dashboard/AllWritings";
 import CreateAuthor from "../pages/Dashboard/CreateAuthor";
@@ -11,8 +12,10 @@ import CreateStory from "../pages/Dashboard/CreateStory";
 import DashboardPage from "../pages/Dashboard/DashboardPage";
 import EditAuthor from "../pages/Dashboard/EditAuthor";
 import EditCategory from "../pages/Dashboard/EditCategory";
+import EditGenre from "../pages/Dashboard/EditGenre";
 import EditQuotes from "../pages/Dashboard/EditQuotes";
 import EditStory from "../pages/Dashboard/EditStory";
+import CreateGenre from "../pages/Dashboard/createGenre";
 
 export const AdminPaths = [
   {
@@ -54,6 +57,18 @@ export const AdminPaths = [
   {
     path: "/admin-dashboard/categories/edit",
     element: <EditCategory />,
+  },
+  {
+    path: "/admin-dashboard/genres",
+    element: <AllGenres />,
+  },
+  {
+    path: "/admin-dashboard/genres/create",
+    element: <CreateGenre />,
+  },
+  {
+    path: "/admin-dashboard/genres/edit",
+    element: <EditGenre />,
   },
   {
     path: "/admin-dashboard/quotes",

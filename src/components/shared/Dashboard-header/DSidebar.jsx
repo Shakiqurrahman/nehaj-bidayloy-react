@@ -1,4 +1,5 @@
 import React from "react";
+import { BiSolidCrown } from "react-icons/bi";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { FaBookOpen } from "react-icons/fa";
 import { MdCategory, MdDashboard } from "react-icons/md";
@@ -53,6 +54,15 @@ const DSideBar = () => {
           >
             <MdCategory size={25} />
             Categories
+          </li>
+        </NavLink>
+        <NavLink to="/admin-dashboard/genres">
+          <li
+            className={` flex items-center gap-4 text-[#7e7e7e] text-xl  px-8 py-5 hover:text-primary-blue duration-300`}
+            onClick={() => dispatch(setActiveHamburgerD(false))}
+          >
+            <BiSolidCrown size={25} />
+            Genres
           </li>
         </NavLink>
         <NavLink to="/admin-dashboard/quotes">
