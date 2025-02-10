@@ -52,7 +52,7 @@ const CreateAuthor = () => {
     }
   };
   return (
-    <div>
+    <div className="min-h-[calc(100vh_-_96px)]">
       <form
         className="max-w-[600px] mx-auto bg-white rounded-lg p-8"
         onSubmit={handleSubmit}

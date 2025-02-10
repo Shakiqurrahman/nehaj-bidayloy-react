@@ -168,7 +168,7 @@ const CreateStory = () => {
     initialData: "",
   };
   return (
-    <div>
+    <div className="min-h-[calc(100vh_-_96px)]">
       <form
         className="max-w-[800px] mx-auto bg-white rounded-lg p-8"
         onSubmit={handleSubmit}

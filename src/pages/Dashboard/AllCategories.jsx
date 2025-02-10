@@ -7,8 +7,8 @@ import {
   useDeleteCategoryMutation,
   useGetCategoriesQuery,
 } from "../../Redux/api/categoryApiSlice";
-import { dateFormatter } from "../../utils/dateFormatter";
 import Loading from "../../utils/Loading";
+import { dateFormatter } from "../../utils/dateFormatter";
 
 const AllCategories = () => {
   const { data: categories, isLoading } = useGetCategoriesQuery();
@@ -27,7 +27,7 @@ const AllCategories = () => {
     <Loading />
   ) : (
     <>
-      <section className="">
+      <section className="min-h-[calc(100vh_-_96px)]">
         <div className="flex items-center justify-between">
           <h1 className="text-[28px] font-semibold leading-none">Categories</h1>
           <Link

@@ -9,7 +9,7 @@ import StoriesCard from "../../components/Dashboard/StoriesCard";
 const DashboardPage = () => {
   const authorsData = [1, 2, 3, 4, 5, 6];
   return (
-    <section className="w-full">
+    <section className="w-full min-h-[calc(100vh_-_96px)]">
       <div>
         <h1 className="text-[28px] font-semibold leading-none">Dashboard</h1>
         <p className="text-sm text-primary-blue tracking-[4px]">
