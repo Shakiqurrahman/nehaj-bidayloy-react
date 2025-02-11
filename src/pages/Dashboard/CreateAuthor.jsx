@@ -40,6 +40,7 @@ const CreateAuthor = () => {
         }
       } catch (error) {
         console.log("error", error);
+        toast.error("Failed to upload image!");
       }
 
       setIsUploading(false);
