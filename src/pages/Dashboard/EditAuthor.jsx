@@ -1,37 +1,98 @@
+import axios from "axios";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { CgSpinner } from "react-icons/cg";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useUpdateAuthorMutation } from "../../Redux/api/authorApiSlice";
+import { API_URL } from "../../utils/config";
 
 const EditAuthor = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const { state } = useLocation();
+
+  const [UpdateAuthor, { isLoading }] = useUpdateAuthorMutation();
+
+  const [isUploading, setIsUploading] = useState(false);
   const [form, setForm] = useState({
-    name: "",
-    userName: "",
-    bio: "",
+    name: state?.fullName || "",
+    userName: state?.userName || "",
+    bio: state?.bio || "",
+    avatar: state?.avatar || null,
   });
 
   const [selectedAvatar, setSelectedAvatar] = useState(null);
 
-  const handleAvatarChange = (e) => {
+  const handleAvatarChange = async (e) => {
     const file = e.target.files[0];
-    console.log(file);
+    setSelectedAvatar(file);
     if (file) {
-      setSelectedAvatar(file);
+      setIsUploading(true);
+      const formData = new FormData();
+      formData.append("avatar", file);
+      const url = API_URL + "/upload";
+      try {
+        const res = await axios.post(url, formData);
+        if (res.status === 200) {
+          const imgObject = {
+            name: file.name,
+            url: res.data.imageUrl,
+          };
+          setForm((prev) => ({ ...prev, avatar: imgObject }));
+        }
+      } catch (error) {
+        console.log("error", error);
+      }
+
+      setIsUploading(false);
       e.target.value = "";
     }
   };
 
-  const handleRemoveAvatar = () => {
+  const handleRemoveAvatar = (e) => {
+    e.preventDefault();
     setSelectedAvatar(null);
+    setForm((prev) => ({
+      ...prev,
+      avatar: null,
+    }));
   };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { categoryName, categorySlug } = form;
-    if (categoryName && categorySlug && selectedAvatar) {
-      console.log(form, selectedAvatar);
+    const { avatar, bio, name, userName } = form;
+    if (
+      avatar?.url !== state?.avatar?.url ||
+      bio !== state?.bio ||
+      name !== state?.fullName ||
+      userName !== state?.userName
+    ) {
+      if (avatar && bio && name && userName && state?._id) {
+        try {
+          const authorData = {
+            fullName: name,
+            bio,
+            userName,
+            avatar,
+          };
+          const res = await UpdateAuthor({
+            authorId: state?._id,
+            authorData,
+          }).unwrap();
+          toast.success(res?.message);
+          navigate("/admin-dashboard/authors");
+        } catch (error) {
+          console.log("Error", error);
+          toast.error("Failed to update an author!");
+        }
+      } else {
+        toast.error("Please fill up every field!");
+      }
+    } else {
+      toast.success("Nothing to change!");
+      navigate("/admin-dashboard/authors");
     }
   };
   return (
@@ -94,17 +155,26 @@ const EditAuthor = () => {
             <div className="py-1.5 px-3 bg-primary-blue text-white shrink-0">
               Choose Avatar
             </div>
-            <p className="line-clamp-1 font-ador">{selectedAvatar?.name}</p>
+            <p className="line-clamp-1 font-ador">
+              {selectedAvatar?.name || form?.avatar?.name}
+            </p>
           </label>
         </div>
-        {selectedAvatar && (
+        {(selectedAvatar || form?.avatar) && (
           <div className="relative mt-5 text-center">
             <img
-              src={URL.createObjectURL(selectedAvatar)}
-              alt={selectedAvatar?.name}
-              className="mx-auto block size-[200px] rounded-full shadow-box object-cover mb-5"
+              src={
+                selectedAvatar
+                  ? URL.createObjectURL(selectedAvatar)
+                  : form?.avatar?.url
+              }
+              alt={selectedAvatar?.name || form?.avatar?.name}
+              className={`mx-auto block size-[200px] rounded-full shadow-box object-cover mb-5 ${
+                isUploading ? "blur" : ""
+              }`}
             />
             <button
+              type="button"
               className="px-5 py-2 rounded-lg bg-red-600 text-white font-medium"
               onClick={handleRemoveAvatar}
             >

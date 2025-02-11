@@ -1,16 +1,22 @@
 import axios from "axios";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { CgSpinner } from "react-icons/cg";
+import { useNavigate } from "react-router-dom";
+import { useCreateAuthorMutation } from "../../Redux/api/authorApiSlice";
 import { API_URL } from "../../utils/config";
 
 const CreateAuthor = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const [CreateAuthor, { isLoading }] = useCreateAuthorMutation();
+
   const [isUploading, setIsUploading] = useState(false);
   const [form, setForm] = useState({
     name: "",
     userName: "",
     bio: "",
-    avatar: "",
+    avatar: null,
   });
 
   const [selectedAvatar, setSelectedAvatar] = useState(null);
@@ -25,7 +31,13 @@ const CreateAuthor = () => {
       const url = API_URL + "/upload";
       try {
         const res = await axios.post(url, formData);
-        setForm((prev) => ({ ...prev, avatar: res.data.imageUrl }));
+        if (res.status === 200) {
+          const imgObject = {
+            name: file.name,
+            url: res.data.imageUrl,
+          };
+          setForm((prev) => ({ ...prev, avatar: imgObject }));
+        }
       } catch (error) {
         console.log("error", error);
       }
@@ -34,21 +46,39 @@ const CreateAuthor = () => {
       e.target.value = "";
     }
   };
-  console.log(form);
 
-  const handleRemoveAvatar = () => {
+  const handleRemoveAvatar = (e) => {
+    e.preventDefault();
     setSelectedAvatar(null);
-    setForm((prev) => ({ ...prev, avatar: "" }));
+    setForm((prev) => ({
+      ...prev,
+      avatar: null,
+    }));
   };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { categoryName, categorySlug } = form;
-    if (categoryName && categorySlug && selectedAvatar) {
-      console.log(form, selectedAvatar);
+    const { avatar, bio, name, userName } = form;
+    if (avatar && bio && name && userName) {
+      try {
+        const authorData = {
+          fullName: name,
+          bio,
+          userName,
+          avatar,
+        };
+        const res = await CreateAuthor(authorData).unwrap();
+        toast.success(res?.message);
+        navigate("/admin-dashboard/authors");
+      } catch (error) {
+        console.log("Error", error);
+        toast.error("Failed to create an author!");
+      }
+    } else {
+      toast.error("Please fill up every field!");
     }
   };
   return (
@@ -124,6 +154,7 @@ const CreateAuthor = () => {
               }`}
             />
             <button
+              type="button"
               className="px-5 py-2 rounded-lg bg-red-600 text-white font-medium"
               onClick={handleRemoveAvatar}
             >
@@ -150,8 +181,8 @@ const CreateAuthor = () => {
         </div>
         <button
           type="submit"
-          disabled={isLoading}
-          className="disabled:bg-primary-blue flex items-center justify-center w-full text-center h-11 bg-primary-blue hover:bg-primary-blue text-white font-medium mt-5 duration-300 rounded select-none"
+          disabled={isLoading || isUploading}
+          className="disabled:bg-primary-blue/50 flex items-center justify-center w-full text-center h-11 bg-primary-blue hover:bg-primary-blue text-white font-medium mt-5 duration-300 rounded select-none"
         >
           {isLoading ? (
             <CgSpinner className="animate-spin text-xl" />

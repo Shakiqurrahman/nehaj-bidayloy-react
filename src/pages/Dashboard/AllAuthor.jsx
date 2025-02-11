@@ -7,6 +7,7 @@ import Loading from "../../utils/Loading";
 
 const AllAuthor = () => {
   const { data: authors, isLoading } = useFetchAuthorsQuery();
+
   return (
     <>
       <section className="min-h-[calc(100vh_-_96px)]">
@@ -26,8 +27,8 @@ const AllAuthor = () => {
           <Loading />
         ) : authors?.length > 0 ? (
           <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
-            {authors?.slice(0, 15).map((story, idx) => (
-              <AuthorsCard key={idx} storiesData={story} />
+            {authors?.slice(0, 15).map((author, idx) => (
+              <AuthorsCard key={idx} authorData={author} />
             ))}
           </div>
         ) : (
