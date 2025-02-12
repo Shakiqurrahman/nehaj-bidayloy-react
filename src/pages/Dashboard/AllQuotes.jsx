@@ -49,7 +49,7 @@ const AllQuotes = () => {
               <div
                 className="rounded-[30px] text-white py-10 text-center px-5 sm:px-10 bg-cover relative group overflow-hidden"
                 style={{
-                  backgroundImage: `url(${thumbnail}), linear-gradient(to right, rgba(0,46,93,1), rgba(0,46,93,1))`,
+                  backgroundImage: `linear-gradient(to right, rgba(0,46,93,0.6), rgba(0,46,93,0.6)), url(${thumbnail})`,
                 }}
               >
                 <div className="absolute top-4 right-4 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-300 translate-x-[50px] group-hover:translate-x-0">

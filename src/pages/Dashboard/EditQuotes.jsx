@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { CgSpinner } from "react-icons/cg";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -9,9 +9,8 @@ import { API_URL } from "../../utils/config";
 
 const EditQuotes = () => {
   const { state } = useLocation();
-  console.log(state);
   const navigate = useNavigate();
-  const { data: categoryList } = useGetCategoriesQuery();
+  const { data: categoryListData } = useGetCategoriesQuery();
   const [UpdateQuote, { isLoading }] = useUpdateQuoteMutation();
 
   const [form, setForm] = useState({
@@ -20,6 +19,7 @@ const EditQuotes = () => {
     thumbnail: state?.thumbnail || null,
     authorImage: state?.authorImage || null,
   });
+  const [categoryList, setCategoryList] = useState([]);
   const [selectedThumbnail, setSelectedThumbnail] = useState(null);
   const [selectedAuthor, setSelectedAuthor] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(
@@ -27,6 +27,17 @@ const EditQuotes = () => {
   );
   const [isUploading, setIsUploading] = useState(false);
   const [isUploading2, setIsUploading2] = useState(false);
+
+  useEffect(() => {
+    if (categoryListData) {
+      const categories = categoryListData?.map((category) => ({
+        id: category?._id,
+        name: category?.category,
+        slug: category?.categorySlug,
+      }));
+      setCategoryList(categories);
+    }
+  }, [categoryListData]);
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -124,13 +135,8 @@ const EditQuotes = () => {
       ) {
         const quotesData = {
           ...form,
-          category: {
-            id: selectedCategory?.id || selectedCategory?._id,
-            name: selectedCategory?.category || selectedCategory?.name,
-            slug: selectedCategory?.categorySlug || selectedCategory?.slug,
-          },
+          category: selectedCategory,
         };
-        console.log(quotesData);
         try {
           const res = await UpdateQuote({
             quoteId: state?._id,
@@ -274,7 +280,7 @@ const EditQuotes = () => {
             {!selectedCategory && <option value="">Select a category</option>}
             {categoryList?.map((category, index) => (
               <option value={JSON.stringify(category)} key={index}>
-                {category?.category}
+                {category?.name}
               </option>
             ))}
           </select>
