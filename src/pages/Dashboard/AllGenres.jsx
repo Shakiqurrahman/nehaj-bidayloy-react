@@ -38,47 +38,51 @@ const AllGenres = () => {
           </Link>
         </div>
         <span className="block w-full h-px bg-black/20 my-5"></span>
-        <div className="bg-white pt-2 px-5">
-          <table className="table-auto w-full" cellPadding={10}>
-            <thead>
-              <tr className="border-b">
-                <th className="w-[10%]">No</th>
-                <th className="w-auto">Genre Name</th>
-                <th className="w-[20%] hidden sm:block mx-auto">Date</th>
-                <th className="w-[20%]">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {genres?.slice(0, 20)?.map((genre, idx) => (
-                <tr key={idx} className="text-center border-b last:border-0">
-                  <td>{idx + 1}</td>
-                  <td>{genre?.genre}</td>
-                  <td className=" hidden sm:block text-sm">
-                    {genre?.updatedAt && dateFormatter(genre?.updatedAt)}
-                  </td>
-                  <td>
-                    <div className="flex items-center gap-2 justify-center">
-                      <Link
-                        to={"edit"}
-                        state={genre}
-                        className="bg-white shadow-box rounded-sm size-8 text-black hover:text-blue-600 flex items-center justify-center text-base hover:shadow-box-lg duration-300"
-                      >
-                        <FiEdit />
-                      </Link>
-                      <button
-                        type="button"
-                        onClick={() => handleDelete(genre?._id)}
-                        className="bg-white shadow-box rounded-sm size-8 text-black hover:text-red-600 flex items-center justify-center text-base hover:shadow-box-lg duration-300"
-                      >
-                        <RiDeleteBin6Line />
-                      </button>
-                    </div>
-                  </td>
+        {genres && genres?.length > 0 ? (
+          <div className="bg-white pt-2 px-5">
+            <table className="table-auto w-full" cellPadding={10}>
+              <thead>
+                <tr className="border-b">
+                  <th className="w-[10%]">No</th>
+                  <th className="w-auto">Genre Name</th>
+                  <th className="w-[20%] hidden sm:block mx-auto">Date</th>
+                  <th className="w-[20%]">Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {genres?.map((genre, idx) => (
+                  <tr key={idx} className="text-center border-b last:border-0">
+                    <td>{idx + 1}</td>
+                    <td>{genre?.genre}</td>
+                    <td className=" hidden sm:block text-sm">
+                      {genre?.updatedAt && dateFormatter(genre?.updatedAt)}
+                    </td>
+                    <td>
+                      <div className="flex items-center gap-2 justify-center">
+                        <Link
+                          to={"edit"}
+                          state={genre}
+                          className="bg-white shadow-box rounded-sm size-8 text-black hover:text-blue-600 flex items-center justify-center text-base hover:shadow-box-lg duration-300"
+                        >
+                          <FiEdit />
+                        </Link>
+                        <button
+                          type="button"
+                          onClick={() => handleDelete(genre?._id)}
+                          className="bg-white shadow-box rounded-sm size-8 text-black hover:text-red-600 flex items-center justify-center text-base hover:shadow-box-lg duration-300"
+                        >
+                          <RiDeleteBin6Line />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <p className="text-center">No Data Found!</p>
+        )}
       </section>
     </>
   );

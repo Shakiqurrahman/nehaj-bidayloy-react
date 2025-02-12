@@ -8,7 +8,9 @@ import Loading from "../../utils/Loading";
 const AllAuthor = () => {
   const { data: authors, isLoading } = useFetchAuthorsQuery();
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <>
       <section className="min-h-[calc(100vh_-_96px)]">
         <div className="flex items-center justify-between">
@@ -23,9 +25,7 @@ const AllAuthor = () => {
         </div>
         <span className="block w-full h-px bg-black/20 my-5"></span>
 
-        {isLoading ? (
-          <Loading />
-        ) : authors?.length > 0 ? (
+        {authors && authors?.length > 0 ? (
           <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
             {authors?.slice(0, 15).map((author, idx) => (
               <AuthorsCard key={idx} authorData={author} />

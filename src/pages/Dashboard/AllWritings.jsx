@@ -2,15 +2,16 @@ import React from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import StoriesCard from "../../components/Dashboard/StoriesCard";
+import { useFetchStoriesQuery } from "../../Redux/api/storyApiSlice";
+import Loading from "../../utils/Loading";
 
 const AllWritings = () => {
-  const stories = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24, 25,
-  ];
-  return (
+  const { data: stories, isLoading } = useFetchStoriesQuery();
+  return isLoading ? (
+    <Loading />
+  ) : (
     <>
-      <section className="">
+      <section className="min-h-[calc(100vh_-_96px)]">
         <div className="flex items-center justify-between">
           <h1 className="text-[28px] font-semibold leading-none">Writings</h1>
           <Link
@@ -22,11 +23,15 @@ const AllWritings = () => {
           </Link>
         </div>
         <span className="block w-full h-px bg-black/20 my-5"></span>
-        <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
-          {stories?.slice(0, 20).map((story, idx) => (
-            <StoriesCard key={idx} storiesData={story} />
-          ))}
-        </div>
+        {stories && stories?.length > 0 ? (
+          <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
+            {stories?.map((story, idx) => (
+              <StoriesCard key={idx} storyData={story} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-center">No Data Found!</p>
+        )}
       </section>
     </>
   );

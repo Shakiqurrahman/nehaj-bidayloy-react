@@ -28,6 +28,12 @@ const CreateQuotes = () => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const handleChangeCategory = (e) => {
+    const id = e.target.value;
+    const selected = categoryList?.find((category) => category?._id === id);
+    setSelectedCategory(selected);
+  };
+
   const handleThumbnailChange = async (e) => {
     const file = e.target.files[0];
     setSelectedThumbnail(file);
@@ -231,11 +237,11 @@ const CreateQuotes = () => {
           <label className="block mb-2">Category</label>
           <select
             className="block w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none"
-            onChange={(e) => setSelectedCategory(JSON.parse(e.target.value))}
+            onChange={handleChangeCategory}
           >
             {!selectedCategory && <option value="">Select a category</option>}
             {categoryList?.map((category, index) => (
-              <option value={JSON.stringify(category)} key={index}>
+              <option value={category?._id} key={index}>
                 {category?.category}
               </option>
             ))}

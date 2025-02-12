@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { CgSpinner } from "react-icons/cg";
 import PreviewImage from "../../assets/images/preview.jpg";
@@ -27,58 +28,88 @@ import {
   Undo,
 } from "ckeditor5";
 import "ckeditor5/ckeditor5.css";
+
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { useFetchAuthorsQuery } from "../../Redux/api/authorApiSlice";
 import { useGetCategoriesQuery } from "../../Redux/api/categoryApiSlice";
+import { useGetGenresQuery } from "../../Redux/api/genreApiSlice";
+import { useCreateStoryMutation } from "../../Redux/api/storyApiSlice";
+import { API_URL } from "../../utils/config";
 
 const CreateStory = () => {
+  const navigate = useNavigate();
+
   const { data: categoryList } = useGetCategoriesQuery();
-  const genreList = [
-    {
-      name: "প্রবন্ধ",
-      value: "article",
-    },
-    {
-      name: "নোটস",
-      value: "notes",
-    },
-    {
-      name: "অনুবাদ",
-      value: "translate",
-    },
-  ];
-  const authors = [
-    {
-      name: "Shakil Ahmed",
-      avatar: PreviewImage,
-    },
-  ];
-  const [isLoading, setIsLoading] = useState(false);
+  const { data: genreList } = useGetGenresQuery();
+  const { data: authors } = useFetchAuthorsQuery();
+
+  const [CreateStory, { isLoading }] = useCreateStoryMutation();
+
+  const [isUploading, setIsUploading] = useState(false);
   const [form, setForm] = useState({
     title: "",
     content: "",
-    bio: "",
+    shortDescription: "",
     isFeatured: false,
+    thumbnail: null,
   });
   const [selectedThumbnail, setSelectedThumbnail] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedGenre, setSelectedGenre] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedGenre, setSelectedGenre] = useState(null);
   const [selectedAuthor, setSelectedAuthor] = useState(null);
 
-  const handleThumbnailChange = (e) => {
+  const handleThumbnailChange = async (e) => {
     const file = e.target.files[0];
-    console.log(file);
+    setSelectedThumbnail(file);
     if (file) {
-      setSelectedThumbnail(file);
+      setIsUploading(true);
+      const formData = new FormData();
+      formData.append("thumbnail", file);
+      const url = API_URL + "/upload";
+      try {
+        const res = await axios.post(url, formData);
+        if (res.status === 200) {
+          const imgObject = {
+            name: file.name,
+            url: res.data.imageUrl,
+          };
+          setForm((prev) => ({ ...prev, thumbnail: imgObject }));
+        }
+      } catch (error) {
+        console.log("error", error);
+        toast.error("Failed to upload image!");
+      }
+
+      setIsUploading(false);
       e.target.value = "";
     }
   };
 
-  const handleRemoveThumbnail = () => {
+  const handleRemoveThumbnail = (e) => {
+    e.preventDefault();
     setSelectedThumbnail(null);
+    setForm((prev) => ({
+      ...prev,
+      thumbnail: null,
+    }));
+  };
+
+  const handleChangeCategory = (e) => {
+    const id = e.target.value;
+    const selected = categoryList?.find((category) => category?._id === id);
+    setSelectedCategory(selected);
+  };
+
+  const handleChangeGenre = (e) => {
+    const id = e.target.value;
+    const selected = genreList?.find((genre) => genre?._id === id);
+    setSelectedGenre(selected);
   };
 
   const handleChangeAuthor = (e) => {
-    const value = e.target.value;
-    const selected = authors.find((author) => author.name === value);
+    const id = e.target.value;
+    const selected = authors?.find((author) => author?._id === id);
     setSelectedAuthor(selected);
   };
 
@@ -94,11 +125,44 @@ const CreateStory = () => {
     setForm({ ...form, content: editor.getData() });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { categoryName, categorySlug, content, title } = form;
-    if (categoryName && categorySlug && selectedThumbnail && content && title) {
-      console.log(form, selectedThumbnail);
+    const { content, title, shortDescription, thumbnail } = form;
+    if (
+      shortDescription &&
+      thumbnail &&
+      content &&
+      title &&
+      selectedCategory &&
+      selectedGenre &&
+      selectedAuthor
+    ) {
+      const storyData = {
+        ...form,
+        category: {
+          id: selectedCategory?._id,
+          name: selectedCategory?.category,
+          slug: selectedCategory?.categorySlug,
+        },
+        genre: {
+          id: selectedGenre?._id,
+          name: selectedGenre?.genre,
+          slug: selectedGenre?.genreSlug,
+        },
+        authorId: selectedAuthor?._id,
+      };
+      try {
+        const res = await CreateStory(storyData).unwrap();
+        if (res?.success) {
+          toast.success(res?.message);
+          navigate("/admin-dashboard/stories");
+        }
+      } catch (error) {
+        console.log("error", error);
+        toast.error("Failed to create Story!");
+      }
+    } else {
+      toast.error("Please Fill Up Required Fields!");
     }
   };
 
@@ -190,8 +254,8 @@ const CreateStory = () => {
           <label className="block mb-2">Short Description</label>
           <textarea
             type="text"
-            name="bio"
-            value={form?.bio}
+            name="shortDescription"
+            value={form?.shortDescription}
             onChange={handleChange}
             className="block w-full h-[150px] py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none resize-none"
           ></textarea>
@@ -209,13 +273,13 @@ const CreateStory = () => {
         <div className="mt-5">
           <input
             type="file"
-            name="avatar"
-            id="avatar"
+            name="thumbnail"
+            id="thumbnail"
             hidden
             onChange={handleThumbnailChange}
           />
           <label
-            htmlFor="avatar"
+            htmlFor="thumbnail"
             className="flex w-full items-center gap-2 bg-gray-200 cursor-pointer rounded overflow-hidden"
           >
             <div className="py-2 px-3 bg-primary-blue text-white shrink-0">
@@ -229,9 +293,12 @@ const CreateStory = () => {
             <img
               src={URL.createObjectURL(selectedThumbnail)}
               alt={selectedThumbnail?.name}
-              className="mx-auto block w-full rounded shadow-box object-cover mb-5"
+              className={`mx-auto block w-full rounded shadow-box object-cover mb-5 ${
+                isUploading ? "blur" : ""
+              }`}
             />
             <button
+              type="button"
               className="px-5 py-2 rounded-lg bg-red-600 text-white font-medium"
               onClick={handleRemoveThumbnail}
             >
@@ -244,11 +311,11 @@ const CreateStory = () => {
             <label className="block mb-2">Category</label>
             <select
               className="block w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none"
-              onChange={(e) => setSelectedCategory(e.target.value)}
+              onChange={handleChangeCategory}
             >
               <option value="">Select a category</option>
               {categoryList?.map((category, index) => (
-                <option value={category?.category} key={index}>
+                <option value={category?._id} key={index}>
                   {category?.category}
                 </option>
               ))}
@@ -258,12 +325,12 @@ const CreateStory = () => {
             <label className="block mb-2">Genre</label>
             <select
               className="block w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none"
-              onChange={(e) => setSelectedGenre(e.target.value)}
+              onChange={handleChangeGenre}
             >
               {!selectedGenre && <option value="">Select a genre</option>}
-              {genreList.map((genre, index) => (
-                <option value={genre.value} key={index}>
-                  {genre.name}
+              {genreList?.map((genre, index) => (
+                <option value={genre?._id} key={index}>
+                  {genre?.genre}
                 </option>
               ))}
             </select>
@@ -277,10 +344,10 @@ const CreateStory = () => {
               name="avatar"
               onChange={handleChangeAuthor}
             >
-              <option value="">Select author</option>
+              {!selectedAuthor && <option value="">Select author</option>}
               {authors?.map((author, index) => (
-                <option value={author?.name} key={index}>
-                  {author?.name}
+                <option value={author?._id} key={index}>
+                  {author?.fullName}
                 </option>
               ))}
             </select>
@@ -289,12 +356,12 @@ const CreateStory = () => {
             <label className="block mb-2">Preview</label>
             <div className="flex items-center gap-2">
               <img
-                src={selectedAuthor?.url || PreviewImage}
+                src={selectedAuthor?.avatar?.url || PreviewImage}
                 alt=""
-                className="w-[40px] rounded-full shadow-box object-cover"
+                className="size-[40px] rounded-full shadow-box object-cover"
               />
               <h1 className="font-ador">
-                {selectedAuthor?.name || "Author Name"}
+                {selectedAuthor?.fullName || "Author Name"}
               </h1>
             </div>
           </div>
@@ -309,13 +376,14 @@ const CreateStory = () => {
             className="cursor-pointer"
           />
           <label htmlFor="featured" className="ml-2 cursor-pointer">
-            Featured
+            Featured{" "}
+            <span className="text-red-500 text-xs">(Not Required)</span>
           </label>
         </div>
         <button
           type="submit"
-          disabled={isLoading}
-          className="disabled:bg-primary-blue flex items-center justify-center w-[200px] mx-auto text-center h-11 bg-primary-blue hover:bg-primary-blue text-white font-medium mt-5 duration-300 rounded select-none"
+          disabled={isLoading || isUploading}
+          className="disabled:bg-primary-blue/50 flex items-center justify-center w-[200px] mx-auto text-center h-11 bg-primary-blue hover:bg-primary-blue text-white font-medium mt-5 duration-300 rounded select-none"
         >
           {isLoading ? (
             <CgSpinner className="animate-spin text-xl" />
