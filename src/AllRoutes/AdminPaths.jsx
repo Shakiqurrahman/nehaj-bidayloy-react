@@ -15,7 +15,7 @@ import EditCategory from "../pages/Dashboard/EditCategory";
 import EditGenre from "../pages/Dashboard/EditGenre";
 import EditQuotes from "../pages/Dashboard/EditQuotes";
 import EditStory from "../pages/Dashboard/EditStory";
-import CreateGenre from "../pages/Dashboard/createGenre";
+import CreateGenre from "../pages/Dashboard/CreateGenre";
 
 export const AdminPaths = [
   {
