@@ -1,12 +1,17 @@
 import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import authorImg from "../assets/images/Cardthumbnail.png";
 import commentAvatar from "../assets/images/commentAvatar.png";
-import Thumbnail from "../assets/images/singlepostthumbnail.png";
 import CategoryCard from "../components/Cards/CategoryCard";
 import { CommentForm } from "../components/CommentForm";
+import { useGetSingleStoryQuery } from "../Redux/api/storyApiSlice";
 import { convertToBanglaDate } from "../utils/convertToBanglaDate";
 
 const SingleBlogPost = () => {
+  const { storyId } = useParams();
+  const navigate = useNavigate();
+  const { data: storyData, isLoading } = useGetSingleStoryQuery(storyId);
+  console.log(storyData);
   const comments = [
     {
       avatar: commentAvatar,
@@ -58,27 +63,67 @@ const SingleBlogPost = () => {
     },
   ];
 
+  // Category Bg Color
+  const categorySlug = storyData?.category?.slug;
+  const categoryBgColor =
+    categorySlug === "tought"
+      ? "bg-primary-blue"
+      : categorySlug === "history"
+      ? "bg-history"
+      : categorySlug === "literary"
+      ? "bg-sahitto"
+      : categorySlug === "art"
+      ? "bg-arts"
+      : categorySlug === "cinema"
+      ? "bg-cinema"
+      : categorySlug === "theology"
+      ? "bg-dhormo-tottho"
+      : "bg-primary-blue";
+
+  // Genre Bg Color
+  const genreSlug = storyData?.genre?.slug;
+  const genreBgColor =
+    genreSlug === "article"
+      ? "bg-probondho"
+      : genreSlug === "notes"
+      ? "bg-notes"
+      : genreSlug === "translate"
+      ? "bg-onubadh"
+      : "bg-primary-blue";
+
+  if (!isLoading && !storyData) {
+    navigate("/not-found", { replace: true });
+  }
+
   return (
     <div className="pt-[200px]">
       <div className="max-width">
         <div className="flex items-center gap-2">
-          <span className="block px-5 py-1 rounded-[30px] bg-primary-blue text-white text-sm">
-            ধর্মতত্ত্ব
+          <span
+            className={`block px-5 py-1 rounded-[30px] text-white text-sm ${categoryBgColor}`}
+          >
+            {storyData?.category?.name}
           </span>
-          <span className="block px-5 py-1 rounded-[30px] bg-onubadh text-white text-sm">
-            অনুবাদ
+          <span
+            className={`block px-5 py-1 rounded-[30px] text-white text-sm ${genreBgColor}`}
+          >
+            {storyData?.genre?.name}
           </span>
         </div>
         <div className="flex items-center gap-2 text-accent-golden mt-5 mb-3">
-          <span>আবুল খায়ের</span>
+          <span>{storyData?.authorId?.fullName}</span>
           <span className="size-2 rounded-full bg-accent-golden shrink-0 block"></span>
-          <span>{convertToBanglaDate(new Date())}</span>
+          <span>
+            {storyData?.createdAt
+              ? convertToBanglaDate(new Date(storyData?.createdAt))
+              : convertToBanglaDate(new Date())}
+          </span>
         </div>
-        <h1 className="text-xl md:text-3xl lg:text-[60px] font-niladri text-primary-blue">
-          চিন্তার ভিতর ঘুমন্ত ঘুঘু এবং অন্যান্য ফুলের কথা
+        <h1 className="text-xl md:text-3xl lg:text-[60px] lg:leading-[80px] font-niladri text-primary-blue">
+          {storyData?.title}
         </h1>
         <img
-          src={Thumbnail}
+          src={storyData?.thumbnail?.url}
           alt="Blog Thumbnail"
           className="block w-full rounded-[30px] object-cover my-10"
         />
@@ -88,35 +133,15 @@ const SingleBlogPost = () => {
         <div className="max-width">
           <div className="flex flex-wrap sm:flex-nowrap items-center gap-10">
             <img
-              src={authorImg}
+              src={storyData?.authorId?.avatar?.url}
               alt="Author Image"
               className="mx-auto sm:ml-0 w-[220px] object-cover rounded-[20px] shrink-0"
             />
-            <div>
+            <div className="grow">
               <h1 className="text-center sm:text-left text-lg sm:text-2xl font-niladri text-primary-blue mb-3">
-                আবুল হুকুম
+                {storyData?.authorId?.fullName}
               </h1>
-              <p>
-                আবুল হুকুম হলেন একজন গদ্য লেখক। নেহাজ শব্দের উৎস হইলো আরবি
-                &quot;নাহাজ&quot;, যার থাকি মানহাজ শব্দ আইছে। অর্থ পদ্ধতি বা
-                মেথড। অবশ্য লালনের বরাতেই শব্দটা আমরা পাই সর্বপ্রথম। কোনো সত্যে
-                পৌছাতে মানুষের লিপ্ততা, সাধনা,অভিনিবেশের যে &quot;বিশেষ&quot;
-                ধরণ লালন এইটারে নেহাজ বলতেন। আবুল হুকুম হলেন একজন গদ্য লেখক।
-                নেহাজ শব্দের উৎস হইলো আরবি &quot;নাহাজ&quot;, যার থাকি মানহাজ
-                শব্দ আইছে। অর্থ পদ্ধতি বা মেথড। অবশ্য লালনের বরাতেই শব্দটা আমরা
-                পাই সর্বপ্রথম। কোনো সত্যে পৌছাতে মানুষের লিপ্ততা,
-                সাধনা,অভিনিবেশের যে &quot;বিশেষ&quot; ধরণ লালন এইটারে নেহাজ
-                বলতেন। আবুল হুকুম হলেন একজন গদ্য লেখক। নেহাজ শব্দের উৎস হইলো
-                আরবি &quot;নাহাজ&quot;, যার থাকি মানহাজ শব্দ আইছে। অর্থ পদ্ধতি
-                বা মেথড। অবশ্য লালনের বরাতেই শব্দটা আমরা পাই সর্বপ্রথম। কোনো
-                সত্যে পৌছাতে মানুষের লিপ্ততা, সাধনা,অভিনিবেশের যে
-                &quot;বিশেষ&quot; ধরণ লালন এইটারে নেহাজ বলতেন। আবুল হুকুম হলেন
-                একজন গদ্য লেখক। নেহাজ শব্দের উৎস হইলো আরবি &quot;নাহাজ&quot;,
-                যার থাকি মানহাজ শব্দ আইছে। অর্থ পদ্ধতি বা মেথড। অবশ্য লালনের
-                বরাতেই শব্দটা আমরা পাই সর্বপ্রথম। কোনো সত্যে পৌছাতে মানুষের
-                লিপ্ততা, সাধনা,অভিনিবেশের যে &quot;বিশেষ&quot; ধরণ লালন এইটারে
-                নেহাজ বলতেন।
-              </p>
+              <p>{storyData?.authorId?.bio}</p>
             </div>
           </div>
         </div>

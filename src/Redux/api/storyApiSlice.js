@@ -7,6 +7,11 @@ export const storyApiSlice = apiSlice.injectEndpoints({
       transformResponse: (response) => response?.data,
       providesTags: ["story"],
     }),
+    getSingleStory: builder.query({
+      query: (storyId) => `/story/${storyId}`,
+      transformResponse: (response) => response?.data,
+      providesTags: ["story"],
+    }),
     createStory: builder.mutation({
       query: (storyData) => ({
         url: "/create/story",
@@ -35,6 +40,7 @@ export const storyApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useFetchStoriesQuery,
+  useGetSingleStoryQuery,
   useCreateStoryMutation,
   useUpdateStoryMutation,
   useDeleteStoryMutation,

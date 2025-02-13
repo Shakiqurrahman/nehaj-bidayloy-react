@@ -42,15 +42,15 @@ export const router = createBrowserRouter([
         element: <PatchokroPage />,
       },
       {
-        path: "/category",
+        path: "/category/:categorySlug",
         element: <CategoryPage />,
       },
       {
-        path: "/genre/:genreType",
+        path: "/genre/:genreSlug",
         element: <GenrePage />,
       },
       {
-        path: "/story",
+        path: "/story/:storyId",
         element: <SingleBlogPost />,
       },
     ],
