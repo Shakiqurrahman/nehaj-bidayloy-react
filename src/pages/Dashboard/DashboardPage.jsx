@@ -5,10 +5,15 @@ import { MdCategory } from "react-icons/md";
 import { Link } from "react-router-dom";
 import AuthorsCard from "../../components/Dashboard/AuthorsCard";
 import StoriesCard from "../../components/Dashboard/StoriesCard";
+import { useGetOverAllDataQuery } from "../../Redux/api/dashboardApiSlice";
+import Loading from "../../utils/Loading";
 
 const DashboardPage = () => {
-  const authorsData = [1, 2, 3, 4, 5, 6];
-  return (
+  const { data: overAllData, isLoading } = useGetOverAllDataQuery();
+
+  return isLoading ? (
+    <Loading />
+  ) : (
     <section className="w-full min-h-[calc(100vh_-_96px)]">
       <div>
         <h1 className="text-[28px] font-semibold leading-none">Dashboard</h1>
@@ -20,7 +25,9 @@ const DashboardPage = () => {
       <div className="mt-10 flex flex-wrap gap-5">
         <div className="flex items-center justify-between p-8 bg-white w-[300px] rounded-2xl border">
           <div>
-            <h2 className="text-[32px] font-bold mb-2 text-center">100</h2>
+            <h2 className="text-[32px] font-bold mb-2 text-center">
+              {overAllData?.totalAuthor || 0}
+            </h2>
             <p className="text-base font-medium">Total Authors</p>
           </div>
           <div>
@@ -29,7 +36,9 @@ const DashboardPage = () => {
         </div>
         <div className="flex items-center justify-between p-8 bg-white w-[300px] rounded-2xl border">
           <div>
-            <h2 className="text-[32px] font-bold mb-2 text-center">20</h2>
+            <h2 className="text-[32px] font-bold mb-2 text-center">
+              {overAllData?.totalCategory || 0}
+            </h2>
             <p className="text-base font-medium">Total Categories</p>
           </div>
           <div>
@@ -38,7 +47,9 @@ const DashboardPage = () => {
         </div>
         <div className="flex items-center justify-between p-8 bg-white w-[300px] rounded-2xl border">
           <div>
-            <h2 className="text-[32px] font-bold mb-2 text-center">230</h2>
+            <h2 className="text-[32px] font-bold mb-2 text-center">
+              {overAllData?.totalStory || 0}
+            </h2>
             <p className="text-base font-medium">Total Writings</p>
           </div>
           <div>
@@ -60,8 +71,8 @@ const DashboardPage = () => {
         {/* Authors List */}
 
         <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
-          {authorsData.map((author, idx) => (
-            <AuthorsCard key={idx} authorsData={author} />
+          {overAllData?.authorsData?.map((author, idx) => (
+            <AuthorsCard key={idx} authorData={author} />
           ))}
         </div>
 
@@ -78,8 +89,8 @@ const DashboardPage = () => {
           {/* Stories List */}
 
           <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
-            {authorsData.map((story, idx) => (
-              <StoriesCard key={idx} storiesData={story} />
+            {overAllData?.storiesData?.map((story, idx) => (
+              <StoriesCard key={idx} storyData={story} />
             ))}
           </div>
         </div>
