@@ -35,6 +35,14 @@ export const storyApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["story"],
     }),
+    createComment: builder.mutation({
+      query: (commentData) => ({
+        url: "/create/comment",
+        method: "POST",
+        body: commentData,
+      }),
+      invalidatesTags: ["story"],
+    }),
   }),
 });
 
@@ -44,4 +52,5 @@ export const {
   useCreateStoryMutation,
   useUpdateStoryMutation,
   useDeleteStoryMutation,
+  useCreateCommentMutation,
 } = storyApiSlice;

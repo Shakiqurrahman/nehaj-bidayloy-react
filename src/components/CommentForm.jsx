@@ -1,20 +1,41 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { useCreateCommentMutation } from "../Redux/api/storyApiSlice";
 
-export const CommentForm = () => {
+export const CommentForm = ({ storyId }) => {
+  const [CreateComment] = useCreateCommentMutation();
+
   const [form, setForm] = useState({
     name: "",
     email: "",
-    text: "",
+    comment: "",
   });
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { name, email, text } = form;
-    if (name && email && text) {
-      console.log(form);
+    const { name, email, comment } = form;
+    if (name && email && comment) {
+      const commentData = { ...form, storyId };
+      try {
+        const res = await CreateComment(commentData).unwrap();
+        console.log(res);
+        if (res?.success) {
+          toast.success(res?.message);
+          setForm({
+            name: "",
+            email: "",
+            comment: "",
+          });
+        }
+      } catch (error) {
+        console.log("error", error);
+        toast.error(error?.data?.message || "Failed to post a comment!");
+      }
+    } else {
+      toast.error("Please fillup every field!");
     }
   };
   return (
@@ -47,12 +68,12 @@ export const CommentForm = () => {
         />
       </div>
       <div className="mt-5">
-        <label htmlFor="text" className="text-accent-golden">
+        <label htmlFor="comment" className="text-accent-golden">
           মন্তব্য*
         </label>
         <textarea
-          id="text"
-          name="text"
+          id="comment"
+          name="comment"
           required
           onChange={handleChange}
           className="bg-[#D9D9D9] rounded-[15px] outline-none p-3 block w-full mt-2 h-[300px] resize-none"
