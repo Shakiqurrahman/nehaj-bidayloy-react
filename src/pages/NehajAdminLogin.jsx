@@ -37,7 +37,6 @@ const NehajAdminLogin = () => {
           dispatch(setUserData(result.user));
           navigate("/admin-dashboard");
         }
-        console.log("Login successful:", result, "token", result?.accessToken);
         toast.success("Login successful!");
       } catch (error) {
         console.error("Operation failed:", error);

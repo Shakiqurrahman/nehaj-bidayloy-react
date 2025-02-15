@@ -20,54 +20,102 @@ const DSideBar = () => {
             : "translate-x-[-100%] duration-300"
         }`}
       >
-        <NavLink to="/admin-dashboard">
+        <NavLink
+          to="/admin-dashboard"
+          end
+          className={({ isActive }) =>
+            isActive
+              ? "text-primary-blue duration-300"
+              : "text-[#7e7e7e] hover:text-primary-blue duration-300"
+          }
+        >
           <li
-            className={` flex gap-4 text-[#7e7e7e] text-xl  px-8 py-5 hover:text-primary-blue duration-300`}
+            className={` flex gap-4 text-xl  px-8 py-5 `}
             onClick={() => dispatch(setActiveHamburgerD(false))}
           >
             <MdDashboard size={25} />
             Dashboard
           </li>
         </NavLink>
-        <NavLink to="/admin-dashboard/stories">
+        <NavLink
+          to="/admin-dashboard/stories"
+          end
+          className={({ isActive }) =>
+            isActive
+              ? "text-primary-blue duration-300"
+              : "text-[#7e7e7e] hover:text-primary-blue duration-300"
+          }
+        >
           <li
-            className={` flex items-center gap-4 text-[#7e7e7e] text-xl  px-8 py-5 hover:text-primary-blue duration-300`}
+            className={` flex items-center gap-4 text-xl  px-8 py-5`}
             onClick={() => dispatch(setActiveHamburgerD(false))}
           >
             <FaBookOpen size={25} />
             Writings
           </li>
         </NavLink>
-        <NavLink to="/admin-dashboard/authors">
+        <NavLink
+          to="/admin-dashboard/authors"
+          end
+          className={({ isActive }) =>
+            isActive
+              ? "text-primary-blue duration-300"
+              : "text-[#7e7e7e] hover:text-primary-blue duration-300"
+          }
+        >
           <li
-            className={` flex items-center gap-4 text-[#7e7e7e] text-xl  px-8 py-5 hover:text-primary-blue duration-300`}
+            className={` flex items-center gap-4 text-xl  px-8 py-5`}
             onClick={() => dispatch(setActiveHamburgerD(false))}
           >
             <BsFillPeopleFill size={25} />
             Authors
           </li>
         </NavLink>
-        <NavLink to="/admin-dashboard/categories">
+        <NavLink
+          to="/admin-dashboard/categories"
+          end
+          className={({ isActive }) =>
+            isActive
+              ? "text-primary-blue duration-300"
+              : "text-[#7e7e7e] hover:text-primary-blue duration-300"
+          }
+        >
           <li
-            className={` flex items-center gap-4 text-[#7e7e7e] text-xl  px-8 py-5 hover:text-primary-blue duration-300`}
+            className={` flex items-center gap-4 text-xl  px-8 py-5`}
             onClick={() => dispatch(setActiveHamburgerD(false))}
           >
             <MdCategory size={25} />
             Categories
           </li>
         </NavLink>
-        <NavLink to="/admin-dashboard/genres">
+        <NavLink
+          to="/admin-dashboard/genres"
+          end
+          className={({ isActive }) =>
+            isActive
+              ? "text-primary-blue duration-300"
+              : "text-[#7e7e7e] hover:text-primary-blue duration-300"
+          }
+        >
           <li
-            className={` flex items-center gap-4 text-[#7e7e7e] text-xl  px-8 py-5 hover:text-primary-blue duration-300`}
+            className={` flex items-center gap-4 text-xl  px-8 py-5`}
             onClick={() => dispatch(setActiveHamburgerD(false))}
           >
             <BiSolidCrown size={25} />
             Genres
           </li>
         </NavLink>
-        <NavLink to="/admin-dashboard/quotes">
+        <NavLink
+          to="/admin-dashboard/quotes"
+          end
+          className={({ isActive }) =>
+            isActive
+              ? "text-primary-blue duration-300"
+              : "text-[#7e7e7e] hover:text-primary-blue duration-300"
+          }
+        >
           <li
-            className={` flex items-center gap-4 text-[#7e7e7e] text-xl  px-8 py-5 hover:text-primary-blue duration-300`}
+            className={` flex items-center gap-4 text-xl  px-8 py-5 `}
             onClick={() => dispatch(setActiveHamburgerD(false))}
           >
             <PiQuotesFill size={25} />
