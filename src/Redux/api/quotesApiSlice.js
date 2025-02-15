@@ -30,6 +30,13 @@ export const quotesApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["quotes"],
     }),
+
+    // 5 random quotes for homepage
+    getRandomQuotes: builder.query({
+      query: () => "/quotes/random",
+      transformResponse: (response) => response?.data,
+      providesTags: ["quotes"],
+    }),
   }),
 });
 
@@ -38,4 +45,5 @@ export const {
   useCreateQuoteMutation,
   useUpdateQuoteMutation,
   useDeleteQuoteMutation,
+  useGetRandomQuotesQuery,
 } = quotesApiSlice;

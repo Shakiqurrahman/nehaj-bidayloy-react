@@ -2,6 +2,7 @@ import React from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
+import { useGetRandomQuotesQuery } from "../Redux/api/quotesApiSlice";
 import articlesBgImage from "../assets/images/articlesBgImage.png";
 import articlesThumbnail from "../assets/images/articlesThumbnail.png";
 import cardThumbnail from "../assets/images/cardImg.png";
@@ -15,6 +16,8 @@ import RecentEventBanner from "../components/RecentEventBanner";
 import Hero from "../components/shared/Header/Hero";
 
 const HomePage = () => {
+  const { data: randomQuotes } = useGetRandomQuotesQuery();
+
   const categoryCardsData = [
     {
       name: "চিন্তা",
@@ -271,31 +274,35 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* articles section */}
-      <div className="rounded-[30px] overflow-hidden">
-        <Slider {...settings}>
-          {articlesArray?.map((item, i) => (
-            <div key={i}>
-              <div
-                className="rounded-[30px] text-white pt-10 pb-20 text-center px-5 sm:px-[100px] bg-cover"
-                style={{
-                  backgroundImage: `url(${item?.bgImage}), linear-gradient(to right, rgba(0,46,93,0.6), rgba(0,46,93,0.6)`,
-                }}
-              >
-                <div className="max-width font-mainak-signature text-lg md:text-2xl">
-                  <img
-                    src={item?.thumbnail}
-                    alt=""
-                    className="block size-[100px] rounded-full mx-auto"
-                  />
-                  <p className="line-clamp-4 my-10 leading-[2]">{item?.text}</p>
-                  <h1>{item?.writer}</h1>
+      {/* quotes section */}
+      {randomQuotes && randomQuotes?.length > 0 && (
+        <div className="rounded-[30px] overflow-hidden">
+          <Slider {...settings}>
+            {randomQuotes?.map((quote, i) => (
+              <div key={i}>
+                <div
+                  className="rounded-[30px] text-white pt-10 pb-20 text-center px-5 sm:px-[100px] bg-cover"
+                  style={{
+                    backgroundImage: `linear-gradient(to right, rgba(0,46,93,0.6), rgba(0,46,93,0.6)), url(${quote?.thumbnail?.url})`,
+                  }}
+                >
+                  <div className="max-width font-mainak-signature text-lg md:text-2xl">
+                    <img
+                      src={quote?.authorImage?.url}
+                      alt=""
+                      className="block size-[100px] rounded-full mx-auto object-cover"
+                    />
+                    <p className="line-clamp-4 my-10 leading-[2]">
+                      {quote?.quotes}
+                    </p>
+                    <h1>{quote?.authorName}</h1>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </Slider>
-      </div>
+            ))}
+          </Slider>
+        </div>
+      )}
     </>
   );
 };
