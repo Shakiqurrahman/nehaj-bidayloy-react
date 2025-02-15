@@ -11,6 +11,8 @@ const CreateCategory = () => {
   const [form, setForm] = useState({
     category: "",
     categorySlug: "",
+    title: "",
+    description: "",
   });
 
   const handleChange = (e) => {
@@ -19,9 +21,14 @@ const CreateCategory = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { category, categorySlug } = form;
-    if (category && categorySlug) {
-      const res = await CreateCategory({ category, categorySlug });
+    const { category, categorySlug, description, title } = form;
+    if (category && categorySlug && description && title) {
+      const res = await CreateCategory({
+        category,
+        categorySlug,
+        title,
+        description,
+      });
       if (res?.data?.success) {
         toast.success(res?.data?.message);
         navigate("/admin-dashboard/categories");
@@ -87,6 +94,42 @@ const CreateCategory = () => {
             (history-thought)
           </p>
         )}
+        <div className="relative mt-5">
+          <input
+            type="text"
+            name="title"
+            value={form.title}
+            onChange={handleChange}
+            className="block relative w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none z-[1] peer"
+          />
+          <label
+            className={`select-none duration-300 peer-focus-visible:text-xs absolute bg-white -translate-y-1/2 text-sm mx-4 left-0 peer-focus-visible:top-0 leading-none peer-focus-visible:z-[2] peer-focus-visible:text-primary-blue peer-focus-visible:mt-[2px] inline-block ${
+              form.title
+                ? "text-xs top-0 z-[2] text-primary-blue mt-[2px]"
+                : "top-1/2 text-gray-500 z-0 mt-0"
+            }`}
+          >
+            Category Title
+          </label>
+        </div>
+        <div className="relative mt-5">
+          <textarea
+            type="text"
+            name="description"
+            value={form.description}
+            onChange={handleChange}
+            className="block relative w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none z-[1] peer h-[150px] resize-none"
+          ></textarea>
+          <label
+            className={`select-none duration-300 peer-focus-visible:text-xs absolute bg-white -translate-y-1/2 text-sm mx-4 left-0 peer-focus-visible:top-0 leading-none peer-focus-visible:z-[2] peer-focus-visible:text-primary-blue peer-focus-visible:mt-[2px] inline-block ${
+              form.description
+                ? "text-xs top-0 z-[2] text-primary-blue mt-[2px]"
+                : "top-5 text-gray-500 z-0 mt-0"
+            }`}
+          >
+            Category Description
+          </label>
+        </div>
         <button
           type="submit"
           disabled={isLoading}
