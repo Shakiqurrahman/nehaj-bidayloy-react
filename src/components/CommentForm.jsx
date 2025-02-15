@@ -24,16 +24,20 @@ export const CommentForm = ({ storyId }) => {
         console.log(res);
         if (res?.success) {
           toast.success(res?.message);
-          setForm({
-            name: "",
-            email: "",
-            comment: "",
-          });
         }
       } catch (error) {
         console.log("error", error);
-        toast.error(error?.data?.message || "Failed to post a comment!");
+        toast.error(
+          error?.data?.message === "You can only comment once on this story."
+            ? error?.data?.message
+            : "Failed to post a comment!"
+        );
       }
+      setForm({
+        name: "",
+        email: "",
+        comment: "",
+      });
     } else {
       toast.error("Please fillup every field!");
     }
@@ -49,6 +53,7 @@ export const CommentForm = ({ storyId }) => {
           type="text"
           id="name"
           name="name"
+          value={form.name}
           required
           onChange={handleChange}
           className="bg-[#D9D9D9] rounded-[15px] outline-none p-3 block w-full mt-2"
@@ -62,6 +67,7 @@ export const CommentForm = ({ storyId }) => {
           type="email"
           id="email"
           name="email"
+          value={form.email}
           required
           onChange={handleChange}
           className="bg-[#D9D9D9] rounded-[15px] outline-none p-3 block w-full mt-2"
@@ -74,6 +80,7 @@ export const CommentForm = ({ storyId }) => {
         <textarea
           id="comment"
           name="comment"
+          value={form.comment}
           required
           onChange={handleChange}
           className="bg-[#D9D9D9] rounded-[15px] outline-none p-3 block w-full mt-2 h-[300px] resize-none"

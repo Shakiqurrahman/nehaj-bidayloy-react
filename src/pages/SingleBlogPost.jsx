@@ -127,7 +127,7 @@ const SingleBlogPost = () => {
                     className="sm:ml-0 mx-auto w-[110px] object-cover rounded-[15px]"
                   />
                   <div className="sm:pr-10 md:pr-[100px] grow">
-                    <h1 className="text-primary-blue text-lg sm:text-xl mb-2 text-center sm:text-left">
+                    <h1 className="text-primary-blue text-lg sm:text-xl mb-2">
                       {comment?.name}
                     </h1>
                     <p>{comment?.comment}</p>
