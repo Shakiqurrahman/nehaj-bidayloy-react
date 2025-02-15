@@ -6,7 +6,8 @@ import { useFetchStoriesQuery } from "../../Redux/api/storyApiSlice";
 import Loading from "../../utils/Loading";
 
 const AllWritings = () => {
-  const { data: stories, isLoading } = useFetchStoriesQuery();
+  const { data: response, isLoading } = useFetchStoriesQuery();
+  const stories = response?.data;
   return isLoading ? (
     <Loading />
   ) : (

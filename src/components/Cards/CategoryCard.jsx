@@ -12,13 +12,14 @@ const CategoryCard = ({
   categoryName,
   genreType,
   link,
+  item,
 }) => {
   const banglaDate = convertToBanglaDate(date);
   return (
     <div>
       <img
         src={thumbnail}
-        alt=""
+        alt={title}
         className="w-full rounded-[30px] block shadow"
       />
       <div className="flex items-center gap-2 text-accent-golden mt-5">

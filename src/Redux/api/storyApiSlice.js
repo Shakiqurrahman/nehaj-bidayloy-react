@@ -3,15 +3,26 @@ import { apiSlice } from "./apiSlice";
 export const storyApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     fetchStories: builder.query({
-      query: () => "/stories",
-      transformResponse: (response) => response?.data,
+      query: (arg = {}) => {
+        const { page, limit, category = "", genre = "" } = arg;
+
+        let queryParams = new URLSearchParams();
+        if (category) queryParams.append("category", category);
+        if (genre) queryParams.append("genre", genre);
+        if (page) queryParams.append("page", page);
+        if (page || limit) queryParams.append("limit", 6);
+
+        return `/stories?${queryParams.toString()}`;
+      },
       providesTags: ["story"],
     }),
+
     getSingleStory: builder.query({
       query: (storyId) => `/story/${storyId}`,
       transformResponse: (response) => response?.data,
       providesTags: ["story"],
     }),
+
     createStory: builder.mutation({
       query: (storyData) => ({
         url: "/create/story",
@@ -20,6 +31,7 @@ export const storyApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["story"],
     }),
+
     updateStory: builder.mutation({
       query: ({ storyId, storyData }) => ({
         url: `/story/${storyId}`,
@@ -28,6 +40,7 @@ export const storyApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["story"],
     }),
+
     deleteStory: builder.mutation({
       query: (storyId) => ({
         url: `/story/${storyId}`,
@@ -35,6 +48,7 @@ export const storyApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["story"],
     }),
+
     createComment: builder.mutation({
       query: (commentData) => ({
         url: "/create/comment",

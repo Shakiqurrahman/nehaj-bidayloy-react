@@ -2,14 +2,14 @@ import React from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const Pagination = ({
-  totalItems,
-  itemsPerPage,
+  totalPages,
+  // totalItems,
+  // itemsPerPage,
   currentPage,
   onPageChange,
 }) => {
   // Calculate total number of pages
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-
+  // const totalPages = Math.ceil(totalItems / itemsPerPage);
   // Handle page click
   const handlePageClick = (page) => {
     if (page !== currentPage && page >= 1 && page <= totalPages) {

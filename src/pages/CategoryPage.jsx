@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import Slider from "react-slick";
+import { useFetchStoriesQuery } from "../Redux/api/storyApiSlice";
 import CardthumbnailImg from "../assets/images/Cardthumbnail.png";
 import cardThumbnail from "../assets/images/cardImg.png";
 import categoryImg from "../assets/images/categoryImg.png";
@@ -11,7 +13,18 @@ import TranslateCard from "../components/Cards/TranslateCard";
 import Pagination from "../components/Pagination";
 
 const CategoryPage = () => {
+  const { categorySlug } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
+  const { data: response, isLoading } = useFetchStoriesQuery(
+    {
+      category: categorySlug,
+      page: Number(currentPage) || 1,
+    },
+    {
+      skip: !categorySlug,
+    }
+  );
+  const { data: stories, meta } = response || {};
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -254,16 +267,16 @@ const CategoryPage = () => {
           <span className="block grow shrink h-px bg-primary-blue"></span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-[30px] gap-y-10">
-          {allPosts?.map((item, i) => (
+          {stories?.map((item, i) => (
             <CategoryCard
               key={i}
-              categoryName={item?.categoryName}
-              date={item?.date}
-              desc={item?.desc}
-              genreType={item?.genreType}
-              thumbnail={item?.thumbnail}
+              categoryName={item?.category?.name}
+              date={item?.createdAt}
+              desc={item?.shortDescription}
+              genreType={item?.genre?.name}
+              thumbnail={item?.thumbnail?.url}
               title={item?.title}
-              writer={item?.writer}
+              writer={item?.authorId?.fullName}
               link={item?.link}
             />
           ))}
@@ -271,9 +284,10 @@ const CategoryPage = () => {
         <hr className="bg-[#EAECF0] mb-5 mt-10" />
         <Pagination
           currentPage={currentPage}
-          itemsPerPage={10}
+          // itemsPerPage={6}
+          totalPages={Number(meta?.totalPages)}
           onPageChange={handlePageChange}
-          totalItems={100}
+          totalItems={Number(meta?.totalStories)}
         />
       </div>
 

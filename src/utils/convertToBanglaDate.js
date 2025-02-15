@@ -1,4 +1,4 @@
-export function convertToBanglaDate(date) {
+export function convertToBanglaDate(createdAt) {
   const banglaDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
   const banglaMonths = [
     "জানুয়ারী",
@@ -15,26 +15,21 @@ export function convertToBanglaDate(date) {
     "ডিসেম্বর",
   ];
 
+  const date = new Date(createdAt);
   // Get the day, month, and year from the given date
   const day = date.getDate();
   const month = date.getMonth(); // month is 0-indexed
   const year = date.getFullYear();
 
   // Convert the day and year to Bangla
-  const banglaDay = day
-    .toString()
-    .split("")
-    .map((digit) => banglaDigits[parseInt(digit)])
-    .join("");
-  const banglaYear = year
-    .toString()
-    .split("")
-    .map((digit) => banglaDigits[parseInt(digit)])
-    .join("");
+  const convertToBangla = (num) =>
+    num
+      .toString()
+      .split("")
+      .map((digit) => banglaDigits[parseInt(digit)])
+      .join("");
 
-  // Get the Bangla month
-  const banglaMonth = banglaMonths[month];
-
-  // Return the formatted Bangla date
-  return `${banglaDay} ${banglaMonth}, ${banglaYear}`;
+  return `${convertToBangla(day)} ${banglaMonths[month]}, ${convertToBangla(
+    year
+  )}`;
 }
