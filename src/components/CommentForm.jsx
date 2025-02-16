@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useCreateCommentMutation } from "../Redux/api/storyApiSlice";
+import { getDeviceId } from "../utils/getDeviceId";
 
 export const CommentForm = ({ storyId }) => {
   const [CreateComment] = useCreateCommentMutation();
@@ -11,6 +12,8 @@ export const CommentForm = ({ storyId }) => {
     comment: "",
   });
 
+  const deviceId = getDeviceId();
+
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -18,7 +21,7 @@ export const CommentForm = ({ storyId }) => {
     e.preventDefault();
     const { name, email, comment } = form;
     if (name && email && comment) {
-      const commentData = { ...form, storyId };
+      const commentData = { ...form, storyId, userIdentifier: deviceId };
       try {
         const res = await CreateComment(commentData).unwrap();
         console.log(res);
