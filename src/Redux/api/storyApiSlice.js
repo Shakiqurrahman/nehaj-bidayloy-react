@@ -23,6 +23,18 @@ export const storyApiSlice = apiSlice.injectEndpoints({
       providesTags: ["story"],
     }),
 
+    getFeaturedStory: builder.query({
+      query: () => `/stories/featured`,
+      transformResponse: (response) => response?.data,
+      providesTags: ["story"],
+    }),
+
+    getSelectedStoriesByCategory: builder.query({
+      query: (categorySlug) => `/stories/latest?category=${categorySlug}`,
+      transformResponse: (response) => response?.data,
+      providesTags: ["story"],
+    }),
+
     createStory: builder.mutation({
       query: (storyData) => ({
         url: "/create/story",
@@ -63,6 +75,8 @@ export const storyApiSlice = apiSlice.injectEndpoints({
 export const {
   useFetchStoriesQuery,
   useGetSingleStoryQuery,
+  useGetFeaturedStoryQuery,
+  useGetSelectedStoriesByCategoryQuery,
   useCreateStoryMutation,
   useUpdateStoryMutation,
   useDeleteStoryMutation,

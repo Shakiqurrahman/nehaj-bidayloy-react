@@ -28,7 +28,7 @@ const CategoryCardWithButton = ({
       </h1>
       <p className="line-clamp-3">{desc}</p>
       <Link
-        to={`/${link}`}
+        to={`/story/${link}`}
         className={`inline-block mt-5 px-8 py-2 rounded-[30px] border  font-niladri sm:text-lg  ${
           darkMode
             ? "text-white border-white"
