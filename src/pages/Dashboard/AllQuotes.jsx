@@ -10,7 +10,8 @@ import {
 import Loading from "../../utils/Loading";
 
 const AllQuotes = () => {
-  const { data: quotesData, isLoading } = useFetchQuotesQuery();
+  const { data: quotesResponse, isLoading } = useFetchQuotesQuery();
+  const { quotes } = quotesResponse || {};
   const [DeleteQuote] = useDeleteQuoteMutation();
 
   const handleDelete = async (quoteId) => {
@@ -42,9 +43,9 @@ const AllQuotes = () => {
         </Link>
       </div>
       <span className="block w-full h-px bg-black/20 my-5"></span>
-      {quotesData && quotesData?.length > 0 ? (
+      {quotes && quotes?.length > 0 ? (
         <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
-          {quotesData?.map((quote, i) => {
+          {quotes?.map((quote, i) => {
             const thumbnail = quote?.thumbnail?.url;
             const authorImage = quote?.authorImage?.url;
             return (

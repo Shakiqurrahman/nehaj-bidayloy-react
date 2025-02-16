@@ -1,54 +1,37 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import Slider from "react-slick";
-import CardthumbnailImg from "../assets/images/Cardthumbnail.png";
+import { useLocation, useParams } from "react-router-dom";
 import cardThumbnail from "../assets/images/cardImg.png";
+import CardthumbnailImg from "../assets/images/Cardthumbnail.png";
 import categoryImg from "../assets/images/categoryImg.png";
 import onubadCardBgImage from "../assets/images/onubadCardBgImage.png";
-import quotesImg from "../assets/images/quotesImg.png";
 import CategoryCard from "../components/Cards/CategoryCard";
 import CategoryCardWithButton from "../components/Cards/CategoryCardWithButton";
 import TranslateCard from "../components/Cards/TranslateCard";
 import Pagination from "../components/Pagination";
+import { useFetchStoriesQuery } from "../Redux/api/storyApiSlice";
 
 const GenrePage = () => {
   const location = useLocation();
   const path = location?.pathname;
   const pathName = path.split("/").pop();
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const { genreSlug } = useParams();
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data: response, isLoading } = useFetchStoriesQuery(
+    {
+      genre: genreSlug,
+      page: Number(currentPage) || 1,
+    },
+    {
+      skip: !genreSlug,
+    }
+  );
+
+  const { data: stories, meta } = response || {};
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-
-  const quotesArray = [
-    {
-      thumbnail: quotesImg,
-      text: `নেহাজ শব্দের উৎস হইলো আরবি "নাহাজ", যার থাকি মানহাজ শব্দ আইছে। অর্থ পদ্ধতি বা মেথড। অবশ্য লালনের বরাতেই শব্দটা আমরা পাই সর্বপ্রথম। কোনো সত্যে পৌছাতে মানুষের লিপ্ততা, সাধনা,অভিনিবেশের যে "বিশেষ" ধরণ লালন এইটারে নেহাজ বলতেন।`,
-      writer: "এরিস্টট",
-    },
-    {
-      thumbnail: quotesImg,
-      text: `নেহাজ শব্দের উৎস হইলো আরবি "নাহাজ", যার থাকি মানহাজ শব্দ আইছে। অর্থ পদ্ধতি বা মেথড। অবশ্য লালনের বরাতেই শব্দটা আমরা পাই সর্বপ্রথম। কোনো সত্যে পৌছাতে মানুষের লিপ্ততা, সাধনা,অভিনিবেশের যে "বিশেষ" ধরণ লালন এইটারে নেহাজ বলতেন।`,
-      writer: "এরিস্টট",
-    },
-    {
-      thumbnail: quotesImg,
-      text: `নেহাজ শব্দের উৎস হইলো আরবি "নাহাজ", যার থাকি মানহাজ শব্দ আইছে। অর্থ পদ্ধতি বা মেথড। অবশ্য লালনের বরাতেই শব্দটা আমরা পাই সর্বপ্রথম। কোনো সত্যে পৌছাতে মানুষের লিপ্ততা, সাধনা,অভিনিবেশের যে "বিশেষ" ধরণ লালন এইটারে নেহাজ বলতেন।`,
-      writer: "এরিস্টট",
-    },
-    {
-      thumbnail: quotesImg,
-      text: `নেহাজ শব্দের উৎস হইলো আরবি "নাহাজ", যার থাকি মানহাজ শব্দ আইছে। অর্থ পদ্ধতি বা মেথড। অবশ্য লালনের বরাতেই শব্দটা আমরা পাই সর্বপ্রথম। কোনো সত্যে পৌছাতে মানুষের লিপ্ততা, সাধনা,অভিনিবেশের যে "বিশেষ" ধরণ লালন এইটারে নেহাজ বলতেন।`,
-      writer: "এরিস্টট",
-    },
-    {
-      thumbnail: quotesImg,
-      text: `নেহাজ শব্দের উৎস হইলো আরবি "নাহাজ", যার থাকি মানহাজ শব্দ আইছে। অর্থ পদ্ধতি বা মেথড। অবশ্য লালনের বরাতেই শব্দটা আমরা পাই সর্বপ্রথম। কোনো সত্যে পৌছাতে মানুষের লিপ্ততা, সাধনা,অভিনিবেশের যে "বিশেষ" ধরণ লালন এইটারে নেহাজ বলতেন।`,
-      writer: "এরিস্টট",
-    },
-  ];
 
   const mostReadPosts = [
     {
@@ -101,69 +84,6 @@ const GenrePage = () => {
     },
   ];
 
-  const allPosts = [
-    {
-      thumbnail: CardthumbnailImg,
-      title: "মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল",
-      desc: `যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। `,
-      link: "",
-      categoryName: "চিন্তা",
-      genreType: "অনুবাদ",
-      date: new Date(),
-      writer: "আবুল খায়ের",
-    },
-    {
-      thumbnail: CardthumbnailImg,
-      title: "মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল",
-      desc: `যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। `,
-      link: "",
-      categoryName: "চিন্তা",
-      genreType: "অনুবাদ",
-      date: new Date(),
-      writer: "আবুল খায়ের",
-    },
-    {
-      thumbnail: CardthumbnailImg,
-      title: "মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল",
-      desc: `যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। `,
-      link: "",
-      categoryName: "চিন্তা",
-      genreType: "অনুবাদ",
-      date: new Date(),
-      writer: "আবুল খায়ের",
-    },
-    {
-      thumbnail: CardthumbnailImg,
-      title: "মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল",
-      desc: `যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। `,
-      link: "",
-      categoryName: "চিন্তা",
-      genreType: "প্রবন্ধ",
-      date: new Date(),
-      writer: "আবুল খায়ের",
-    },
-    {
-      thumbnail: CardthumbnailImg,
-      title: "মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল",
-      desc: `যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। `,
-      link: "",
-      categoryName: "চিন্তা",
-      genreType: "নোটস",
-      date: new Date(),
-      writer: "আবুল খায়ের",
-    },
-    {
-      thumbnail: CardthumbnailImg,
-      title: "মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল",
-      desc: `যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। `,
-      link: "",
-      categoryName: "চিন্তা",
-      genreType: "অনুবাদ",
-      date: new Date(),
-      writer: "আবুল খায়ের",
-    },
-  ];
-
   const translateCardData = {
     bgImage: onubadCardBgImage,
     title: "অনুবাদ",
@@ -200,37 +120,6 @@ const GenrePage = () => {
           />
         </div>
       )}
-
-      {/* category quotes section */}
-      <div className="max-width my-[60px] sm:my-[100px]">
-        <h2 className="text-lg lg:text-3xl font-niladri text-center text-primary-blue mb-2">
-          চিন্তা
-        </h2>
-        <h1 className="lg:w-[70%] mx-auto text-center text-2xl md:text-3xl lg:text-[40px] lg:leading-[60px] xl:text-[60px] xl:leading-[80px] font-niladri mb-10">
-          চিন্তার দৈন্যদশা থেইকা আমাদের মুক্তির সংগ্রাম বুদ্ধিবৃত্তিক, কায়িক না
-        </h1>
-        <div className="mt-10">
-          <Slider {...settings}>
-            {quotesArray?.map((item, i) => (
-              <div key={i}>
-                <div className="flex flex-wrap lg:flex-nowrap gap-5">
-                  <div className="w-full lg:w-1/2 shrink-0">
-                    <img
-                      src={item?.thumbnail}
-                      alt=""
-                      className="size-full object-cover rounded-[30px]"
-                    />
-                  </div>
-                  <div className="w-full lg:w-1/2 rounded-[30px] border border-primary-blue p-6 sm:p-10 md:p-20 font-mainak-signature sm:text-lg md:text-2xl">
-                    <p className="leading-[2] mb-10">{item?.text}</p>
-                    <h1 className="text-primary-blue">{item?.writer}</h1>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </Slider>
-        </div>
-      </div>
 
       {/* সর্বাধিক পঠিত section */}
       <div
@@ -271,26 +160,25 @@ const GenrePage = () => {
           সমস্ত লেখা
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-[30px] gap-y-10">
-          {allPosts?.map((item, i) => (
+          {stories?.map((item, i) => (
             <CategoryCard
               key={i}
-              categoryName={item?.categoryName}
-              date={item?.date}
-              desc={item?.desc}
-              genreType={item?.genreType}
-              thumbnail={item?.thumbnail}
+              categoryName={item?.category?.name}
+              date={item?.createdAt}
+              desc={item?.shortDescription}
+              genreType={item?.genre?.name}
+              thumbnail={item?.thumbnail?.url}
               title={item?.title}
-              writer={item?.writer}
-              link={item?.link}
+              writer={item?.authorId?.fullName}
+              link={`${item?._id}`}
             />
           ))}
         </div>
         <hr className="bg-[#EAECF0] mb-5 mt-10" />
         <Pagination
           currentPage={currentPage}
-          itemsPerPage={10}
+          totalPages={Number(meta?.totalPages) || 0}
           onPageChange={handlePageChange}
-          totalItems={100}
         />
       </div>
     </>

@@ -3,8 +3,14 @@ import { apiSlice } from "./apiSlice";
 export const quotesApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     fetchQuotes: builder.query({
-      query: () => "/quotes",
-      transformResponse: (response) => response?.quotes,
+      query: (arg = {}) => {
+        const { category } = arg;
+
+        let queryParams = new URLSearchParams();
+        if (category) queryParams.append("category", category);
+        return `/quotes?${queryParams.toString()}`;
+      },
+      transformResponse: (response) => response?.data,
       providesTags: ["quotes"],
     }),
     createQuote: builder.mutation({
