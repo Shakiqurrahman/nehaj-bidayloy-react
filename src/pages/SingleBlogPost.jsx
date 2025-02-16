@@ -5,11 +5,14 @@ import commentAvatar from "../assets/images/commentAvatar.png";
 import CategoryCard from "../components/Cards/CategoryCard";
 import { CommentForm } from "../components/CommentForm";
 import { convertToBanglaDate } from "../utils/convertToBanglaDate";
+import { markStoryAsRead } from "../utils/markAsReadStory";
 
 const SingleBlogPost = () => {
   const { storyId } = useParams();
   const navigate = useNavigate();
-  const { data: storyDataObj, isLoading } = useGetSingleStoryQuery(storyId);
+  const { data: storyDataObj, isLoading } = useGetSingleStoryQuery(storyId, {
+    skip: storyId,
+  });
 
   const [storyData, setStoryData] = useState({});
   const [relatedStories, setRelatedStories] = useState([]);
@@ -23,6 +26,12 @@ const SingleBlogPost = () => {
       setComments(storyDataObj?.story?.comments || []);
     }
   }, [storyDataObj]);
+
+  useEffect(() => {
+    if (storyId) {
+      markStoryAsRead(storyId);
+    }
+  }, [storyId]);
 
   // Category Bg Color
   const categorySlug = storyData?.category?.slug;

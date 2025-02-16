@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import cardThumbnail from "../assets/images/cardImg.png";
-import CardthumbnailImg from "../assets/images/Cardthumbnail.png";
 import categoryImg from "../assets/images/categoryImg.png";
 import onubadCardBgImage from "../assets/images/onubadCardBgImage.png";
 import CategoryCard from "../components/Cards/CategoryCard";
 import CategoryCardWithButton from "../components/Cards/CategoryCardWithButton";
 import TranslateCard from "../components/Cards/TranslateCard";
 import Pagination from "../components/Pagination";
-import { useFetchStoriesQuery } from "../Redux/api/storyApiSlice";
+import {
+  useFetchStoriesQuery,
+  useGetMostReadStoriesQuery,
+} from "../Redux/api/storyApiSlice";
 
 const GenrePage = () => {
   const location = useLocation();
@@ -28,61 +29,18 @@ const GenrePage = () => {
     }
   );
 
+  const { data: mostReadPosts, isLoading: isMostReadLoading } =
+    useGetMostReadStoriesQuery(
+      {
+        genre: genreSlug,
+      },
+      { skip: !genreSlug }
+    );
+
   const { data: stories, meta } = response || {};
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-
-  const mostReadPosts = [
-    {
-      thumbnail: cardThumbnail,
-      title: "মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল",
-      desc: `যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। `,
-      link: "",
-      categoryName: "চিন্তা",
-      genreType: "প্রবন্ধ",
-    },
-    {
-      thumbnail: cardThumbnail,
-      title: "মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল",
-      desc: `যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। `,
-      link: "",
-      categoryName: "চিন্তা",
-      genreType: "প্রবন্ধ",
-    },
-    {
-      thumbnail: cardThumbnail,
-      title: "মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল",
-      desc: `যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। `,
-      link: "",
-      categoryName: "চিন্তা",
-      genreType: "প্রবন্ধ",
-    },
-    {
-      thumbnail: cardThumbnail,
-      title: "মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল",
-      desc: `যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। `,
-      link: "",
-      categoryName: "চিন্তা",
-      genreType: "প্রবন্ধ",
-    },
-    {
-      thumbnail: cardThumbnail,
-      title: "মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল",
-      desc: `যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। `,
-      link: "",
-      categoryName: "চিন্তা",
-      genreType: "প্রবন্ধ",
-    },
-    {
-      thumbnail: cardThumbnail,
-      title: "মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল",
-      desc: `যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। `,
-      link: "",
-      categoryName: "চিন্তা",
-      genreType: "প্রবন্ধ",
-    },
-  ];
 
   const translateCardData = {
     bgImage: onubadCardBgImage,
@@ -142,12 +100,12 @@ const GenrePage = () => {
             {mostReadPosts?.map((item, i) => (
               <CategoryCardWithButton
                 key={i}
-                thumbnail={item?.thumbnail}
+                thumbnail={item?.thumbnail?.url}
                 title={item?.title}
-                desc={item?.desc}
-                link={item?.link}
-                categoryName={item?.categoryName}
-                genreType={item?.genreType}
+                desc={item?.shortDescription}
+                link={item?._id}
+                categoryName={item?.category?.name}
+                genreType={item?.genre?.প্রবন্ধ}
               />
             ))}
           </div>

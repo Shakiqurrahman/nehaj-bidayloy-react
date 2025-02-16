@@ -17,6 +17,18 @@ export const storyApiSlice = apiSlice.injectEndpoints({
       providesTags: ["story"],
     }),
 
+    getMostReadStories: builder.query({
+      query: (arg = {}) => {
+        const { category = "", genre = "" } = arg;
+        let queryParams = new URLSearchParams();
+        if (category) queryParams.append("category", category);
+        if (genre) queryParams.append("genre", genre);
+
+        return `/stories/mostRead?${queryParams.toString()}`;
+      },
+      transformResponse: (response) => response?.data,
+    }),
+
     getSingleStory: builder.query({
       query: (storyId) => `/story/${storyId}`,
       transformResponse: (response) => response?.data,
@@ -81,4 +93,5 @@ export const {
   useUpdateStoryMutation,
   useDeleteStoryMutation,
   useCreateCommentMutation,
+  useGetMostReadStoriesQuery,
 } = storyApiSlice;
