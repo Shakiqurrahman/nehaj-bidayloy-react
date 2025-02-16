@@ -83,7 +83,7 @@ const Pagination = ({
                 : "text-[#667085]"
             }`}
             onClick={() => typeof page === "number" && handlePageClick(page)}
-            disabled={page === "..."}
+            disabled={page === "..." || typeof page !== "number"}
           >
             {page}
           </button>
