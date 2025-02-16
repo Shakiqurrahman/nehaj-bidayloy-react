@@ -33,6 +33,13 @@ const categoryApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["category"],
     }),
+
+    // category slider get api
+    getCategorySlider: builder.query({
+      query: () => "/category/slider",
+      transformResponse: (response) => response?.categories,
+      providesTags: ["category"],
+    }),
   }),
 });
 
@@ -41,4 +48,5 @@ export const {
   useCreateCategoryMutation,
   useUpdateCategoryMutation,
   useDeleteCategoryMutation,
+  useGetCategorySliderQuery,
 } = categoryApiSlice;

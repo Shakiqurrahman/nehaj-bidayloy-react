@@ -3,11 +3,9 @@ import { useParams } from "react-router-dom";
 import Slider from "react-slick";
 import { useFetchQuotesQuery } from "../Redux/api/quotesApiSlice";
 import { useFetchStoriesQuery } from "../Redux/api/storyApiSlice";
-import CardthumbnailImg from "../assets/images/Cardthumbnail.png";
 import cardThumbnail from "../assets/images/cardImg.png";
 import categoryImg from "../assets/images/categoryImg.png";
 import onubadCardBgImage from "../assets/images/onubadCardBgImage.png";
-import quotesImg from "../assets/images/quotesImg.png";
 import CategoryCard from "../components/Cards/CategoryCard";
 import CategoryCardWithButton from "../components/Cards/CategoryCardWithButton";
 import TranslateCard from "../components/Cards/TranslateCard";
@@ -34,6 +32,8 @@ const CategoryPage = () => {
     );
   const { data: stories, meta } = response || {};
   const { quotes, categoryInfo } = quotesResponse || {};
+
+  console.log(quotes);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -99,7 +99,7 @@ const CategoryPage = () => {
 
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: quotes?.length > 1 ? true : false,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,

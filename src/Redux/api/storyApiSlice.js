@@ -10,7 +10,7 @@ export const storyApiSlice = apiSlice.injectEndpoints({
         if (category) queryParams.append("category", category);
         if (genre) queryParams.append("genre", genre);
         if (page) queryParams.append("page", page);
-        if (page || limit) queryParams.append("limit", 6);
+        if (page || limit) queryParams.append("limit", 2);
 
         return `/stories?${queryParams.toString()}`;
       },

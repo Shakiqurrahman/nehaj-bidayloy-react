@@ -2,9 +2,6 @@ import React from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import { useGetRandomQuotesQuery } from "../Redux/api/quotesApiSlice";
-import articlesBgImage from "../assets/images/articlesBgImage.png";
-import articlesThumbnail from "../assets/images/articlesThumbnail.png";
 import cardThumbnail from "../assets/images/cardImg.png";
 import nirbachitoImg from "../assets/images/nirbachito-lekha.png";
 import onubadCardBgImage from "../assets/images/onubadCardBgImage.png";
@@ -14,9 +11,14 @@ import HomeSinglePostCard from "../components/Cards/HomeSinglePostCard";
 import TranslateCard from "../components/Cards/TranslateCard";
 import RecentEventBanner from "../components/RecentEventBanner";
 import Hero from "../components/shared/Header/Hero";
+import { useGetCategorySliderQuery } from "../Redux/api/categoryApiSlice";
+import { useGetRandomQuotesQuery } from "../Redux/api/quotesApiSlice";
 
 const HomePage = () => {
   const { data: randomQuotes } = useGetRandomQuotesQuery();
+  const { data: categorySliderData } = useGetCategorySliderQuery();
+
+  console.log(categorySliderData);
 
   const categoryCardsData = [
     {
@@ -96,36 +98,9 @@ const HomePage = () => {
     link: "",
   };
 
-  const articlesArray = [
-    {
-      bgImage: articlesBgImage,
-      thumbnail: articlesThumbnail,
-      text: `"পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। এই অমিত সম্ভাবনার বরাতে যে অভিনিবেশ আর লিপ্ততা আমাদের পাঠ আর চিন্তা চর্চায়, সত্য অনুসন্ধানে, ওইটারেই "নেহাজ" কই আমরা।`,
-      writer: `এরিস্টটল`,
-    },
-    {
-      bgImage: articlesBgImage,
-      thumbnail: articlesThumbnail,
-      text: `"পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। এই অমিত সম্ভাবনার বরাতে যে অভিনিবেশ আর লিপ্ততা আমাদের পাঠ আর চিন্তা চর্চায়, সত্য অনুসন্ধানে, ওইটারেই "নেহাজ" কই আমরা।`,
-      writer: `এরিস্টটল`,
-    },
-    {
-      bgImage: articlesBgImage,
-      thumbnail: articlesThumbnail,
-      text: `"পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। এই অমিত সম্ভাবনার বরাতে যে অভিনিবেশ আর লিপ্ততা আমাদের পাঠ আর চিন্তা চর্চায়, সত্য অনুসন্ধানে, ওইটারেই "নেহাজ" কই আমরা।`,
-      writer: `এরিস্টটল`,
-    },
-    {
-      bgImage: articlesBgImage,
-      thumbnail: articlesThumbnail,
-      text: `"পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। এই অমিত সম্ভাবনার বরাতে যে অভিনিবেশ আর লিপ্ততা আমাদের পাঠ আর চিন্তা চর্চায়, সত্য অনুসন্ধানে, ওইটারেই "নেহাজ" কই আমরা।`,
-      writer: `এরিস্টটল`,
-    },
-  ];
-
   const settings = {
-    dots: true,
-    infinite: true,
+    dots: categorySliderData?.length > 6 ? false : true,
+    infinite: categorySliderData?.length > 1 ? true : false,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -147,22 +122,23 @@ const HomePage = () => {
         </div>
       </div>
       {/* Single Category Post section */}
-      <div className="max-width mb-[60px] sm:mb-[240px]">
-        <Slider {...settings}>
-          {[1, 2, 3, 4]?.map((item, i) => (
-            <div key={i}>
-              <h2 className="text-lg lg:text-3xl font-niladri text-center text-primary-blue mb-2">
-                চিন্তা
-              </h2>
-              <h1 className="lg:w-[70%] mx-auto text-center text-2xl md:text-3xl lg:text-[40px] lg:leading-[60px] xl:text-[60px] xl:leading-[80px] font-niladri mb-10">
-                চিন্তার দৈন্যদশা থেইকা আমাদের মুক্তির সংগ্রাম বুদ্ধিবৃত্তিক,
-                কায়িক না
-              </h1>
-              <HomeSinglePostCard />
-            </div>
-          ))}
-        </Slider>
-      </div>
+      {categorySliderData && categorySliderData?.length > 0 && (
+        <div className="max-width mb-[60px] sm:mb-[240px]">
+          <Slider {...settings}>
+            {categorySliderData?.map((item, i) => (
+              <div key={i}>
+                <h2 className="text-lg lg:text-3xl font-niladri text-center text-primary-blue mb-2">
+                  {item?.category?.id?.category}
+                </h2>
+                <h1 className="lg:w-[70%] mx-auto text-center text-2xl md:text-3xl lg:text-[40px] lg:leading-[60px] xl:text-[60px] xl:leading-[80px] font-niladri mb-10">
+                  {item?.category?.id?.title}
+                </h1>
+                <HomeSinglePostCard storyData={item} />
+              </div>
+            ))}
+          </Slider>
+        </div>
+      )}
       {/* সাম্প্রতিক পাঠচক্র section */}
       <RecentEventBanner
         title="সাম্প্রতিক পাঠচক্র"
