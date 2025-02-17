@@ -11,13 +11,12 @@ const SingleBlogPost = () => {
   const { storyId } = useParams();
   const navigate = useNavigate();
   const { data: storyDataObj, isLoading } = useGetSingleStoryQuery(storyId, {
-    skip: storyId,
+    skip: !storyId,
   });
 
   const [storyData, setStoryData] = useState({});
   const [relatedStories, setRelatedStories] = useState([]);
   const [comments, setComments] = useState([]);
-  console.log(storyData, relatedStories, comments);
 
   useEffect(() => {
     if (storyDataObj) {
