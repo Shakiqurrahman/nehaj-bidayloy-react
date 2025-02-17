@@ -27,6 +27,7 @@ export const storyApiSlice = apiSlice.injectEndpoints({
         return `/stories/mostRead?${queryParams.toString()}`;
       },
       transformResponse: (response) => response?.data,
+      providesTags: ["story"],
     }),
 
     getSingleStory: builder.query({
