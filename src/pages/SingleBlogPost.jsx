@@ -36,7 +36,7 @@ const SingleBlogPost = () => {
   // Category Bg Color
   const categorySlug = storyData?.category?.slug;
   const categoryBgColor =
-    categorySlug === "tought"
+    categorySlug === "thought"
       ? "bg-primary-blue"
       : categorySlug === "history"
       ? "bg-history"
@@ -167,11 +167,13 @@ const SingleBlogPost = () => {
                 <CategoryCard
                   key={i}
                   categoryName={story?.category?.name}
+                  categorySlug={story?.category?.slug}
                   date={
                     story?.createdAt ? new Date(story?.createdAt) : new Date()
                   }
                   desc={story?.shortDescription}
                   genreType={story?.genre?.name}
+                  genreSlug={story?.genre?.slug}
                   thumbnail={story?.thumbnail?.url}
                   title={story?.title}
                   writer={story?.author?.fullName}

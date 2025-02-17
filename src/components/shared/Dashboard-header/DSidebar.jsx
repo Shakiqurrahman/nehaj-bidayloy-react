@@ -2,8 +2,9 @@ import React from "react";
 import { BiSolidCrown } from "react-icons/bi";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { FaBookOpen } from "react-icons/fa";
+import { GrAnnounce } from "react-icons/gr";
 import { MdCategory, MdDashboard } from "react-icons/md";
-import { PiQuotesFill } from "react-icons/pi";
+import { PiQuotesFill, PiStudentFill } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { setActiveHamburgerD } from "../../../Redux/features/utilsSlice";
@@ -120,6 +121,40 @@ const DSideBar = () => {
           >
             <PiQuotesFill size={25} />
             Quotes
+          </li>
+        </NavLink>
+        <NavLink
+          to="/admin-dashboard/study-circle"
+          end
+          className={({ isActive }) =>
+            isActive
+              ? "text-primary-blue duration-300"
+              : "text-[#7e7e7e] hover:text-primary-blue duration-300"
+          }
+        >
+          <li
+            className={` flex items-center gap-4 text-xl  px-8 py-5 `}
+            onClick={() => dispatch(setActiveHamburgerD(false))}
+          >
+            <PiStudentFill size={25} />
+            Study Circle
+          </li>
+        </NavLink>
+        <NavLink
+          to="/admin-dashboard/notice"
+          end
+          className={({ isActive }) =>
+            isActive
+              ? "text-primary-blue duration-300"
+              : "text-[#7e7e7e] hover:text-primary-blue duration-300"
+          }
+        >
+          <li
+            className={` flex items-center gap-4 text-xl  px-8 py-5 `}
+            onClick={() => dispatch(setActiveHamburgerD(false))}
+          >
+            <GrAnnounce size={25} />
+            Notice
           </li>
         </NavLink>
       </ul>
