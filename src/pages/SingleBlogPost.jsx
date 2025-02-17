@@ -36,7 +36,7 @@ const SingleBlogPost = () => {
   // Category Bg Color
   const categorySlug = storyData?.category?.slug;
   const categoryBgColor =
-    categorySlug === "tought"
+    categorySlug === "thought"
       ? "bg-primary-blue"
       : categorySlug === "history"
       ? "bg-history"

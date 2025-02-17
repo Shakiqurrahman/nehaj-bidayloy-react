@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import categoryImg from "../assets/images/categoryImg.png";
+import { useParams } from "react-router-dom";
 import onubadCardBgImage from "../assets/images/onubadCardBgImage.png";
 import CategoryCard from "../components/Cards/CategoryCard";
 import CategoryCardWithButton from "../components/Cards/CategoryCardWithButton";
@@ -11,11 +10,12 @@ import {
   useGetMostReadStoriesQuery,
 } from "../Redux/api/storyApiSlice";
 
-const GenrePage = () => {
-  const location = useLocation();
-  const path = location?.pathname;
-  const pathName = path.split("/").pop();
+// genre bg image imports
+import articleBgImage from "../assets/images/genre-bg-images/article.png";
+import notesBgImage from "../assets/images/genre-bg-images/notes.png";
+import translateBgImage from "../assets/images/genre-bg-images/translate.png";
 
+const GenrePage = () => {
   const { genreSlug } = useParams();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -49,27 +49,32 @@ const GenrePage = () => {
     link: "",
   };
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    className: "quotes-slider",
-    autoplay: true,
-  };
+  const genreBgColor =
+    genreSlug === "article"
+      ? "bg-probondho"
+      : genreSlug === "notes"
+      ? "bg-notes"
+      : "bg-onubadh";
+
+  const genreBgImage =
+    genreSlug === "article"
+      ? articleBgImage
+      : genreSlug === "notes"
+      ? notesBgImage
+      : genreSlug === "translate"
+      ? translateBgImage
+      : articleBgImage;
 
   return (
     <>
       <div
         className="h-[500px] sm:h-[600px] lg:h-[1000px] object-center object-cover shadow-sm rounded-[30px]"
-        style={{ backgroundImage: `url(${categoryImg})` }}
+        style={{ backgroundImage: `url(${genreBgImage})` }}
       ></div>
 
       {/* অনুবাদ card section */}
       {translateCardData && (
-        <div className="mt-[60px] sm:mt-[100px]">
+        <div className="my-[60px] sm:my-[100px]">
           <TranslateCard
             bgImage={translateCardData?.bgImage}
             title={translateCardData?.title}
@@ -80,65 +85,63 @@ const GenrePage = () => {
       )}
 
       {/* সর্বাধিক পঠিত section */}
-      <div
-        className={`py-10 sm:py-20 px-4 rounded-[30px] text-white ${
-          pathName === "article"
-            ? "bg-probondho"
-            : pathName === "notes"
-            ? "bg-notes"
-            : "bg-onubadh"
-        }`}
-      >
-        <div className="max-width">
-          <h2 className="text-center text-lg font-niladri">সর্বাধিক পঠিত</h2>
-          <p className="text-center w-full md:w-3/4 mx-auto sm:text-lg mt-5 mb-10">
-            নেহাজে প্রকাশিত চিন্তা বিষয়ক প্রবন্ধ, অনুবাদসমূহ থেইকা সবচে’ বেশীবার
-            পঠিত লেখাগুলা আপনি পড়তে পারে এইখান থেকে। এই আ‍র্কাইভ প্রতি মাসের
-            পরিসংখ্যানের উপর নির্ভর করে রিশাফল হইবে।
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[30px] gap-y-[60px]">
-            {mostReadPosts?.map((item, i) => (
-              <CategoryCardWithButton
+      {mostReadPosts && mostReadPosts?.length > 0 && (
+        <div
+          className={`py-10 sm:py-20 px-4 rounded-[30px] text-white ${genreBgColor}`}
+        >
+          <div className="max-width">
+            <h2 className="text-center text-lg font-niladri">সর্বাধিক পঠিত</h2>
+            <p className="text-center w-full md:w-3/4 mx-auto sm:text-lg mt-5 mb-10">
+              নেহাজে প্রকাশিত চিন্তা বিষয়ক প্রবন্ধ, অনুবাদসমূহ থেইকা সবচে’
+              বেশীবার পঠিত লেখাগুলা আপনি পড়তে পারে এইখান থেকে। এই আ‍র্কাইভ
+              প্রতি মাসের পরিসংখ্যানের উপর নির্ভর করে রিশাফল হইবে।
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[30px] gap-y-[60px]">
+              {mostReadPosts?.map((item, i) => (
+                <CategoryCardWithButton
+                  key={i}
+                  thumbnail={item?.thumbnail?.url}
+                  title={item?.title}
+                  desc={item?.shortDescription}
+                  link={item?._id}
+                  categoryName={item?.category?.name}
+                  genreType={item?.genre?.প্রবন্ধ}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* সমস্ত লেখা section */}
+      {stories && stories?.length > 0 && (
+        <div className="my-[60px] sm:my-[100px] max-width">
+          <h1 className="font-niladri text-primary-blue text-2xl mb-10">
+            সমস্ত লেখা
+          </h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-[30px] gap-y-10">
+            {stories?.map((item, i) => (
+              <CategoryCard
                 key={i}
+                categoryName={item?.category?.name}
+                date={item?.createdAt}
+                desc={item?.shortDescription}
+                genreType={item?.genre?.name}
                 thumbnail={item?.thumbnail?.url}
                 title={item?.title}
-                desc={item?.shortDescription}
-                link={item?._id}
-                categoryName={item?.category?.name}
-                genreType={item?.genre?.প্রবন্ধ}
+                writer={item?.authorId?.fullName}
+                link={`${item?._id}`}
               />
             ))}
           </div>
+          <hr className="bg-[#EAECF0] mb-5 mt-10" />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={Number(meta?.totalPages) || 0}
+            onPageChange={handlePageChange}
+          />
         </div>
-      </div>
-
-      {/* সমস্ত লেখা section */}
-      <div className="my-[60px] sm:my-[100px] max-width">
-        <h1 className="font-niladri text-primary-blue text-2xl mb-10">
-          সমস্ত লেখা
-        </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-[30px] gap-y-10">
-          {stories?.map((item, i) => (
-            <CategoryCard
-              key={i}
-              categoryName={item?.category?.name}
-              date={item?.createdAt}
-              desc={item?.shortDescription}
-              genreType={item?.genre?.name}
-              thumbnail={item?.thumbnail?.url}
-              title={item?.title}
-              writer={item?.authorId?.fullName}
-              link={`${item?._id}`}
-            />
-          ))}
-        </div>
-        <hr className="bg-[#EAECF0] mb-5 mt-10" />
-        <Pagination
-          currentPage={currentPage}
-          totalPages={Number(meta?.totalPages) || 0}
-          onPageChange={handlePageChange}
-        />
-      </div>
+      )}
     </>
   );
 };
