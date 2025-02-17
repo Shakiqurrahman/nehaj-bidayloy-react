@@ -10,11 +10,36 @@ const CategoryCard = ({
   thumbnail,
   desc,
   categoryName,
+  categorySlug,
+  genreSlug,
   genreType,
   link,
   item,
 }) => {
   const banglaDate = convertToBanglaDate(date);
+
+  const categoryBgColor =
+    categorySlug === "thought"
+      ? "bg-primary-blue"
+      : categorySlug === "history"
+      ? "bg-history"
+      : categorySlug === "literary"
+      ? "bg-sahitto"
+      : categorySlug === "art"
+      ? "bg-arts"
+      : categorySlug === "cinema"
+      ? "bg-cinema"
+      : categorySlug === "theology"
+      ? "bg-dhormo-tottho"
+      : "bg-primary-blue";
+
+  const genreBgColor =
+    genreSlug === "article"
+      ? "bg-probondho"
+      : genreSlug === "notes"
+      ? "bg-notes"
+      : "bg-onubadh";
+
   return (
     <div>
       <img
@@ -35,19 +60,13 @@ const CategoryCard = ({
       </Link>
       <p className="line-clamp-3 my-5">{desc}</p>
       <div className="flex items-center gap-2">
-        <span className="block px-5 py-1 text-sm rounded-[30px] bg-primary-blue text-white">
+        <span
+          className={`block px-5 py-1 text-sm rounded-[30px] text-white ${categoryBgColor}`}
+        >
           {categoryName}
         </span>
         <span
-          className={`block px-5 py-1 text-sm rounded-[30px] ${
-            genreType?.trim() === "অনুবাদ"
-              ? "bg-onubadh"
-              : genreType?.trim() === "প্রবন্ধ"
-              ? "bg-probondho"
-              : genreType?.trim() === "নোটস"
-              ? "bg-notes"
-              : "bg-primary-blue"
-          } text-white`}
+          className={`block px-5 py-1 text-sm rounded-[30px] ${genreBgColor} text-white`}
         >
           {genreType}
         </span>

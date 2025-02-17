@@ -190,9 +190,11 @@ const CategoryPage = () => {
               <CategoryCard
                 key={i}
                 categoryName={item?.category?.name}
+                categorySlug={item?.category?.slug}
                 date={item?.createdAt}
                 desc={item?.shortDescription}
                 genreType={item?.genre?.name}
+                genreSlug={item?.genre?.slug}
                 thumbnail={item?.thumbnail?.url}
                 title={item?.title}
                 writer={item?.authorId?.fullName}
