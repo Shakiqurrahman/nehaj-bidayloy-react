@@ -3,10 +3,13 @@ import React from "react";
 import AllAuthor from "../pages/Dashboard/AllAuthor";
 import AllCategories from "../pages/Dashboard/AllCategories";
 import AllGenres from "../pages/Dashboard/AllGenres";
+import AllNotice from "../pages/Dashboard/AllNotice";
 import AllQuotes from "../pages/Dashboard/AllQuotes";
+import AllStudyCircle from "../pages/Dashboard/AllStudyCircle";
 import AllWritings from "../pages/Dashboard/AllWritings";
 import CreateAuthor from "../pages/Dashboard/CreateAuthor";
 import CreateCategory from "../pages/Dashboard/CreateCategory";
+import CreateGenre from "../pages/Dashboard/CreateGenre";
 import CreateQuotes from "../pages/Dashboard/CreateQuotes";
 import CreateStory from "../pages/Dashboard/CreateStory";
 import DashboardPage from "../pages/Dashboard/DashboardPage";
@@ -15,7 +18,6 @@ import EditCategory from "../pages/Dashboard/EditCategory";
 import EditGenre from "../pages/Dashboard/EditGenre";
 import EditQuotes from "../pages/Dashboard/EditQuotes";
 import EditStory from "../pages/Dashboard/EditStory";
-import CreateGenre from "../pages/Dashboard/CreateGenre";
 
 export const AdminPaths = [
   {
@@ -81,5 +83,13 @@ export const AdminPaths = [
   {
     path: "/admin-dashboard/quotes/edit",
     element: <EditQuotes />,
+  },
+  {
+    path: "/admin-dashboard/study-circle",
+    element: <AllStudyCircle />,
+  },
+  {
+    path: "/admin-dashboard/notice",
+    element: <AllNotice />,
   },
 ];
