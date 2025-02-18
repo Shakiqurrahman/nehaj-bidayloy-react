@@ -10,14 +10,17 @@ import AllWritings from "../pages/Dashboard/AllWritings";
 import CreateAuthor from "../pages/Dashboard/CreateAuthor";
 import CreateCategory from "../pages/Dashboard/CreateCategory";
 import CreateGenre from "../pages/Dashboard/CreateGenre";
+import CreateNotice from "../pages/Dashboard/CreateNotice";
 import CreateQuotes from "../pages/Dashboard/CreateQuotes";
 import CreateStory from "../pages/Dashboard/CreateStory";
+import CreateStudyCircle from "../pages/Dashboard/CreateStudyCircle";
 import DashboardPage from "../pages/Dashboard/DashboardPage";
 import EditAuthor from "../pages/Dashboard/EditAuthor";
 import EditCategory from "../pages/Dashboard/EditCategory";
 import EditGenre from "../pages/Dashboard/EditGenre";
 import EditQuotes from "../pages/Dashboard/EditQuotes";
 import EditStory from "../pages/Dashboard/EditStory";
+import EditStudyCircle from "../pages/Dashboard/EditStudyCircle";
 
 export const AdminPaths = [
   {
@@ -89,7 +92,23 @@ export const AdminPaths = [
     element: <AllStudyCircle />,
   },
   {
+    path: "/admin-dashboard/study-circle/create",
+    element: <CreateStudyCircle />,
+  },
+  {
+    path: "/admin-dashboard/study-circle/edit",
+    element: <EditStudyCircle />,
+  },
+  {
     path: "/admin-dashboard/notice",
     element: <AllNotice />,
+  },
+  {
+    path: "/admin-dashboard/notice/create",
+    element: <CreateNotice />,
+  },
+  {
+    path: "/admin-dashboard/notice/edit",
+    element: <CreateNotice />,
   },
 ];
