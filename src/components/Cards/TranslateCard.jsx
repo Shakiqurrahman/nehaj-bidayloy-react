@@ -17,7 +17,7 @@ const TranslateCard = ({ bgImage, title, desc, link }) => {
             <p className="line-clamp-2">{desc}</p>
           </div>
           <Link
-            to={`/${link}`}
+            to={`/genre/${link}`}
             className="shrink-0 flex items-center justify-center bg-white size-10 rounded-full text-primary-dark hover:bg-alert-orange hover:text-white duration-300"
           >
             <BsArrowUpRight className="text-xl" />
