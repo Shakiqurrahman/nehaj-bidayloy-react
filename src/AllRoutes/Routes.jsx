@@ -15,6 +15,7 @@ import SingleBlogPost from "../pages/SingleBlogPost";
 import { AdminPaths } from "./AdminPaths";
 import AdminRoute from "./private-route/AdminRoute";
 import UnAuthenticatedRoute from "./private-route/UnAuthenticatedRoute";
+import SingleStudyCirclePost from "../pages/SingleStudyCirclePost";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
       {
         path: "/story/:storyId",
         element: <SingleBlogPost />,
+      },
+      {
+        path: "/study-circle/:studyCircleId",
+        element: <SingleStudyCirclePost />,
       },
     ],
   },
