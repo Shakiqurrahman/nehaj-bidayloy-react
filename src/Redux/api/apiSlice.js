@@ -55,6 +55,14 @@ export const apiSlice = createApi({
   keepUnusedDataFor: 60,
   // refetchOnFocus: true,
   refetchOnMountOrArgChanges: true,
-  tagTypes: ["category", "genre", "authors", "quotes", "story", "dashboard"],
+  tagTypes: [
+    "category",
+    "genre",
+    "authors",
+    "quotes",
+    "story",
+    "dashboard",
+    "notice",
+  ],
   endpoints: () => ({}),
 });

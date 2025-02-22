@@ -18,6 +18,7 @@ import DashboardPage from "../pages/Dashboard/DashboardPage";
 import EditAuthor from "../pages/Dashboard/EditAuthor";
 import EditCategory from "../pages/Dashboard/EditCategory";
 import EditGenre from "../pages/Dashboard/EditGenre";
+import EditNotice from "../pages/Dashboard/EditNotice";
 import EditQuotes from "../pages/Dashboard/EditQuotes";
 import EditStory from "../pages/Dashboard/EditStory";
 import EditStudyCircle from "../pages/Dashboard/EditStudyCircle";
@@ -109,6 +110,6 @@ export const AdminPaths = [
   },
   {
     path: "/admin-dashboard/notice/edit",
-    element: <CreateNotice />,
+    element: <EditNotice />,
   },
 ];

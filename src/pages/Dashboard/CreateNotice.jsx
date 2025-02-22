@@ -3,12 +3,14 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { CgSpinner } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
+import { useCreateNoticeMutation } from "../../Redux/api/noticeApiSlice";
 import { API_URL } from "../../utils/config";
 
 const CreateNotice = () => {
   const navigate = useNavigate();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [CreateNotice, { isLoading }] = useCreateNoticeMutation();
+
   const [isUploading, setIsUploading] = useState(false);
   const [form, setForm] = useState({
     thumbnail: null,
@@ -59,10 +61,9 @@ const CreateNotice = () => {
         const noticeData = {
           ...form,
         };
-        console.log(noticeData);
-        //   const res = await CreateAuthor(authorData).unwrap();
-        //   toast.success(res?.message);
-        //   navigate("/admin-dashboard/authors");
+        const res = await CreateNotice(noticeData).unwrap();
+        toast.success(res?.message);
+        navigate("/admin-dashboard/notice");
       } catch (error) {
         console.log("Error", error);
         toast.error("Failed to create an author!");

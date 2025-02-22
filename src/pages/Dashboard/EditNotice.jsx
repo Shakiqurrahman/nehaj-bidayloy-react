@@ -2,16 +2,20 @@ import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { CgSpinner } from "react-icons/cg";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useUpdateNoticeMutation } from "../../Redux/api/noticeApiSlice";
 import { API_URL } from "../../utils/config";
 
 const EditNotice = () => {
   const navigate = useNavigate();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const { state } = useLocation();
+
+  const [UpdateNotice, { isLoading }] = useUpdateNoticeMutation();
+
   const [isUploading, setIsUploading] = useState(false);
   const [form, setForm] = useState({
-    thumbnail: null,
+    thumbnail: state?.thumbnail || null,
   });
   const [selectedThumbnail, setSelectedThumbnail] = useState(null);
 
@@ -54,21 +58,28 @@ const EditNotice = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { thumbnail } = form;
-    if (thumbnail) {
-      try {
-        const noticeData = {
-          ...form,
-        };
-        console.log(noticeData);
-        //   const res = await CreateAuthor(authorData).unwrap();
-        //   toast.success(res?.message);
-        //   navigate("/admin-dashboard/authors");
-      } catch (error) {
-        console.log("Error", error);
-        toast.error("Failed to create an author!");
+    if (thumbnail?.url !== state?.thumbnail?.url) {
+      if (thumbnail && state?._id) {
+        try {
+          const noticeData = {
+            ...form,
+          };
+          const res = await UpdateNotice({
+            noticeId: state?._id,
+            noticeData,
+          }).unwrap();
+          toast.success(res?.message);
+          navigate("/admin-dashboard/notice");
+        } catch (error) {
+          console.log("Error", error);
+          toast.error("Failed to update notice!");
+        }
+      } else {
+        toast.error("Please select notice thumbnail!");
       }
     } else {
-      toast.error("Please select notice thumbnail!");
+      navigate("/admin-dashboard/notice");
+      toast.error("Nothing to update");
     }
   };
 
@@ -96,14 +107,20 @@ const EditNotice = () => {
             <div className="py-1.5 px-3 bg-primary-blue text-white shrink-0">
               Choose Thumbnail
             </div>
-            <p className="line-clamp-1 font-ador">{selectedThumbnail?.name}</p>
+            <p className="line-clamp-1 font-ador">
+              {selectedThumbnail?.name || form?.thumbnail?.name}
+            </p>
           </label>
         </div>
-        {(selectedThumbnail || isUploading) && (
+        {(selectedThumbnail || form?.thumbnail) && (
           <div className="relative mt-5 text-center">
             <img
-              src={URL.createObjectURL(selectedThumbnail)}
-              alt={selectedThumbnail?.name}
+              src={
+                selectedThumbnail
+                  ? URL.createObjectURL(selectedThumbnail)
+                  : form?.thumbnail?.url
+              }
+              alt={selectedThumbnail?.name || form?.thumbnail?.name}
               className={`mx-auto block w-full rounded-lg shadow-box object-cover mb-5 ${
                 isUploading ? "blur" : ""
               }`}
@@ -125,7 +142,7 @@ const EditNotice = () => {
           {isLoading ? (
             <CgSpinner className="animate-spin text-xl" />
           ) : (
-            "Create"
+            "Update"
           )}
         </button>
       </form>

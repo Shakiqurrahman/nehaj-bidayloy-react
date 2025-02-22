@@ -3,11 +3,32 @@ import { FiEdit, FiPlusCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Loading from "../../utils/Loading";
 
+import toast from "react-hot-toast";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import {
+  useDeleteNoticeMutation,
+  useFetchNoticeQuery,
+} from "../../Redux/api/noticeApiSlice";
 import noticeBgImage from "../../assets/images/noticeImage.png";
 
 const AllNotice = () => {
-  const isLoading = false;
+  const { data: notices, isLoading } = useFetchNoticeQuery();
+
+  const [DeleteNotice] = useDeleteNoticeMutation();
+
+  const handleDelete = async (id) => {
+    if (id) {
+      try {
+        const res = await DeleteNotice(id).unwrap();
+        if (res?.success) {
+          toast.success(res?.message);
+        }
+      } catch (error) {
+        console.log("error", error);
+        toast.error("Faild to delete a notice!");
+      }
+    }
+  };
 
   return isLoading ? (
     <Loading />
@@ -25,28 +46,31 @@ const AllNotice = () => {
           </Link>
         </div>
         <span className="block w-full h-px bg-black/20 my-5"></span>
-        {[1, 2, 3]?.length > 0 ? (
+        {notices && notices?.length > 0 ? (
           <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
-            {[1, 2, 3, 4, 5, 6, 7, 8]?.map((note, idx) => (
-              <div key={idx} className="w-full relative group overflow-hidden">
+            {notices?.map((note, idx) => (
+              <div
+                key={idx}
+                className="w-full relative group overflow-hidden rounded-lg"
+              >
                 <div className="absolute top-4 right-4 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-300 translate-x-[50px] group-hover:translate-x-0">
                   <Link
                     to={"edit"}
-                    // state={storyData}
+                    state={note}
                     className="bg-white shadow-box rounded-sm size-8 text-black hover:text-blue-600 mb-2 flex items-center justify-center text-base hover:shadow-box-lg duration-300"
                   >
                     <FiEdit />
                   </Link>
                   <button
                     type="button"
-                    // onClick={handleDelete}
+                    onClick={() => handleDelete(note?._id)}
                     className="bg-white shadow-box rounded-sm size-8 text-black hover:text-red-600 mb-2 flex items-center justify-center text-base hover:shadow-box-lg duration-300"
                   >
                     <RiDeleteBin6Line />
                   </button>
                 </div>
                 <img
-                  src={noticeBgImage}
+                  src={note?.thumbnail?.url || noticeBgImage}
                   alt=""
                   className="w-full object-cover"
                 />
