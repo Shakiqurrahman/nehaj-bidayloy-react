@@ -1,10 +1,6 @@
 import React from "react";
 
-import patcokroCard1 from "../assets/images/patchokro-cards/patcokro-card-1.png";
-import patcokroCard2 from "../assets/images/patchokro-cards/patcokro-card-2.png";
-import patcokroCard3 from "../assets/images/patchokro-cards/patcokro-card-3.png";
-
-const RecentEventBanner = ({ title = "", subTitle = "" }) => {
+const RecentEventBanner = ({ title = "", subTitle = "", data }) => {
   return (
     <div className="bg-primary-blue rounded-[40px] pt-[70px] pb-[60px] sm:pb-[100px] mb-[80px] px-5">
       <div className="max-width text-white">
@@ -15,21 +11,15 @@ const RecentEventBanner = ({ title = "", subTitle = "" }) => {
           </p>
         )}
         <div className="grid gap-5 md:grid-cols-3">
-          <img
-            src={patcokroCard1}
-            alt="Patcokro Card Image"
-            className="w-full rounded-[50px] block"
-          />
-          <img
-            src={patcokroCard2}
-            alt="Patcokro Card Image"
-            className="w-full rounded-[50px] block"
-          />
-          <img
-            src={patcokroCard3}
-            alt="Patcokro Card Image"
-            className="w-full rounded-[50px] block"
-          />
+          {data &&
+            data?.map((item, i) => (
+              <img
+                key={i}
+                src={item?.thumbnail?.url}
+                alt="Recent Event Card Image"
+                className="w-full rounded-[50px] block"
+              />
+            ))}
         </div>
       </div>
     </div>

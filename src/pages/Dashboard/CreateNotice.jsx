@@ -66,7 +66,7 @@ const CreateNotice = () => {
         navigate("/admin-dashboard/notice");
       } catch (error) {
         console.log("Error", error);
-        toast.error("Failed to create an author!");
+        toast.error("Failed to create notice!");
       }
     } else {
       toast.error("Please select notice thumbnail!");
