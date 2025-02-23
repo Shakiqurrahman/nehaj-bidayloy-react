@@ -3,8 +3,15 @@ import { apiSlice } from "./apiSlice";
 export const noticeApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     fetchNotice: builder.query({
-      query: () => "/notices",
-      transformResponse: (response) => response?.data,
+      query: (arg = {}) => {
+        const { page, limit } = arg;
+
+        let queryParams = new URLSearchParams();
+        if (page) queryParams.append("page", page);
+        if (page || limit) queryParams.append("limit", 6);
+
+        return `/notices?${queryParams.toString()}`;
+      },
       providesTags: ["notice"],
     }),
 

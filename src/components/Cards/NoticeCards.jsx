@@ -1,12 +1,7 @@
-import React, { useState } from "react";
-import { useFetchNoticeQuery } from "../../Redux/api/noticeApiSlice";
+import React from "react";
 import Pagination from "../Pagination";
 
-const NoticeCards = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const { data: notices } = useFetchNoticeQuery();
-
+const NoticeCards = ({ currentPage, setCurrentPage, notices, meta }) => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -29,9 +24,8 @@ const NoticeCards = () => {
       <hr className="bg-[#EAECF0] mb-5 mt-10" />
       <Pagination
         currentPage={currentPage}
-        itemsPerPage={10}
         onPageChange={handlePageChange}
-        totalItems={100}
+        totalPages={Number(meta?.totalPages) || 0}
       />
     </section>
   );

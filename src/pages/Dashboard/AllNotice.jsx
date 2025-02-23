@@ -12,7 +12,8 @@ import {
 import noticeBgImage from "../../assets/images/noticeImage.png";
 
 const AllNotice = () => {
-  const { data: notices, isLoading } = useFetchNoticeQuery();
+  const { data: response, isLoading } = useFetchNoticeQuery();
+  const notices = response?.data || [];
 
   const [DeleteNotice] = useDeleteNoticeMutation();
 
