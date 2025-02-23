@@ -18,8 +18,10 @@ import {
   useGetFeaturedStoryQuery,
   useGetSelectedStoriesByCategoryQuery,
 } from "../Redux/api/storyApiSlice";
+import { useGet3StudyCircleQuery } from "../Redux/api/studyCircleApiSlice";
 
 const HomePage = () => {
+  const { data: latestStudyCircle } = useGet3StudyCircleQuery();
   const { data: randomQuotes } = useGetRandomQuotesQuery();
   const { data: categorySliderData } = useGetCategorySliderQuery();
   const { data: featuredStoryData } = useGetFeaturedStoryQuery();
@@ -87,12 +89,15 @@ const HomePage = () => {
         </div>
       )}
       {/* সাম্প্রতিক পাঠচক্র section */}
-      <RecentEventBanner
-        title="সাম্প্রতিক পাঠচক্র"
-        subTitle="নেহাজ প্রতি পাক্ষিকে একটা করে পাঠচক্রের আয়োজন করে। আগ্রহীগন
+      {latestStudyCircle && latestStudyCircle?.length > 0 && (
+        <RecentEventBanner
+          title="সাম্প্রতিক পাঠচক্র"
+          subTitle="নেহাজ প্রতি পাক্ষিকে একটা করে পাঠচক্রের আয়োজন করে। আগ্রহীগন
           পাঠচক্রের বিজ্ঞপ্তি মোতাবেক নেহাজের উক্ত পাঠচক্রে যুক্ত হইতে পারবেন।
           বিজ্ঞপ্তিতে ক্লিকের মাধ্যমে আপনি এক্টিভ সেশনের জুম লিংক-এ যেতে পারবে।"
-      />
+          data={latestStudyCircle}
+        />
+      )}
       {/* নির্বাচিত লেখা section */}
       {featuredStoryData && featuredStoryData?.length > 0 && (
         <div className="max-width">

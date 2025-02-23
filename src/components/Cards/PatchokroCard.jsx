@@ -3,14 +3,7 @@ import { MdArrowOutward } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { convertToBanglaDate } from "../../utils/convertToBanglaDate";
 
-const PatchokroCard = ({
-  date,
-  title,
-  thumbnail,
-  desc,
-  categoryName,
-  link,
-}) => {
+const PatchokroCard = ({ date, title, thumbnail, desc, session, link }) => {
   const banglaDate = convertToBanglaDate(date);
   return (
     <div>
@@ -23,7 +16,7 @@ const PatchokroCard = ({
         <p>{banglaDate}</p>
       </div>
       <Link
-        to={`${link}`}
+        to={`/study-circle/${link}`}
         className="flex items-start gap-5 font-niladri text-lg lg:text-2xl text-primary-blue line-clamp-2"
       >
         {title} <MdArrowOutward className="shrink-0" />
@@ -36,7 +29,7 @@ const PatchokroCard = ({
           পাঠচক্র
         </span>
         <span className="block px-5 py-1 text-sm rounded-[30px] bg-alert-green text-white">
-          {categoryName}
+          {session}
         </span>
       </div>
     </div>

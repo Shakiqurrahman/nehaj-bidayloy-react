@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const RecentEventBanner = ({ title = "", subTitle = "", data }) => {
   return (
@@ -12,14 +13,28 @@ const RecentEventBanner = ({ title = "", subTitle = "", data }) => {
         )}
         <div className="grid gap-5 md:grid-cols-3">
           {data &&
-            data?.map((item, i) => (
-              <img
-                key={i}
-                src={item?.thumbnail?.url}
-                alt="Recent Event Card Image"
-                className="w-full rounded-[50px] block"
-              />
-            ))}
+            data?.map((item, i) =>
+              item?.title ? (
+                <Link
+                  to={`/study-circle/${item?._id}`}
+                  key={i}
+                  className="w-full"
+                >
+                  <img
+                    src={item?.thumbnail?.url}
+                    alt="Recent Event Card Image"
+                    className="w-full rounded-[50px] block"
+                  />
+                </Link>
+              ) : (
+                <img
+                  key={i}
+                  src={item?.thumbnail?.url}
+                  alt="Recent Event Card Image"
+                  className="w-full rounded-[50px] block"
+                />
+              )
+            )}
         </div>
       </div>
     </div>

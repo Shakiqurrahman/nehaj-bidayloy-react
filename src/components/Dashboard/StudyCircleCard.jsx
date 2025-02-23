@@ -59,7 +59,7 @@ const StudyCircleCard = ({ data }) => {
         <p>{banglaDate}</p>
       </div>
       <Link
-        to={`study-circle/${data?._id}`}
+        to={`/study-circle/${data?._id}`}
         className="flex items-start gap-5 font-niladri text-lg lg:text-2xl text-primary-blue line-clamp-2"
       >
         {data?.title} <MdArrowOutward className="shrink-0" />
