@@ -3,27 +3,32 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { CgSpinner } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
+import PreviewImage from "../../assets/images/preview.jpg";
+import { useFetchAuthorsQuery } from "../../Redux/api/authorApiSlice";
+import { useCreateStudyCircleMutation } from "../../Redux/api/studyCircleApiSlice";
 import { API_URL } from "../../utils/config";
 
 const CreateStudyCircle = () => {
   const navigate = useNavigate();
 
-  // const [CreateAuthor, { isLoading }] = useCreateAuthorMutation();
+  const { data: authors } = useFetchAuthorsQuery();
+  const [CreateStudyCircle, { isLoading }] = useCreateStudyCircleMutation();
 
-  const [isLoading, setIsLoading] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [form, setForm] = useState({
-    name: "",
-    userName: "",
-    bio: "",
-    avatar: null,
+    title: "",
+    date: "",
+    session: "",
+    description: "",
+    thumbnail: null,
   });
 
-  const [selectedAvatar, setSelectedAvatar] = useState(null);
+  const [selectedThumbnail, setSelectedThumbnail] = useState(null);
+  const [selectedAuthor, setSelectedAuthor] = useState(null);
 
-  const handleAvatarChange = async (e) => {
+  const handleChangeThumbnail = async (e) => {
     const file = e.target.files[0];
-    setSelectedAvatar(file);
+    setSelectedThumbnail(file);
     if (file) {
       setIsUploading(true);
       const formData = new FormData();
@@ -36,7 +41,7 @@ const CreateStudyCircle = () => {
             name: file.name,
             url: res.data.imageUrl,
           };
-          setForm((prev) => ({ ...prev, avatar: imgObject }));
+          setForm((prev) => ({ ...prev, thumbnail: imgObject }));
         }
       } catch (error) {
         console.log("error", error);
@@ -48,36 +53,53 @@ const CreateStudyCircle = () => {
     }
   };
 
-  const handleRemoveAvatar = (e) => {
+  const handleRemoveThumbnail = (e) => {
     e.preventDefault();
-    setSelectedAvatar(null);
+    setSelectedThumbnail(null);
     setForm((prev) => ({
       ...prev,
-      avatar: null,
+      thumbnail: null,
     }));
   };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
+  const handleChangeAuthor = (e) => {
+    const id = e.target.value;
+    const selected = authors?.find((author) => author?._id === id);
+    setSelectedAuthor(selected);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { avatar, bio, name, userName } = form;
-    if (avatar && bio && name && userName) {
+    const { date, description, session, thumbnail, title } = form;
+    if (
+      date &&
+      description &&
+      session &&
+      thumbnail?.url &&
+      title &&
+      selectedAuthor
+    ) {
+      const formattedDate = form.date.split("-").reverse().join("/");
+      const author = selectedAuthor?._id;
       try {
         const studyCircleData = {
-          fullName: name,
-          bio,
-          userName,
-          avatar,
+          title,
+          author,
+          date: formattedDate,
+          session,
+          description,
+          thumbnail,
         };
-        console.log(studyCircleData);
-        //   const res = await CreateAuthor(authorData).unwrap();
-        //   toast.success(res?.message);
-        //   navigate("/admin-dashboard/authors");
+        const res = await CreateStudyCircle(studyCircleData).unwrap();
+        toast.success(res?.message);
+        navigate("/admin-dashboard/study-circle");
       } catch (error) {
         console.log("Error", error);
-        toast.error("Failed to create an author!");
+        toast.error("Failed to create study circle!");
       }
     } else {
       toast.error("Please fill up every field!");
@@ -95,26 +117,26 @@ const CreateStudyCircle = () => {
         <div className="relative mt-5">
           <input
             type="file"
-            name="poster"
-            id="poster"
+            name="thumbnail"
+            id="thumbnail"
             hidden
-            onChange={handleAvatarChange}
+            onChange={handleChangeThumbnail}
           />
           <label
-            htmlFor="poster"
+            htmlFor="thumbnail"
             className="flex w-full items-center gap-2 bg-gray-200 cursor-pointer rounded overflow-hidden"
           >
             <div className="py-1.5 px-3 bg-primary-blue text-white shrink-0">
-              Choose Poster
+              Choose Thumbnail
             </div>
-            <p className="line-clamp-1 font-ador">{selectedAvatar?.name}</p>
+            <p className="line-clamp-1 font-ador">{selectedThumbnail?.name}</p>
           </label>
         </div>
-        {(selectedAvatar || isUploading) && (
+        {(selectedThumbnail || isUploading) && (
           <div className="relative mt-5 text-center">
             <img
-              src={URL.createObjectURL(selectedAvatar)}
-              alt={selectedAvatar?.name}
+              src={URL.createObjectURL(selectedThumbnail)}
+              alt={selectedThumbnail?.name}
               className={`mx-auto block w-full rounded-lg shadow-box object-cover mb-5 ${
                 isUploading ? "blur" : ""
               }`}
@@ -122,7 +144,7 @@ const CreateStudyCircle = () => {
             <button
               type="button"
               className="px-5 py-2 rounded-lg bg-red-600 text-white font-medium"
-              onClick={handleRemoveAvatar}
+              onClick={handleRemoveThumbnail}
             >
               Remove
             </button>
@@ -131,56 +153,100 @@ const CreateStudyCircle = () => {
         <div className="relative mt-5">
           <input
             type="text"
-            name="name"
-            value={form.name}
+            name="title"
+            value={form.title}
             onChange={handleChange}
             className="block relative w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none z-[1] peer"
           />
           <label
             className={`select-none duration-300 peer-focus-visible:text-xs absolute bg-white -translate-y-1/2 text-sm mx-4 left-0 peer-focus-visible:top-0 leading-none peer-focus-visible:z-[2] peer-focus-visible:text-primary-blue peer-focus-visible:mt-[2px] inline-block ${
-              form.name
+              form.title
                 ? "text-xs top-0 z-[2] text-primary-blue mt-[2px]"
                 : "top-1/2 text-gray-500 z-0 mt-0"
             }`}
           >
-            Name
+            Title
           </label>
         </div>
         <div className="relative mt-5">
           <input
             type="text"
-            name="userName"
-            value={form.userName}
+            name="session"
+            value={form.session}
             onChange={handleChange}
             className="block relative w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none z-[1] peer"
           />
           <label
             className={`select-none duration-300 peer-focus-visible:text-xs absolute bg-white -translate-y-1/2 text-sm mx-4 left-0 peer-focus-visible:top-0 leading-none peer-focus-visible:z-[2] peer-focus-visible:text-primary-blue peer-focus-visible:mt-[2px] inline-block ${
-              form.userName
+              form.session
                 ? "text-xs top-0 z-[2] text-primary-blue mt-[2px]"
                 : "top-1/2 text-gray-500 z-0 mt-0"
             }`}
           >
-            Username
+            Session
+          </label>
+        </div>
+        <div className="relative mt-5">
+          <input
+            type="date"
+            name="date"
+            value={form.date}
+            onChange={handleChange}
+            className="block relative w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none z-[1]"
+          />
+          <label
+            className={`select-none duration-300 text-xs absolute bg-white -translate-y-1/2 mx-4 left-0 top-0 leading-none z-[2] text-primary-blue mt-[2px] inline-block`}
+          >
+            Date
           </label>
         </div>
 
         <div className="relative mt-5">
           <textarea
-            name="bio"
-            value={form.bio}
+            name="description"
+            value={form.description}
             onChange={handleChange}
             className="block relative w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none z-[1] peer resize-y min-h-[120px]"
           ></textarea>
           <label
             className={`select-none duration-300 peer-focus-visible:text-xs absolute bg-white -translate-y-1/2 text-sm mx-4 left-0 peer-focus-visible:top-0 leading-none peer-focus-visible:z-[2] peer-focus-visible:text-primary-blue peer-focus-visible:mt-[2px] inline-block ${
-              form.bio
+              form.description
                 ? "text-xs top-0 z-[2] text-primary-blue mt-[2px]"
                 : "top-5 text-gray-500 z-0 mt-0"
             }`}
           >
-            Write Bio...
+            Write Description...
           </label>
+        </div>
+        <div className="mt-5 flex items-center gap-3 flex-wrap sm:flex-nowrap">
+          <div className="w-full sm:w-1/2">
+            <label className="block mb-2">Author</label>
+            <select
+              className="block w-full py-2.5 px-4 border-gray-300 border rounded bg-transparent outline-none"
+              name="author"
+              onChange={handleChangeAuthor}
+            >
+              {!selectedAuthor && <option value="">Select author</option>}
+              {authors?.map((author, index) => (
+                <option value={author?._id} key={index}>
+                  {author?.fullName}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="w-full sm:w-1/2">
+            <label className="block mb-2">Preview</label>
+            <div className="flex items-center gap-2">
+              <img
+                src={selectedAuthor?.avatar?.url || PreviewImage}
+                alt=""
+                className="size-[40px] rounded-full shadow-box object-cover"
+              />
+              <h1 className="font-ador">
+                {selectedAuthor?.fullName || "Author Name"}
+              </h1>
+            </div>
+          </div>
         </div>
         <button
           type="submit"

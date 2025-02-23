@@ -1,63 +1,12 @@
 import React from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import CardthumbnailImg from "../../assets/images/noticeImage.png";
 import StudyCircleCard from "../../components/Dashboard/StudyCircleCard";
+import { useFetchStudyCircleQuery } from "../../Redux/api/studyCircleApiSlice";
 import Loading from "../../utils/Loading";
 
 const AllStudyCircle = () => {
-  const isLoading = false;
-
-  const allPosts = [
-    {
-      thumbnail: CardthumbnailImg,
-      title: "মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল",
-      desc: `যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। `,
-      link: "",
-      categoryName: "ষষ্ঠ সেশন",
-      date: new Date(),
-    },
-    {
-      thumbnail: CardthumbnailImg,
-      title: "মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল",
-      desc: `যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। `,
-      link: "",
-      categoryName: "ষষ্ঠ সেশন",
-      date: new Date(),
-    },
-    {
-      thumbnail: CardthumbnailImg,
-      title: "মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল",
-      desc: `যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। `,
-      link: "",
-      categoryName: "ষষ্ঠ সেশন",
-      date: new Date(),
-    },
-    {
-      thumbnail: CardthumbnailImg,
-      title: "মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল",
-      desc: `যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। `,
-      link: "",
-      categoryName: "ষষ্ঠ সেশন",
-      date: new Date(),
-    },
-    {
-      thumbnail: CardthumbnailImg,
-      title: "মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল",
-      desc: `যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। `,
-      link: "",
-      categoryName: "ষষ্ঠ সেশন",
-      date: new Date(),
-    },
-    {
-      thumbnail: CardthumbnailImg,
-      title: "মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল",
-      desc: `যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়। `,
-      link: "",
-      categoryName: "ষষ্ঠ সেশন",
-      date: new Date(),
-    },
-  ];
+  const { data: allPosts, isLoading } = useFetchStudyCircleQuery();
 
   return isLoading ? (
     <Loading />
