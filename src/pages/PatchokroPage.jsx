@@ -8,10 +8,13 @@ import {
 } from "../Redux/api/studyCircleApiSlice";
 
 const PatchokroPage = () => {
-  const { data: latest } = useGet3StudyCircleQuery();
-  const { data: allPosts } = useFetchStudyCircleQuery();
-
   const [currentPage, setCurrentPage] = useState(1);
+  const { data: latest } = useGet3StudyCircleQuery();
+  const { data: response, isLoading } = useFetchStudyCircleQuery({
+    page: Number(currentPage) || 1,
+  });
+
+  const { data: allPosts, meta } = response || {};
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -47,9 +50,8 @@ const PatchokroPage = () => {
         <hr className="bg-[#EAECF0] mb-5 mt-10" />
         <Pagination
           currentPage={currentPage}
-          itemsPerPage={10}
           onPageChange={handlePageChange}
-          totalItems={100}
+          totalPages={Number(meta?.totalPages) || 0}
         />
       </div>
     </div>

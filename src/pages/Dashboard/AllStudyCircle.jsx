@@ -6,7 +6,8 @@ import { useFetchStudyCircleQuery } from "../../Redux/api/studyCircleApiSlice";
 import Loading from "../../utils/Loading";
 
 const AllStudyCircle = () => {
-  const { data: allPosts, isLoading } = useFetchStudyCircleQuery();
+  const { data: response, isLoading } = useFetchStudyCircleQuery();
+  const allPosts = response?.data || [];
 
   return isLoading ? (
     <Loading />

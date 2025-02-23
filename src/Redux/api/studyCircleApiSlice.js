@@ -3,8 +3,15 @@ import { apiSlice } from "./apiSlice";
 export const studyCircleApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     fetchStudyCircle: builder.query({
-      query: () => "/study-circle",
-      transformResponse: (response) => response?.data,
+      query: (arg = {}) => {
+        const { page, limit } = arg;
+
+        let queryParams = new URLSearchParams();
+        if (page) queryParams.append("page", page);
+        if (page || limit) queryParams.append("limit", 6);
+
+        return `/study-circle?${queryParams.toString()}`;
+      },
       providesTags: ["study-circle"],
     }),
 
