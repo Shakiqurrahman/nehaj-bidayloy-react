@@ -21,6 +21,12 @@ export const studyCircleApiSlice = apiSlice.injectEndpoints({
       providesTags: ["study-circle"],
     }),
 
+    getSingleStudyCircle: builder.query({
+      query: (id) => `/study-circle/${id}`,
+      transformResponse: (response) => response?.data,
+      providesTags: ["study-circle"],
+    }),
+
     createStudyCircle: builder.mutation({
       query: (studyCircleData) => ({
         url: "/create/study-circle",
@@ -52,6 +58,7 @@ export const studyCircleApiSlice = apiSlice.injectEndpoints({
 export const {
   useFetchStudyCircleQuery,
   useGet3StudyCircleQuery,
+  useGetSingleStudyCircleQuery,
   useCreateStudyCircleMutation,
   useUpdateStudyCircleMutation,
   useDeleteStudyCircleMutation,
