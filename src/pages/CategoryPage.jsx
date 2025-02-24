@@ -131,8 +131,10 @@ const CategoryPage = () => {
                         className="size-full object-cover rounded-[30px]"
                       />
                     </div>
-                    <div className="w-full lg:w-1/2 rounded-[30px] border border-primary-blue p-6 sm:p-10 md:p-20 font-mainak-signature sm:text-lg md:text-2xl">
-                      <p className="leading-[2] mb-10">{item?.quotes}</p>
+                    <div className="w-full lg:w-1/2 rounded-[30px] text-center sm:text-start sm:border border-primary-blue p-6 sm:p-10 md:p-20 font-mainak-signature sm:text-lg md:text-2xl">
+                      <p className="leading-[2] mb-3 sm:mb-10">
+                        {item?.quotes}
+                      </p>
                       <h1 className="text-primary-blue">{item?.authorName}</h1>
                     </div>
                   </div>
@@ -159,7 +161,7 @@ const CategoryPage = () => {
               বেশীবার পঠিত লেখাগুলা আপনি পড়তে পারে এইখান থেকে। এই আ‍র্কাইভ
               প্রতি মাসের পরিসংখ্যানের উপর নির্ভর করে রিশাফল হইবে।
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[30px] gap-y-[60px]">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-[30px] gap-y-[60px]">
               {mostReadPosts?.map((item, i) => (
                 <CategoryCardWithButton
                   key={i}
@@ -185,7 +187,7 @@ const CategoryPage = () => {
             </h1>
             <span className="block grow shrink h-px bg-primary-blue"></span>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-[30px] gap-y-10">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-[30px] gap-y-10">
             {stories?.map((item, i) => (
               <CategoryCard
                 key={i}

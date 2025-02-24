@@ -15,7 +15,7 @@ const CategoryCardWithButton = ({
       <img
         src={thumbnail}
         alt=""
-        className="rounded-[30px] h-[250px] sm:h-[350px] w-full object-cover shadow"
+        className="rounded-xl sm:rounded-[30px] h-[150px] sm:h-[350px] w-full object-cover shadow"
       />
       {(categoryName || genreType) && (
         <div className="flex items-center gap-5 text-grey mt-5">
@@ -23,10 +23,13 @@ const CategoryCardWithButton = ({
           <p>{genreType}</p>
         </div>
       )}
-      <h1 className="font-niladri my-3 text-lg sm:text-2xl" title={title}>
+      <h1
+        className="font-niladri my-3 text-lg sm:text-2xl line-clamp-3 sm:line-clamp-2"
+        title={title}
+      >
         {title}
       </h1>
-      <p className="line-clamp-3">{desc}</p>
+      <p className="line-clamp-5 sm:line-clamp-3">{desc}</p>
       <Link
         to={`/story/${link}`}
         className={`inline-block mt-5 px-8 py-2 rounded-[30px] border  font-niladri sm:text-lg  ${

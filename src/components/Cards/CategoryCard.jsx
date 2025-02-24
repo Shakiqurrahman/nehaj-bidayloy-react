@@ -45,20 +45,21 @@ const CategoryCard = ({
       <img
         src={thumbnail}
         alt={title}
-        className="w-full rounded-[30px] block shadow"
+        className="w-full rounded-xl sm:rounded-[30px] block shadow min-h-[150px] object-cover"
       />
-      <div className="flex items-center gap-2 text-accent-golden mt-5">
+      <div className="flex flex-wrap text-xs sm:text-base items-center gap-2 text-accent-golden mt-5">
         <h1>{writer}</h1>
         <span className="block size-2 rounded-full bg-accent-golden"></span>
         <p>{banglaDate}</p>
       </div>
       <Link
         to={`/story/${link}`}
-        className="flex items-start gap-5 font-niladri text-lg lg:text-2xl text-primary-blue line-clamp-2"
+        className="flex items-center sm:items-start gap-2 justify-between sm:gap-5 font-niladri text-sm sm:text-lg lg:text-2xl text-primary-blue"
       >
-        {title} <MdArrowOutward className="shrink-0" />
+        <span className="line-clamp-2">{title}</span>
+        <MdArrowOutward className="text-lg lg:text-2xl shrink-0" />
       </Link>
-      <p className="line-clamp-3 my-5">{desc}</p>
+      <p className="line-clamp-3 my-5 text-xs sm:text-base">{desc}</p>
       <div className="flex items-center gap-2">
         <span
           className={`block px-5 py-1 text-sm rounded-[30px] text-white ${categoryBgColor}`}
