@@ -15,7 +15,9 @@ const HomeSinglePostCard = ({ storyData }) => {
         <h1 className="text-xl sm:text-3xl font-niladri text-secondary-charcoal-gray">
           {storyData?.title}
         </h1>
-        <p className="mt-[26px] mb-[40px]">{storyData?.shortDescription}</p>
+        <p className="mt-[26px] mb-[40px] line-clamp-6">
+          {storyData?.shortDescription}
+        </p>
         <Link
           to={`/story/${storyData?._id}`}
           className="w-full sm:w-[180px] h-[50px] flex items-center justify-center p-[6px] sm:p-[10px] rounded-[100px] border border-primary-blue text-primary-blue text-base sm:text-lg hover:bg-primary-blue hover:text-white duration-300 font-niladri"

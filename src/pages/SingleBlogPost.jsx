@@ -1,3 +1,4 @@
+import DOMPurify from "dompurify";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetSingleStoryQuery } from "../Redux/api/storyApiSlice";
@@ -64,6 +65,8 @@ const SingleBlogPost = () => {
     navigate("/not-found", { replace: true });
   }
 
+  const sanitizedContent = DOMPurify.sanitize(storyData?.content || "");
+
   return (
     <div className="pt-[200px]">
       <div className="max-width">
@@ -95,6 +98,10 @@ const SingleBlogPost = () => {
           src={storyData?.thumbnail?.url}
           alt="Blog Thumbnail"
           className="block w-full rounded-[30px] object-cover my-10"
+        />
+        <div
+          className="mb-10 sm:text-lg text-base"
+          dangerouslySetInnerHTML={{ __html: sanitizedContent }}
         />
       </div>
       {/* author details section */}

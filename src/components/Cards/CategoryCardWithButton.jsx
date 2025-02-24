@@ -15,7 +15,7 @@ const CategoryCardWithButton = ({
       <img
         src={thumbnail}
         alt=""
-        className="rounded-xl sm:rounded-[30px] h-[150px] sm:h-[350px] w-full object-cover shadow"
+        className="rounded-xl sm:rounded-[30px] min-h-[150px] w-full object-cover shadow"
       />
       {(categoryName || genreType) && (
         <div className="flex items-center gap-5 text-grey mt-5">
