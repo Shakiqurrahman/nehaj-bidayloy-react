@@ -123,14 +123,20 @@ const HomePage = () => {
                   <h2 className="text-primary-blue text-lg lg:text-3xl font-medium">
                     {item?.authorId?.fullName}
                   </h2>
-                  <h2 className="text-2xl lg:text-4xl font-semibold my-3">
+                  <h2 className="text-2xl lg:text-4xl font-semibold my-2 sm:my-3">
                     {item?.title}
                   </h2>
+                  <Link
+                    to={`/story/${item?._id}`}
+                    className="shrink-0 size-10 rounded-full border-2 border-black sm:hidden flex items-center justify-center text-xl mb-2"
+                  >
+                    <IoIosArrowForward />
+                  </Link>
                   <p className="line-clamp-3">{item?.shortDescription}</p>
                 </div>
                 <Link
                   to={`/story/${item?._id}`}
-                  className="shrink-0 size-10 rounded-full border-2 border-black flex items-center justify-center text-xl"
+                  className="shrink-0 size-10 rounded-full border-2 border-black hidden sm:flex items-center justify-center text-xl"
                 >
                   <IoIosArrowForward />
                 </Link>

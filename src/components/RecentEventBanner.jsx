@@ -7,11 +7,11 @@ const RecentEventBanner = ({ title = "", subTitle = "", data }) => {
       <div className="max-width text-white">
         <h2 className="text-xl font-niladri text-center mb-5">{title}</h2>
         {subTitle && (
-          <p className="sm:text-lg sm:w-[70%] mx-auto mb-[60px] text-center">
+          <p className="sm:text-lg sm:w-[70%] mx-auto mb-5 md:mb-[60px] text-center">
             {subTitle}
           </p>
         )}
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="hidden md:grid gap-5 md:grid-cols-3">
           {data &&
             data?.map((item, i) =>
               item?.title ? (
@@ -33,6 +33,32 @@ const RecentEventBanner = ({ title = "", subTitle = "", data }) => {
                   alt="Recent Event Card Image"
                   className="w-full rounded-[50px] block"
                 />
+              )
+            )}
+        </div>
+        <div className="flex md:hidden -space-x-[62px] overflow-auto">
+          {data?.length > 0 &&
+            data?.map((item, i) =>
+              item?.title ? (
+                <Link
+                  to={`/study-circle/${item?._id}`}
+                  key={i}
+                  className="grow"
+                >
+                  <img
+                    src={item?.thumbnail?.url}
+                    alt={`পাঠচক্র ${i + 1}`}
+                    className="rounded-lg shadow-lg"
+                  />
+                </Link>
+              ) : (
+                <div key={i} className="grow">
+                  <img
+                    src={item?.thumbnail?.url}
+                    alt={`পাঠচক্র ${i + 1}`}
+                    className="rounded-lg shadow-lg"
+                  />
+                </div>
               )
             )}
         </div>

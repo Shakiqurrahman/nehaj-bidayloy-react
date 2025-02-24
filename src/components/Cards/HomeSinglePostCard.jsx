@@ -18,7 +18,7 @@ const HomeSinglePostCard = ({ storyData }) => {
         <p className="mt-[26px] mb-[40px]">{storyData?.shortDescription}</p>
         <Link
           to={`/story/${storyData?._id}`}
-          className="w-[100px] sm:w-[180px] h-[50px] flex items-center justify-center p-[6px] sm:p-[10px] rounded-[100px] border border-primary-blue text-primary-blue text-sm sm:text-lg hover:bg-primary-blue hover:text-white duration-300 font-niladri"
+          className="w-full sm:w-[180px] h-[50px] flex items-center justify-center p-[6px] sm:p-[10px] rounded-[100px] border border-primary-blue text-primary-blue text-base sm:text-lg hover:bg-primary-blue hover:text-white duration-300 font-niladri"
         >
           পড়ুন
         </Link>
