@@ -8,21 +8,21 @@ const Footer = () => {
   return (
     <footer className="bg-primary-blue rounded-[30px] mt-[60px] sm:mt-32 text-white pt-[78px] pb-[33px] px-5">
       <div className="max-width">
-        <div className="flex items-start xl:justify-between flex-wrap xl:flex-nowrap gap-y-5">
-          <div className="w-full md:w-1/2 xl:w-auto shrink-0 flex flex-col gap-3 sm:gap-[25px]">
+        <div className="flex items-start justify-between flex-wrap lg:flex-nowrap gap-y-5">
+          <div className="w-full lg:w-auto shrink-0 flex flex-col items-center md:items-start text-center md:text-start gap-3 sm:gap-[25px]">
             <img
               src={WhiteLogo}
               alt="Nehaj Bidyaloy White Logo"
               className="w-[165px]"
             />
-            <p className="sm:text-lg leading-[1.5] md:w-[305px]">
+            <p className="sm:text-lg leading-[1.5] lg:w-[305px]">
               নেহাজ-এ প্রকাশিত কোনো লেখা, ছবি কিংবা শিল্পকর্ম লেখক অথবা
               কর্তৃপক্ষের অনুমতি ছাড়া কোথাও প্রকাশ করা অবৈধ৷
             </p>
           </div>
-          <div className="w-1/2 pr-5 sm:pr-0 sm:w-1/4 xl:w-auto shrink-0 flex flex-col gap-3 sm:gap-[25px] order-1 xl:order-none">
+          <div className="pr-5 sm:pr-0 w-full md:w-auto shrink-0 flex flex-col items-center md:items-start gap-3 sm:gap-[25px]">
             <h1 className="text-lg sm:text-2xl font-niladri">বিষয়</h1>
-            <ul className="flex flex-col gap-[10px]">
+            <ul className="flex md:flex-col gap-[10px]">
               <li>
                 <Link
                   to={"/"}
@@ -73,9 +73,9 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="w-1/2 sm:w-1/4 xl:w-auto shrink-0 flex flex-col gap-3 sm:gap-[25px] order-2 xl:order-none">
+          <div className="w-full md:w-auto shrink-0 flex flex-col items-center md:items-start gap-3 sm:gap-[25px]">
             <h1 className="text-lg sm:text-2xl font-niladri">ধরণ</h1>
-            <ul className="flex flex-col gap-[10px]">
+            <ul className="flex md:flex-col gap-[10px]">
               <li>
                 <Link
                   to={"/"}
@@ -102,11 +102,11 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="w-1/2 pr-5 sm:pr-0 sm:w-1/4 xl:w-auto shrink-0 flex flex-col gap-3 sm:gap-[25px] order-3 xl:order-none">
+          <div className="pr-5 sm:pr-0 w-full md:w-auto shrink-0 flex flex-col items-center md:items-start gap-3 sm:gap-[25px]">
             <h1 className="text-lg sm:text-2xl font-niladri">
               গুরুত্বপূর্ণ লিংক
             </h1>
-            <ul className="flex flex-col gap-[10px]">
+            <ul className="flex md:flex-col gap-[10px]">
               <li>
                 <Link
                   to={"/"}
@@ -133,11 +133,11 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="w-1/2 sm:w-1/4 xl:w-auto shrink-0 flex flex-col gap-3 sm:gap-[25px] order-4 xl:order-none">
+          <div className="w-full md:w-auto shrink-0 flex flex-col items-center md:items-start gap-3 sm:gap-[25px]">
             <h1 className="text-lg sm:text-2xl font-niladri">
               সোশ্যাল মিডিয়া
             </h1>
-            <ul className="flex flex-col gap-[10px]">
+            <ul className="flex md:flex-col gap-[10px]">
               <li>
                 <Link
                   to={"/"}
@@ -164,15 +164,27 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="w-1/2 md:w-[25%] xl:w-auto shrink-0 flex flex-col gap-3 sm:gap-[25px]">
+          <div className="w-full md:w-auto shrink-0 flex flex-col items-center md:items-start gap-3 sm:gap-[25px]">
             <h1 className="text-lg sm:text-2xl font-niladri">নেহাজের লেখকগন</h1>
-            <img
-              src={AuthorLogo}
-              alt="Nehaj Footer Author Logo"
-              className="size-[100px] sm:size-[174px] shrink-0 rounded-full object-cover"
-            />
+            <div className="flex gap-3 sm:gap-[25px]">
+              <img
+                src={AuthorLogo}
+                alt="Nehaj Footer Author Logo"
+                className="block size-[80px] sm:size-[174px] shrink-0 rounded-full object-cover"
+              />
+              <img
+                src={AuthorLogo}
+                alt="Nehaj Footer Author Logo"
+                className="block sm:hidden size-[80px] sm:size-[174px] shrink-0 rounded-full object-cover"
+              />
+              <img
+                src={AuthorLogo}
+                alt="Nehaj Footer Author Logo"
+                className="block md:hidden size-[80px] sm:size-[174px] shrink-0 rounded-full object-cover"
+              />
+            </div>
           </div>
-          <div className="w-1/2 md:w-[25%] xl:w-auto shrink-0 flex flex-col gap-3 sm:gap-[25px]">
+          <div className="w-auto shrink-0 hidden xl:flex flex-col gap-3 sm:gap-[25px]">
             <h1 className="text-lg sm:text-2xl font-niladri">নেহাজ মাসকুট</h1>
             <img
               src={MaskutLogo}
@@ -181,15 +193,18 @@ const Footer = () => {
             />
           </div>
         </div>
-        <hr className="w-full h-px my-[60px] bg-white" />
+        <hr className="w-full h-px my-10 md:my-[60px] bg-white" />
         <div className="flex flex-wrap xl:flex-nowrap items-center justify-between sm:text-lg font-syne-mono">
-          <p className="w-full text-center xl:text-left mb-5 xl:mb-0 xl:w-auto">
+          <p className="w-full text-center xl:text-left mb-3 md:mb-5 xl:mb-0 xl:w-auto">
             copyright 2024 @nehaj-bidyaloy All Right Reserved
           </p>
-          <p className="w-full sm:w-1/2 text-center xl:text-left xl:w-auto">
+          <p className="block md:hidden w-full md:w-1/2 text-center xl:text-left xl:w-auto">
+            UI by BRAILLE
+          </p>
+          <p className="w-full md:w-1/2 text-center xl:text-left xl:w-auto">
             developed by flytech IT
           </p>
-          <p className="w-full sm:w-1/2 text-center xl:text-left xl:w-auto">
+          <p className="hidden md:block w-full md:w-1/2 text-center xl:text-left xl:w-auto">
             coa 2024 @ibnsums All Right Reserved
           </p>
         </div>
