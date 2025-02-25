@@ -20,7 +20,7 @@ const AuthorsPage = () => {
         {isLoading ? (
           <Loading />
         ) : authors && authors?.length > 0 ? (
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
+          <div className="grid grid-cols-3 gap-4 sm:gap-8">
             {authors?.map((author, i) => (
               <AuthorCard authorData={author} key={i} />
             ))}

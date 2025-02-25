@@ -6,7 +6,7 @@ const AboutUs = () => {
   return (
     <section className="pt-[200px] sm:pb-[70px]">
       <div className="max-width">
-        <div className="flex gap-2 sm:gap-5">
+        <div className="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-5">
           <div className="w-full rounded-2xl">
             <img src={image1} alt="Logo" className="rounded-2xl" />
           </div>
@@ -18,7 +18,7 @@ const AboutUs = () => {
         <div className="border border-primary-blue px-4 py-8  sm:p-10 md:pt-[100px] md:px-[110px] md:pb-[50px] rounded-[30px]  text-primary-blue mt-6">
           <div className="space-y-5 mb-[50px]">
             <h1 className="font-niladri text-lg sm:text-[22px]">নেহাজ কি?</h1>
-            <p className="text-base sm:text-lg">
+            <p className="text-base sm:text-lg text-justify sm:text-start">
               নেহাজ শব্দের উৎস হইলো আরবি &ldquo;নাহাজ&rdquo;, যার থাকি মানহাজ
               শব্দ আইছে। অর্থ পদ্ধতি বা মেথড। অবশ্য লালনের বরাতেই শব্দটা আমরা
               পাই সর্বপ্রথম। কোনো সত্যে পৌছাতে মানুষের লিপ্ততা, সাধনা,অভিনিবেশের
@@ -33,7 +33,7 @@ const AboutUs = () => {
           </div>
           <div className="space-y-5 ">
             <h1 className="font-niladri text-lg sm:text-[22px]">নেহাজ কেন?</h1>
-            <p className="text-base sm:text-lg">
+            <p className="text-base sm:text-lg text-justify sm:text-start">
               নেহাজ শব্দের উৎস হইলো আরবি &ldquo;নাহাজ&rdquo;, যার থাকি মানহাজ
               শব্দ আইছে। অর্থ পদ্ধতি বা মেথড। অবশ্য লালনের বরাতেই শব্দটা আমরা
               পাই সর্বপ্রথম। কোনো সত্যে পৌছাতে মানুষের লিপ্ততা, সাধনা,অভিনিবেশের

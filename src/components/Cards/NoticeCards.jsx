@@ -9,7 +9,7 @@ const NoticeCards = ({ currentPage, setCurrentPage, notices, meta }) => {
   return (
     <section className="max-width">
       <h1 className="section_title">সমস্ত বিজ্ঞপ্তিসমূহ</h1>
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
         {notices &&
           notices?.map((note, index) => (
             <div key={index}>
