@@ -20,14 +20,14 @@ const ContactPage = () => {
             <img
               src={image1}
               alt="Logo"
-              className="rounded-2xl w-full object-cover object-center"
+              className="rounded-lg sm:rounded-2xl w-full object-cover object-center"
             />
             <img
               src={image2}
               alt="Eagle"
-              className="rounded-2xl w-full object-cover object-center lg:hidden"
+              className="rounded-lg sm:rounded-2xl w-full object-cover object-center lg:hidden"
             />
-            <div className="border border-primary-blue p-5 sm:p-[50px] rounded-lg sm:rounded-[30px]  text-primary-blue mt-6">
+            <div className="border border-primary-blue p-5 sm:p-[50px] rounded-lg sm:rounded-2xl  text-primary-blue mt-6">
               <p className="text-base sm:text-lg text-justify sm:text-start font-medium">
                 নেহাজ শব্দের উৎস হইলো আরবি &quot;নাহাজ&quot;, যার থাকি মানহাজ
                 শব্দ আইছে। অর্থ পদ্ধতি বা মেথড। অবশ্য লালনের বরাতেই শব্দটা আমরা

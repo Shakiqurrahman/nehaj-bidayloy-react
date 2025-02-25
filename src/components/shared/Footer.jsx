@@ -25,7 +25,7 @@ const Footer = () => {
             <ul className="flex md:flex-col gap-[10px]">
               <li>
                 <Link
-                  to={"/"}
+                  to={"/category/thought"}
                   className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
                 >
                   চিন্তা
@@ -33,7 +33,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to={"/"}
+                  to={"/category/history"}
                   className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
                 >
                   ইতিহাস
@@ -41,7 +41,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to={"/"}
+                  to={"/category/literary"}
                   className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
                 >
                   সাহিত্য
@@ -49,7 +49,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to={"/"}
+                  to={"/category/art"}
                   className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
                 >
                   শিল্প
@@ -57,7 +57,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to={"/"}
+                  to={"/category/cinema"}
                   className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
                 >
                   সিনেমা
@@ -65,7 +65,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to={"/"}
+                  to={"/category/theology"}
                   className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
                 >
                   ধর্মতত্ত্ব
@@ -78,7 +78,7 @@ const Footer = () => {
             <ul className="flex md:flex-col gap-[10px]">
               <li>
                 <Link
-                  to={"/"}
+                  to={"/genre/article"}
                   className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
                 >
                   প্রবন্ধ
@@ -86,7 +86,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to={"/"}
+                  to={"/genre/notes"}
                   className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
                 >
                   নোটস
@@ -94,7 +94,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to={"/"}
+                  to={"/genre/translate"}
                   className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
                 >
                   অনুবাদ
@@ -109,7 +109,7 @@ const Footer = () => {
             <ul className="flex md:flex-col gap-[10px]">
               <li>
                 <Link
-                  to={"/"}
+                  to={"/notice"}
                   className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
                 >
                   বিজ্ঞপ্তি
@@ -117,7 +117,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to={"/"}
+                  to={"/about-us"}
                   className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
                 >
                   পরিচয়
@@ -125,7 +125,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to={"/"}
+                  to={"/contact"}
                   className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
                 >
                   যোগাযোগ
@@ -140,7 +140,8 @@ const Footer = () => {
             <ul className="flex md:flex-col gap-[10px]">
               <li>
                 <Link
-                  to={"/"}
+                  to={"https://facebook.com/"}
+                  target="_blank"
                   className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
                 >
                   ফেইসবুক
@@ -148,7 +149,8 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to={"/"}
+                  to={"https://instagram.com/"}
+                  target="_blank"
                   className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
                 >
                   ইনস্টাগ্রাম
@@ -156,7 +158,8 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to={"/"}
+                  to={"https://youtube.com/"}
+                  target="_blank"
                   className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
                 >
                   ইউটিউব
