@@ -97,24 +97,24 @@ const SingleBlogPost = () => {
         <img
           src={storyData?.thumbnail?.url}
           alt="Blog Thumbnail"
-          className="block w-full rounded-[30px] object-cover my-10"
+          className="block w-full rounded-xl sm:rounded-[30px] object-cover my-10"
         />
         <div
-          className="mb-10 sm:text-lg text-base"
+          className="mb-10 sm:text-lg text-base text-justify sm:text-left px-4 sm:px-0"
           dangerouslySetInnerHTML={{ __html: sanitizedContent }}
         />
       </div>
       {/* author details section */}
-      <div className="bg-[#F1F8FF] py-[50px] w-[calc(100%_+_20px)] sm:w-[calc(100%_+_60px)] -ml-[10px] sm:-ml-[30px] px-[10px] sm:px-[30px]">
+      <div className="bg-[#F1F8FF] py-[50px] w-[calc(100%_+_20px)] sm:w-[calc(100%_+_60px)] -ml-[10px] sm:-ml-[30px] px-[30px]">
         <div className="max-width">
           <div className="flex flex-wrap sm:flex-nowrap items-center gap-10">
             <img
               src={storyData?.authorId?.avatar?.url}
               alt="Author Image"
-              className="mx-auto sm:ml-0 w-[220px] object-cover rounded-[20px] shrink-0"
+              className="mx-auto sm:ml-0 w-full sm:w-[220px] object-cover rounded-[20px] shrink-0"
             />
             <div className="grow">
-              <h1 className="text-center sm:text-left text-lg sm:text-2xl font-niladri text-primary-blue mb-3">
+              <h1 className="text-2xl font-niladri text-primary-blue mb-3">
                 {storyData?.authorId?.fullName}
               </h1>
               <p>{storyData?.authorId?.bio}</p>
@@ -135,7 +135,7 @@ const SingleBlogPost = () => {
             </div>
             {comments?.map((comment, i) => (
               <div key={i} className="mt-5">
-                <div className="flex flex-wrap sm:flex-nowrap items-center gap-5 sm:gap-10 p-4 sm:p-[10px] rounded-[20px] border border-dark-grey">
+                <div className="flex items-center gap-5 sm:gap-10 p-4 sm:p-[10px] rounded-[20px] border border-dark-grey">
                   <img
                     src={commentAvatar}
                     alt="Comment Avatar"
@@ -168,8 +168,27 @@ const SingleBlogPost = () => {
             <h1 className=" text-lg sm:text-xl md:text-3xl font-niladri mb-5">
               আরো লেখা
             </h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <div className="hidden md:grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8">
               {relatedStories?.map((story, i) => (
+                <CategoryCard
+                  key={i}
+                  categoryName={story?.category?.name}
+                  categorySlug={story?.category?.slug}
+                  date={
+                    story?.createdAt ? new Date(story?.createdAt) : new Date()
+                  }
+                  desc={story?.shortDescription}
+                  genreType={story?.genre?.name}
+                  genreSlug={story?.genre?.slug}
+                  thumbnail={story?.thumbnail?.url}
+                  title={story?.title}
+                  writer={story?.author?.fullName}
+                  link={story?._id}
+                />
+              ))}
+            </div>
+            <div className="md:hidden grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8">
+              {relatedStories?.slice?.(0, 2)?.map((story, i) => (
                 <CategoryCard
                   key={i}
                   categoryName={story?.category?.name}

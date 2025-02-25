@@ -57,19 +57,21 @@ const SingleStudyCirclePost = () => {
           alt="Blog Thumbnail"
           className="block w-full rounded-[30px] object-cover my-10"
         />
-        <div className="mb-10">{storyData?.description}</div>
+        <div className="mb-10 text-justify sm:text-start px-4 sm:px-0">
+          {storyData?.description}
+        </div>
       </div>
       {/* author details section */}
-      <div className="bg-[#F1F8FF] py-[50px] w-[calc(100%_+_20px)] sm:w-[calc(100%_+_60px)] -ml-[10px] sm:-ml-[30px] px-[10px] sm:px-[30px]">
+      <div className="bg-[#F1F8FF] py-[50px] w-[calc(100%_+_20px)] sm:w-[calc(100%_+_60px)] -ml-[10px] sm:-ml-[30px] px-[30px]">
         <div className="max-width">
           <div className="flex flex-wrap sm:flex-nowrap items-center gap-10">
             <img
               src={storyData?.author?.avatar?.url}
               alt="Author Image"
-              className="mx-auto sm:ml-0 w-[220px] object-cover rounded-[20px] shrink-0"
+              className="mx-auto sm:ml-0 w-full sm:w-[220px] object-cover rounded-[20px] shrink-0"
             />
             <div className="grow">
-              <h1 className="text-center sm:text-left text-lg sm:text-2xl font-niladri text-primary-blue mb-3">
+              <h1 className="text-lg sm:text-2xl font-niladri text-primary-blue mb-3">
                 {storyData?.author?.fullName}
               </h1>
               <p>{storyData?.author?.bio}</p>
