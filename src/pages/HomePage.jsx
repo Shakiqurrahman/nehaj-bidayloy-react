@@ -56,7 +56,7 @@ const HomePage = () => {
       {/* Category Cards section */}
       {categoryCardsData && categoryCardsData?.length > 0 && (
         <div className="max-width my-[60px] sm:mt-[113px] sm:mb-[152px]">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-x-10 xl:gap-x-[70px] md:gap-y-[46px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-x-10 2xl:gap-x-[70px] md:gap-y-[46px]">
             {categoryCardsData?.map((card, index) => (
               <HomeCategoryCard key={index} data={card} />
             ))}
