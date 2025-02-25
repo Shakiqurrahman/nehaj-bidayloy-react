@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import Slider from "react-slick";
 import { useFetchQuotesQuery } from "../Redux/api/quotesApiSlice";
 import {
   useFetchStoriesQuery,
@@ -8,17 +7,19 @@ import {
 } from "../Redux/api/storyApiSlice";
 import onubadCardBgImage from "../assets/images/onubadCardBgImage.png";
 import CategoryCard from "../components/Cards/CategoryCard";
-import CategoryCardWithButton from "../components/Cards/CategoryCardWithButton";
-import TranslateCard from "../components/Cards/TranslateCard";
 import Pagination from "../components/Pagination";
 
 // category bg image imports
+import Slider from "react-slick";
 import artBgImage from "../assets/images/category-bg-images/art.png";
 import cinemaBgImage from "../assets/images/category-bg-images/cinema.png";
 import historyBgImage from "../assets/images/category-bg-images/history.png";
 import literaryBgImage from "../assets/images/category-bg-images/literary.png";
 import theologyBgImage from "../assets/images/category-bg-images/theology.png";
 import thoughtBgImage from "../assets/images/category-bg-images/thought.png";
+import CategoryCardWithButton from "../components/Cards/CategoryCardWithButton";
+import TranslateCard from "../components/Cards/TranslateCard";
+import StoryCardSkeleton from "../components/skeleton/StoryCardSkeleton";
 
 const CategoryPage = () => {
   const { categorySlug } = useParams();
@@ -179,16 +180,24 @@ const CategoryPage = () => {
       )}
 
       {/* সমস্ত লেখা section */}
-      {stories && stories?.length > 0 && (
-        <div className="my-[60px] sm:my-[100px] max-width">
-          <div className="flex items-baseline gap-5 mb-10">
-            <h1 className="font-niladri text-primary-blue text-2xl shrink-0">
-              সমস্ত লেখা
-            </h1>
-            <span className="block sm:hidden grow shrink h-px bg-primary-blue"></span>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-[30px] gap-y-10">
-            {stories?.map((item, i) => (
+      <div className="my-[60px] sm:my-[100px] max-width">
+        <div className="flex items-baseline gap-5 mb-10">
+          <h1 className="font-niladri text-primary-blue text-2xl shrink-0">
+            সমস্ত লেখা
+          </h1>
+          <span className="block sm:hidden grow shrink h-px bg-primary-blue"></span>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-[30px] gap-y-10">
+          {isLoading ? (
+            <>
+              <StoryCardSkeleton />
+              <StoryCardSkeleton />
+              <StoryCardSkeleton />
+              <StoryCardSkeleton />
+              <StoryCardSkeleton />
+            </>
+          ) : (
+            stories?.map((item, i) => (
               <CategoryCard
                 key={i}
                 categoryName={item?.category?.name}
@@ -202,16 +211,18 @@ const CategoryPage = () => {
                 writer={item?.authorId?.fullName}
                 link={`${item?._id}`}
               />
-            ))}
-          </div>
-          <hr className="bg-[#EAECF0] mb-5 mt-10" />
+            ))
+          )}
+        </div>
+        <hr className="bg-[#EAECF0] mb-5 mt-10" />
+        {!isLoading && (
           <Pagination
             currentPage={currentPage}
             totalPages={Number(meta?.totalPages) || 0}
             onPageChange={handlePageChange}
           />
-        </div>
-      )}
+        )}
+      </div>
 
       {/* অনুবাদ card section */}
       {translateCardData && (
