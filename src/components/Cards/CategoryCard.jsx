@@ -62,12 +62,12 @@ const CategoryCard = ({
       <p className="line-clamp-3 my-5 text-xs sm:text-base">{desc}</p>
       <div className="flex items-center gap-2">
         <span
-          className={`block px-5 py-1 text-sm rounded-[30px] text-white ${categoryBgColor}`}
+          className={`block px-3 sm:px-5 py-1 text-xs sm:text-sm rounded-[30px] text-white ${categoryBgColor}`}
         >
           {categoryName}
         </span>
         <span
-          className={`block px-5 py-1 text-sm rounded-[30px] ${genreBgColor} text-white`}
+          className={`block px-3 sm:px-5 py-1 text-xs sm:text-sm rounded-[30px] ${genreBgColor} text-white`}
         >
           {genreType}
         </span>

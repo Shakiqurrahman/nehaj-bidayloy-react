@@ -181,11 +181,11 @@ const CategoryPage = () => {
       {/* সমস্ত লেখা section */}
       {stories && stories?.length > 0 && (
         <div className="my-[60px] sm:my-[100px] max-width">
-          <div className="flex items-center gap-5 mb-10">
+          <div className="flex items-baseline gap-5 mb-10">
             <h1 className="font-niladri text-primary-blue text-2xl shrink-0">
               সমস্ত লেখা
             </h1>
-            <span className="block grow shrink h-px bg-primary-blue"></span>
+            <span className="block sm:hidden grow shrink h-px bg-primary-blue"></span>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-x-[30px] gap-y-10">
             {stories?.map((item, i) => (

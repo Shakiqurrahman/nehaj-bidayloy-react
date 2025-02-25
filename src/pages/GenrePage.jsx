@@ -96,7 +96,7 @@ const GenrePage = () => {
               বেশীবার পঠিত লেখাগুলা আপনি পড়তে পারে এইখান থেকে। এই আ‍র্কাইভ
               প্রতি মাসের পরিসংখ্যানের উপর নির্ভর করে রিশাফল হইবে।
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[30px] gap-y-[60px]">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-[30px] gap-y-[60px]">
               {mostReadPosts?.map((item, i) => (
                 <CategoryCardWithButton
                   key={i}
@@ -116,10 +116,13 @@ const GenrePage = () => {
       {/* সমস্ত লেখা section */}
       {stories && stories?.length > 0 && (
         <div className="my-[60px] sm:my-[100px] max-width">
-          <h1 className="font-niladri text-primary-blue text-2xl mb-10">
-            সমস্ত লেখা
-          </h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-[30px] gap-y-10">
+          <div className="flex items-baseline gap-5 mb-10">
+            <h1 className="font-niladri text-primary-blue text-2xl shrink-0">
+              সমস্ত লেখা
+            </h1>
+            <span className="block sm:hidden grow shrink h-px bg-primary-blue"></span>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-[30px] gap-y-10">
             {stories?.map((item, i) => (
               <CategoryCard
                 key={i}
