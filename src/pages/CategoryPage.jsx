@@ -190,11 +190,9 @@ const CategoryPage = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-x-[30px] gap-y-10">
           {isLoading ? (
             <>
-              <StoryCardSkeleton />
-              <StoryCardSkeleton />
-              <StoryCardSkeleton />
-              <StoryCardSkeleton />
-              <StoryCardSkeleton />
+              {Array.from({ length: 6 }).map((_, index) => (
+                <StoryCardSkeleton key={index} />
+              ))}
             </>
           ) : (
             stories?.map((item, i) => (

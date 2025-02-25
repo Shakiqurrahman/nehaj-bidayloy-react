@@ -14,6 +14,7 @@ import {
 import articleBgImage from "../assets/images/genre-bg-images/article.png";
 import notesBgImage from "../assets/images/genre-bg-images/notes.png";
 import translateBgImage from "../assets/images/genre-bg-images/translate.png";
+import StoryCardSkeleton from "../components/skeleton/StoryCardSkeleton";
 
 const GenrePage = () => {
   const { genreSlug } = useParams();
@@ -71,7 +72,6 @@ const GenrePage = () => {
         className="h-[500px] sm:h-[600px] lg:h-[1000px] object-center object-cover shadow-sm rounded-[30px]"
         style={{ backgroundImage: `url(${genreBgImage})` }}
       ></div>
-
       {/* অনুবাদ card section */}
       {translateCardData && (
         <div className="my-[60px] sm:my-[100px]">
@@ -83,7 +83,6 @@ const GenrePage = () => {
           />
         </div>
       )}
-
       {/* সর্বাধিক পঠিত section */}
       {mostReadPosts && mostReadPosts?.length > 0 && (
         <div
@@ -112,18 +111,23 @@ const GenrePage = () => {
           </div>
         </div>
       )}
-
       {/* সমস্ত লেখা section */}
-      {stories && stories?.length > 0 && (
-        <div className="my-[60px] sm:my-[100px] max-width">
-          <div className="flex items-baseline gap-5 mb-10">
-            <h1 className="font-niladri text-primary-blue text-2xl shrink-0">
-              সমস্ত লেখা
-            </h1>
-            <span className="block sm:hidden grow shrink h-px bg-primary-blue"></span>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-[30px] gap-y-10">
-            {stories?.map((item, i) => (
+      <div className="my-[60px] sm:my-[100px] max-width">
+        <div className="flex items-baseline gap-5 mb-10">
+          <h1 className="font-niladri text-primary-blue text-2xl shrink-0">
+            সমস্ত লেখা
+          </h1>
+          <span className="block sm:hidden grow shrink h-px bg-primary-blue"></span>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-[30px] gap-y-10">
+          {isLoading ? (
+            <>
+              {Array.from({ length: 6 }).map((_, index) => (
+                <StoryCardSkeleton key={index} />
+              ))}
+            </>
+          ) : (
+            stories?.map((item, i) => (
               <CategoryCard
                 key={i}
                 categoryName={item?.category?.name}
@@ -137,16 +141,18 @@ const GenrePage = () => {
                 writer={item?.authorId?.fullName}
                 link={`${item?._id}`}
               />
-            ))}
-          </div>
-          <hr className="bg-[#EAECF0] mb-5 mt-10" />
+            ))
+          )}
+        </div>
+        <hr className="bg-[#EAECF0] mb-5 mt-10" />
+        {!isLoading && (
           <Pagination
             currentPage={currentPage}
             totalPages={Number(meta?.totalPages) || 0}
             onPageChange={handlePageChange}
           />
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 };
