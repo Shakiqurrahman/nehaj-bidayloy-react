@@ -153,7 +153,7 @@ const Footer = () => {
                   target="_blank"
                   className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
                 >
-                  ইনস্টাগ্রাম
+                  ইমেইল
                 </Link>
               </li>
               <li>
@@ -168,32 +168,28 @@ const Footer = () => {
             </ul>
           </div>
           <div className="w-full md:w-auto shrink-0 flex flex-col items-center md:items-start gap-3 sm:gap-[25px]">
-            <h1 className="text-lg sm:text-2xl font-niladri">নেহাজের লেখকগন</h1>
-            <div className="flex gap-3 sm:gap-[25px]">
+            <h1 className="text-lg sm:text-2xl font-niladri mx-auto">
+              নেহাজ-লেখক
+            </h1>
+            <Link to={"/author"} className="flex gap-3 sm:gap-[25px]">
               <img
                 src={AuthorLogo}
                 alt="Nehaj Footer Author Logo"
-                className="block size-[80px] sm:size-[174px] shrink-0 rounded-full object-cover"
+                className="block size-[100px] sm:size-[174px] shrink-0 rounded-full object-cover"
               />
-              <img
-                src={AuthorLogo}
-                alt="Nehaj Footer Author Logo"
-                className="block sm:hidden size-[80px] sm:size-[174px] shrink-0 rounded-full object-cover"
-              />
-              <img
-                src={AuthorLogo}
-                alt="Nehaj Footer Author Logo"
-                className="block md:hidden size-[80px] sm:size-[174px] shrink-0 rounded-full object-cover"
-              />
-            </div>
+            </Link>
           </div>
           <div className="w-auto shrink-0 hidden xl:flex flex-col gap-3 sm:gap-[25px]">
-            <h1 className="text-lg sm:text-2xl font-niladri">নেহাজ মাসকুট</h1>
-            <img
-              src={MaskutLogo}
-              alt="Nehaj Footer Maskut Logo"
-              className="size-[100px] sm:size-[174px] shrink-0 rounded-full object-cover"
-            />
+            <h1 className="text-lg sm:text-2xl font-niladri text-center">
+              নেহাজ-পরিচয়
+            </h1>
+            <Link to={"/about-us"}>
+              <img
+                src={MaskutLogo}
+                alt="Nehaj Footer Maskut Logo"
+                className="size-[100px] sm:size-[174px] shrink-0 rounded-full object-cover"
+              />
+            </Link>
           </div>
         </div>
         <hr className="w-full h-px my-10 md:my-[60px] bg-white" />
@@ -201,14 +197,11 @@ const Footer = () => {
           <p className="w-full text-center xl:text-left mb-3 md:mb-5 xl:mb-0 xl:w-auto">
             copyright 2024 @nehaj-bidyaloy All Right Reserved
           </p>
-          <p className="block md:hidden w-full md:w-1/2 text-center xl:text-left xl:w-auto">
-            UI by BRAILLE
+          <p className="w-full md:w-1/2 text-center xl:text-left xl:w-auto">
+            UI by @ibnsums
           </p>
           <p className="w-full md:w-1/2 text-center xl:text-left xl:w-auto">
-            developed by flytech IT
-          </p>
-          <p className="hidden md:block w-full md:w-1/2 text-center xl:text-left xl:w-auto">
-            coa 2024 @ibnsums All Right Reserved
+            developed by Shakiqur, Shakil, Soumik
           </p>
         </div>
       </div>

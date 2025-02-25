@@ -29,7 +29,7 @@ const SidePanel = ({ open, close }) => {
     >
       <div
         ref={boxRef}
-        className={`h-full w-full max-w-[360px] p-5 bg-white ml-auto duration-300 ${
+        className={`h-full w-full max-w-[360px] p-5 bg-primary-white ml-auto duration-300 ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >

@@ -27,10 +27,10 @@ const Header = () => {
             </Link>
             <ul className="hidden lg:flex items-center gap-6 xl:gap-10">
               <li className="relative group">
-                <div className="text-lg text-primary-blue hover:text-primary-golden duration-300 flex items-center gap-3 cursor-pointer">
+                <div className="text-lg text-primary-blue hover:text-primary-golden duration-300 flex items-center gap-1 cursor-pointer">
                   বিষয় <IoIosArrowDown />
                 </div>
-                <ul className="absolute top-[32px] left-0 space-y-3 bg-white w-[150px] py-5 rounded-lg shadow group-hover:opacity-100 opacity-0 invisible group-hover:visible duration-300">
+                <ul className="absolute top-[32px] left-0 space-y-3 bg-primary-white w-[150px] py-5 rounded-lg shadow group-hover:opacity-100 opacity-0 invisible group-hover:visible duration-300">
                   <li>
                     <NavLink
                       to={"/category/thought"}
@@ -82,10 +82,10 @@ const Header = () => {
                 </ul>
               </li>
               <li className="relative group">
-                <div className="text-lg text-primary-blue hover:text-primary-golden duration-300 flex items-center gap-3 cursor-pointer">
+                <div className="text-lg text-primary-blue hover:text-primary-golden duration-300 flex items-center gap-1 cursor-pointer">
                   ধরণ <IoIosArrowDown />
                 </div>
-                <ul className="absolute top-[32px] left-0 space-y-3 bg-white w-[120px] py-5 rounded-lg shadow group-hover:opacity-100 opacity-0 invisible group-hover:visible duration-300">
+                <ul className="absolute top-[32px] left-0 space-y-3 bg-primary-white w-[120px] py-5 rounded-lg shadow group-hover:opacity-100 opacity-0 invisible group-hover:visible duration-300">
                   <li>
                     <NavLink
                       to={"/genre/article"}

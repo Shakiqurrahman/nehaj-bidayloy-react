@@ -56,7 +56,9 @@ const CategoryCard = ({
         to={`/story/${link}`}
         className="flex items-center sm:items-start gap-2 justify-between sm:gap-5 font-niladri text-sm sm:text-lg lg:text-2xl text-primary-blue"
       >
-        <span className="line-clamp-2">{title}</span>
+        <span className="line-clamp-1" title={title}>
+          {title}
+        </span>
         <MdArrowOutward className="text-lg lg:text-2xl shrink-0" />
       </Link>
       <p className="line-clamp-3 my-5 text-xs sm:text-base">{desc}</p>
