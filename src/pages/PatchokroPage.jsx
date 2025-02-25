@@ -28,7 +28,7 @@ const PatchokroPage = () => {
         <h1 className="font-niladri text-primary-blue text-2xl mb-10">
           সমস্ত পাঠচক্র
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-[30px] gap-y-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-[30px] gap-y-10">
           {allPosts?.map((item, i) => {
             const dateStr = item?.date;
             const [day, month, year] = dateStr.split("/");

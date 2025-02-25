@@ -62,7 +62,7 @@ const Pagination = ({
   generatePageNumbers();
 
   return (
-    <div className="flex gap-3 flex-wrap sm:flex-nowrap justify-center items-center sm:justify-between">
+    <div className="flex gap-3 items-center justify-between">
       {/* Previous Button */}
       <button
         className="text-sm flex gap-2 items-center text-[#667085] hover:text-primary-blue duration-300 disabled:text-[#667085]/50"
@@ -73,7 +73,7 @@ const Pagination = ({
       </button>
 
       {/* Page Numbers with Ellipsis */}
-      <div className="flex items-center">
+      <div className="hidden sm:flex items-center">
         {pageNumbers.map((page, index) => (
           <button
             key={index}
