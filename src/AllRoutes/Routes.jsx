@@ -5,6 +5,7 @@ import PublicLayout from "../Layouts/PublicLayout";
 import AboutUs from "../pages/AboutUs";
 import AuthorsPage from "../pages/AuthorsPage";
 import CategoryPage from "../pages/CategoryPage";
+import ContactPage from "../pages/ContactPage";
 import ErrorPage from "../pages/ErrorPage";
 import GenrePage from "../pages/GenrePage";
 import HomePage from "../pages/HomePage";
@@ -12,10 +13,10 @@ import NehajAdminLogin from "../pages/NehajAdminLogin";
 import Notice from "../pages/Notice";
 import PatchokroPage from "../pages/PatchokroPage";
 import SingleBlogPost from "../pages/SingleBlogPost";
+import SingleStudyCirclePost from "../pages/SingleStudyCirclePost";
 import { AdminPaths } from "./AdminPaths";
 import AdminRoute from "./private-route/AdminRoute";
 import UnAuthenticatedRoute from "./private-route/UnAuthenticatedRoute";
-import SingleStudyCirclePost from "../pages/SingleStudyCirclePost";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
       {
         path: "/about-us",
         element: <AboutUs />,
+      },
+      {
+        path: "/contact",
+        element: <ContactPage />,
       },
       {
         path: "/notice",
