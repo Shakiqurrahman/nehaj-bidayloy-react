@@ -31,7 +31,7 @@ body {
 
 /* Additonal custom styles */
 .max-width {
-  @apply max-w-[1280px] mx-auto lg:px-24 2xl:px-0;
+  @apply max-w-[1280px] mx-auto;
 }
 
 .active {
