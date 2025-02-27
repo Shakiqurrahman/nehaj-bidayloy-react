@@ -194,3 +194,9 @@ input[type="password"] + div {
 }
 
 /* Slick Slider Config end */
+
+@media (max-width: 370px) {
+  .search-box {
+    max-width: 180px;
+  }
+}

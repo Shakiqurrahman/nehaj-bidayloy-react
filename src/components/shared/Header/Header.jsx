@@ -1,13 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoIosArrowDown } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import { setOpenSearch } from "../../../Redux/features/utilsSlice";
+import { SearchBox } from "./SearchBox";
 import SidePanel from "./SidePanel";
 import Logo from "/public/Nehaj_Logo.png";
 import Icon from "/public/icon.png";
 
 const Header = () => {
+  const dispatch = useDispatch();
+
   const [toggle, setToggle] = useState(false);
+  const { openSearch } = useSelector((state) => state.utils);
+
+  useEffect(() => {
+    if (openSearch) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [openSearch]);
+
   return (
     <>
       <header className="w-full absolute top-[75px] left-0 z-[99999999] px-[30px] sm:px-[46px]">
@@ -156,7 +171,11 @@ const Header = () => {
               >
                 <GiHamburgerMenu className="text-2xl text-primary-blue hover:text-primary-golden duration-300" />
               </button>
-              <button className="hidden sm:block shrink-0 px-5 sm:px-10 py-1 text-sm sm:text-base sm:py-[15px] rounded-[40px] bg-primary-blue text-white hover:bg-primary-golden duration-300">
+              <button
+                type="button"
+                onClick={() => dispatch(setOpenSearch(!openSearch))}
+                className="hidden sm:block shrink-0 px-5 sm:px-10 py-1 text-sm sm:text-base sm:py-[15px] rounded-[40px] bg-primary-blue text-white hover:bg-primary-golden duration-300"
+              >
                 খুঁজুন
               </button>
             </div>
@@ -164,6 +183,7 @@ const Header = () => {
         </nav>
       </header>
       <SidePanel open={toggle} close={() => setToggle(false)} />
+      {openSearch && <SearchBox />}
     </>
   );
 };

@@ -25,7 +25,8 @@ export default {
         },
         alert: {
           green: "#4CAF50",
-          orange: "#FF9800",
+          // orange: "#FF9800",
+          orange: "#BA7901",
           red: "#F44336",
         },
         light: {

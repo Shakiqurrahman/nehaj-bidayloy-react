@@ -1,11 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import useOutsideClick from "../../../hooks/useOutsideClick";
+import { setOpenSearch } from "../../../Redux/features/utilsSlice";
 import Logo from "/public/icon.png";
 
 const SidePanel = ({ open, close }) => {
+  const dispatch = useDispatch();
+
+  const { openSearch } = useSelector((state) => state.utils);
+
   const boxRef = useRef(null);
   const dropdownsRef = useRef({});
 
@@ -18,6 +24,11 @@ const SidePanel = ({ open, close }) => {
       document.body.style.overflow = "auto";
     }
   }, [open]);
+
+  const handleSearchBox = () => {
+    close();
+    dispatch(setOpenSearch(!openSearch));
+  };
 
   useOutsideClick(boxRef, close);
 
@@ -37,7 +48,11 @@ const SidePanel = ({ open, close }) => {
           <Link to={"/"}>
             <img src={Logo} alt="Nehaj Logo" />
           </Link>
-          <button className="ml-auto shrink-0 px-5 py-2 text-sm rounded-[40px] bg-primary-blue text-white hover:bg-primary-golden duration-300 font-niladri">
+          <button
+            type="button"
+            onClick={handleSearchBox}
+            className="ml-auto shrink-0 px-5 py-2 text-sm rounded-[40px] bg-primary-blue text-white hover:bg-primary-golden duration-300 font-niladri"
+          >
             খুঁজুন
           </button>
           <button onClick={close} className="shrink-0">
