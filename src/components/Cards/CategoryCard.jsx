@@ -54,7 +54,7 @@ const CategoryCard = ({
       </div>
       <Link
         to={`/story/${link}`}
-        className="flex items-center sm:items-start gap-2 justify-between sm:gap-5 font-niladri text-sm sm:text-lg lg:text-2xl text-primary-blue"
+        className="flex items-center sm:items-start gap-2 justify-between sm:gap-5 font-niladri text-sm sm:text-lg lg:text-2xl text-primary-blue hover:text-primary-golden duration-300"
       >
         <span className="line-clamp-1" title={title}>
           {title}

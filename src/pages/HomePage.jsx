@@ -128,7 +128,7 @@ const HomePage = () => {
                   </h2>
                   <Link
                     to={`/story/${item?._id}`}
-                    className="shrink-0 size-10 rounded-full border-2 border-black sm:hidden flex items-center justify-center text-xl mb-2"
+                    className="shrink-0 size-10 rounded-full border-2 border-black sm:hidden flex items-center justify-center text-xl mb-2 hover:bg-primary-blue hover:border-primary-blue hover:text-white duration-300"
                   >
                     <IoIosArrowForward />
                   </Link>
@@ -136,7 +136,7 @@ const HomePage = () => {
                 </div>
                 <Link
                   to={`/story/${item?._id}`}
-                  className="shrink-0 size-10 rounded-full border-2 border-black hidden sm:flex items-center justify-center text-xl"
+                  className="shrink-0 size-10 rounded-full border-2 border-black hidden sm:flex items-center justify-center text-xl hover:bg-primary-blue hover:border-primary-blue hover:text-white duration-300"
                 >
                   <IoIosArrowForward />
                 </Link>

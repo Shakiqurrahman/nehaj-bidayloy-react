@@ -91,7 +91,7 @@ export const CommentForm = ({ storyId }) => {
       </div>
       <button
         type="submit"
-        className="bg-primary-blue font-niladri text-white rounded-[40px] outline-none py-3 px-10 mt-5"
+        className="bg-primary-blue font-niladri text-white rounded-[40px] outline-none py-3 px-10 mt-5 hover:bg-primary-golden duration-300"
       >
         মন্তব্য প্রকাশ করুন
       </button>

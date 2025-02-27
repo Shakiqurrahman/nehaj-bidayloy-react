@@ -34,8 +34,8 @@ const CategoryCardWithButton = ({
         to={`/story/${link}`}
         className={`inline-block mt-5 px-8 py-2 rounded-[30px] border  font-niladri sm:text-lg  ${
           darkMode
-            ? "text-white border-white"
-            : "text-primary-blue border-primary-blue"
+            ? "text-white border-white hover:bg-white hover:text-primary-blue duration-300"
+            : "text-primary-blue border-primary-blue hover:bg-primary-blue hover:border-primary-blue hover:text-white duration-300"
         }`}
       >
         পড়ুন
