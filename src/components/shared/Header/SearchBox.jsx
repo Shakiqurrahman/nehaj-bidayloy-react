@@ -1,22 +1,37 @@
-import React, { useRef, useState } from "react";
-import { IoSearch } from "react-icons/io5";
+import React, { useEffect, useRef, useState } from "react";
+import { FaAnglesRight } from "react-icons/fa6";
+import { HiMinusSm } from "react-icons/hi";
+import { IoMdReturnLeft } from "react-icons/io";
+import { IoClose, IoSearch } from "react-icons/io5";
+import { MdChevronRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useOutsideClick from "../../../hooks/useOutsideClick";
+import { useLazyGetSearchSuggessionsQuery } from "../../../Redux/api/userApiSlice";
 import { setOpenSearch } from "../../../Redux/features/utilsSlice";
 
 export const SearchBox = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const { openSearch } = useSelector((state) => state.utils);
 
   const textRef = useRef(null);
   const searchBoxRef = useRef(null);
   const [textInput, setTextInput] = useState("");
+  const [triggerSearch, { data: suggessionsData, isFetching }] =
+    useLazyGetSearchSuggessionsQuery();
+  useEffect(() => {
+    if (openSearch && textRef.current) {
+      textRef.current.focus();
+    }
+  }, [openSearch]);
 
-  const handleInput = async (e) => {
-    setTextInput(e.target.value);
+  const handleInput = (e) => {
+    const value = e.target.value;
+    setTextInput(value);
+
+    if (value.length >= 2) {
+      triggerSearch({ searchTerm: value });
+    }
   };
 
   const handleClearInput = () => {
@@ -24,26 +39,8 @@ export const SearchBox = () => {
     textRef.current && textRef.current.focus();
   };
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    // dispatch(setSearchedText(textInput));
-    // if (textInput) {
-    //   getDesignsBySearch(textInput);
-    //   navigate("/designs");
-    // }
-    // setTextInput("");
-    // handleClose(false);
-  };
-
-  const handleEnterKeySearch = (e) => {
-    if (e.key === "Enter") {
-      // dispatch(setSearchedText(textInput));
-      // if (textInput) {
-      //   navigate("/designs");
-      // }
-      // setTextInput("");
-      // handleClose(false);
-    }
+  const handleClose = () => {
+    dispatch(setOpenSearch(false));
   };
 
   useOutsideClick(searchBoxRef, () => dispatch(setOpenSearch(!openSearch)));
@@ -62,32 +59,31 @@ export const SearchBox = () => {
             placeholder="খুজুন..."
             className={`${textInput ? "search-box" : ""} flex-1 outline-none`}
             onChange={handleInput}
-            onKeyDown={handleEnterKeySearch}
             value={textInput}
           />
-          {textInput && (
+          {textInput ? (
             <button
-              className="shrink-0 text-sm font-medium text-primary-blue"
+              className="shrink-0 text-base font-medium text-primary-blue flex items-center"
               onClick={handleClearInput}
             >
-              Clear
+              মুছুন
+              <IoClose className="text-xl" />
             </button>
+          ) : (
+            <div className="ml-auto flex shrink-0 items-center">
+              <IoSearch className="text-2xl text-gray-400" />
+            </div>
           )}
-          <button
-            onClick={handleSearch}
-            className="ml-auto flex shrink-0 items-center"
-          >
-            <IoSearch className="text-2xl text-gray-400" />
-          </button>
         </div>
-        {/* <div className="bg-white">
-          {textInput?.length > 0 &&
-            searchResult?.map((res, idx) => {
+        <div className="bg-white">
+          {textInput.length >= 2 &&
+            suggessionsData?.length > 0 &&
+            suggessionsData?.map((res, idx) => {
               return (
                 <Link
                   className={`flex items-center justify-between border-t bg-transparent p-4 text-base font-semibold duration-300 first:mt-3 hover:bg-lightskyblue`}
-                  to={`/design/${res?.designId}`}
-                  onClick={() => handleClose()}
+                  to={`/story/${res?._id}`}
+                  onClick={handleClose}
                   key={idx}
                 >
                   <div className="flex items-center gap-3">
@@ -95,9 +91,21 @@ export const SearchBox = () => {
                     <div className="flex flex-col">
                       <h2>{res?.title}</h2>
                       <div className="flex items-center text-[11px] leading-normal text-gray-500">
-                        <span>design </span>
-                        <MdChevronRight size={15} />
-                        <span> {res?.designId}</span>
+                        <span>লেখক</span>
+                        <HiMinusSm size={12} />
+                        <span> {res?.author}</span>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center text-[11px] leading-normal text-gray-500">
+                          <span>বিষয় </span>
+                          <MdChevronRight size={15} />
+                          <span> {res?.category}</span>
+                        </div>
+                        <div className="flex items-center text-[11px] leading-normal text-gray-500">
+                          <span>ধরণ </span>
+                          <MdChevronRight size={15} />
+                          <span> {res?.genre}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -107,7 +115,14 @@ export const SearchBox = () => {
                 </Link>
               );
             })}
-        </div> */}
+          {!isFetching &&
+            textInput.length >= 2 &&
+            suggessionsData?.length === 0 && (
+              <p className="text-center mt-5 mb-2 font-poppins">
+                Nothing Found!
+              </p>
+            )}
+        </div>
       </div>
     </div>
   );
