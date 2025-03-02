@@ -201,22 +201,17 @@ input[type="password"] + div {
   }
 }
 
-.search_scroll {
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #d6d6d6 transparent;
-}
-
 /* For WebKit browsers like Chrome, Edge, and Safari */
-.search_scroll::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 8px;
+  background-color: #FFFFF0;
 }
 
-.search_scroll::-webkit-scrollbar-thumb {
-  background-color: #d6d6d6;
+::-webkit-scrollbar-thumb {
+  background-color: #d1d1d1;
   border-radius: 8px;
 }
 
-.search_scroll::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background-color: transparent;
 }

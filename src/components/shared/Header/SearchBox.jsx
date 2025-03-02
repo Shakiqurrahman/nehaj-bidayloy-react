@@ -75,7 +75,7 @@ export const SearchBox = () => {
             </div>
           )}
         </div>
-        <div className="bg-white max-h-[82vh] search_scroll px-3">
+        <div className="bg-white max-h-[82vh] overflow-y-auto px-3">
           {textInput.length >= 2 &&
             suggessionsData?.length > 0 &&
             suggessionsData?.map((res, idx) => {

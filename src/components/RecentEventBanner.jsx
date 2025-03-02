@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import EventCardSkeleton from "./skeleton/EventCardSkeleton";
 
-const RecentEventBanner = ({ title = "", subTitle = "", data }) => {
+const RecentEventBanner = ({ title = "", subTitle = "", data, isLoading }) => {
   return (
     <div className="bg-primary-blue rounded-[40px] pt-[70px] pb-[60px] sm:pb-[100px] mb-[80px] px-5">
       <div className="max-width text-white">
@@ -12,7 +13,14 @@ const RecentEventBanner = ({ title = "", subTitle = "", data }) => {
           </p>
         )}
         <div className="hidden md:grid gap-5 md:grid-cols-3">
-          {data &&
+          {isLoading ? (
+            <>
+              {Array.from({ length: 3 }).map((_, index) => (
+                <EventCardSkeleton key={index} />
+              ))}
+            </>
+          ) : (
+            data &&
             data?.map((item, i) =>
               item?.title ? (
                 <Link
@@ -34,7 +42,8 @@ const RecentEventBanner = ({ title = "", subTitle = "", data }) => {
                   className="w-full rounded-[50px] block"
                 />
               )
-            )}
+            )
+          )}
         </div>
         <div className="flex md:hidden -space-x-[62px] overflow-auto">
           {data?.length > 0 &&
