@@ -200,3 +200,23 @@ input[type="password"] + div {
     max-width: 180px;
   }
 }
+
+.search_scroll {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #d6d6d6 transparent;
+}
+
+/* For WebKit browsers like Chrome, Edge, and Safari */
+.search_scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.search_scroll::-webkit-scrollbar-thumb {
+  background-color: #d6d6d6;
+  border-radius: 8px;
+}
+
+.search_scroll::-webkit-scrollbar-track {
+  background-color: transparent;
+}

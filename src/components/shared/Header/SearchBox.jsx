@@ -48,10 +48,10 @@ export const SearchBox = () => {
   return (
     <div className="fixed left-0 top-0 z-[999999999999] flex h-screen w-full items-start justify-center overflow-y-auto bg-black/50 px-5 py-10 backdrop-blur-sm">
       <div
-        className="w-full max-w-[600px] rounded-lg bg-white p-3"
+        className="w-full max-w-[600px] rounded-lg bg-white py-3"
         ref={searchBoxRef}
       >
-        <div className="flex items-center gap-2 rounded-lg border-2 border-primary p-3">
+        <div className="flex items-center gap-2 rounded-lg border-2 border-primary p-3 mx-3">
           {/* <IoSearch className="shrink-0 text-2xl text-gray-400" /> */}
           <input
             ref={textRef}
@@ -75,7 +75,7 @@ export const SearchBox = () => {
             </div>
           )}
         </div>
-        <div className="bg-white">
+        <div className="bg-white max-h-[82vh] search_scroll px-3">
           {textInput.length >= 2 &&
             suggessionsData?.length > 0 &&
             suggessionsData?.map((res, idx) => {
