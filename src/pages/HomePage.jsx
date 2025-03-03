@@ -4,12 +4,14 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import onubadCardBgImage from "../assets/images/onubadCardBgImage.png";
 import CategoryCardWithButton from "../components/Cards/CategoryCardWithButton";
+import FeaturedStoryCardSkeleton from "../components/Cards/FeaturedStoryCardSkeleton";
 import HomeCategoryCard from "../components/Cards/HomeCategoryCard";
 import HomeSinglePostCard from "../components/Cards/HomeSinglePostCard";
 import TranslateCard from "../components/Cards/TranslateCard";
 import RecentEventBanner from "../components/RecentEventBanner";
 import Hero from "../components/shared/Header/Hero";
 import CategoryCardSkeleton from "../components/skeleton/CategoryCardSkeleton";
+import MostReadCardSkeleton from "../components/skeleton/MostReadCardSkeleton";
 import {
   useGetCategoriesForHomePageQuery,
   useGetCategorySliderQuery,
@@ -26,12 +28,13 @@ const HomePage = () => {
     useGet3StudyCircleQuery();
   const { data: randomQuotes } = useGetRandomQuotesQuery();
   const { data: categorySliderData } = useGetCategorySliderQuery();
-  const { data: featuredStoryData } = useGetFeaturedStoryQuery();
+  const { data: featuredStoryData, isLoading: isFeaturedStoryLoading } =
+    useGetFeaturedStoryQuery();
   const { data: categoryCardsData, isLoading: isCategoryDataLoading } =
     useGetCategoriesForHomePageQuery();
-  const { data: thoughtCategoryStories } =
+  const { data: thoughtCategoryStories, isLoading: isThoughtCategoryLoading } =
     useGetSelectedStoriesByCategoryQuery("thought");
-  const { data: artCategoryStories } =
+  const { data: artCategoryStories, isLoading: isArtCategoryLoading } =
     useGetSelectedStoriesByCategoryQuery("art");
 
   const translateCardData = {
@@ -108,77 +111,81 @@ const HomePage = () => {
       />
 
       {/* নির্বাচিত লেখা section */}
-      {featuredStoryData && featuredStoryData?.length > 0 && (
-        <div className="max-width">
-          <h2 className="text-center text-primary-blue text-lg lg:text-2xl font-niladri mb-2">
-            নির্বাচিত লেখা
-          </h2>
-          <h1 className="text-center text-2xl md:text-3xl lg:text-[40px] lg:leading-[60px] xl:text-[60px] xl:leading-[80px] font-niladri">
-            যে কোন বিষয়বস্তু থেইকা ছাইকা বের কইরা নেয়া যায়, গুরুত্বপূর্ণ
-            কনটেক্স। কোনটাই ফেলনা না
-          </h1>
-          {featuredStoryData?.map((item, i) => (
-            <div
-              key={i}
-              className="flex items-center flex-wrap sm:flex-nowrap gap-5 md:gap-[60px] py-5 md:py-16 border-b-2 border-primary-blue"
-            >
-              <img
-                src={item?.thumbnail?.url}
-                alt="nirbachito-lekha"
-                className="w-full sm:w-[45%] shrink-0 rounded-lg object-cover h-[250px]"
-              />
-              <div className="w-full sm:w-[55%] flex items-center justify-between gap-5">
-                <div>
-                  <h2 className="text-primary-blue text-lg lg:text-3xl font-medium">
-                    {item?.authorId?.fullName}
-                  </h2>
-                  <h2 className="text-2xl lg:text-4xl font-semibold my-2 sm:my-3">
-                    {item?.title}
-                  </h2>
+      <div className="max-width">
+        <h2 className="text-center text-primary-blue text-lg lg:text-2xl font-niladri mb-2">
+          নির্বাচিত লেখা
+        </h2>
+        <h1 className="text-center text-2xl md:text-3xl lg:text-[40px] lg:leading-[60px] xl:text-[60px] xl:leading-[80px] font-niladri">
+          যে কোন বিষয়বস্তু থেইকা ছাইকা বের কইরা নেয়া যায়, গুরুত্বপূর্ণ কনটেক্স।
+          কোনটাই ফেলনা না
+        </h1>
+        {isFeaturedStoryLoading
+          ? Array.from({ length: 3 }).map((_, index) => (
+              <FeaturedStoryCardSkeleton key={index} />
+            ))
+          : featuredStoryData?.map((item, i) => (
+              <div
+                key={i}
+                className="flex items-center flex-wrap sm:flex-nowrap gap-5 md:gap-[60px] py-5 md:py-16 border-b-2 border-primary-blue"
+              >
+                <img
+                  src={item?.thumbnail?.url}
+                  alt="nirbachito-lekha"
+                  className="w-full sm:w-[45%] shrink-0 rounded-lg object-cover h-[250px]"
+                />
+                <div className="w-full sm:w-[55%] flex items-center justify-between gap-5">
+                  <div>
+                    <h2 className="text-primary-blue text-lg lg:text-3xl font-medium">
+                      {item?.authorId?.fullName}
+                    </h2>
+                    <h2 className="text-2xl lg:text-4xl font-semibold my-2 sm:my-3">
+                      {item?.title}
+                    </h2>
+                    <Link
+                      to={`/story/${item?._id}`}
+                      className="shrink-0 size-10 rounded-full border-2 border-black sm:hidden flex items-center justify-center text-xl mb-2 hover:bg-primary-blue hover:border-primary-blue hover:text-white duration-300"
+                    >
+                      <IoIosArrowForward />
+                    </Link>
+                    <p className="line-clamp-3">{item?.shortDescription}</p>
+                  </div>
                   <Link
                     to={`/story/${item?._id}`}
-                    className="shrink-0 size-10 rounded-full border-2 border-black sm:hidden flex items-center justify-center text-xl mb-2 hover:bg-primary-blue hover:border-primary-blue hover:text-white duration-300"
+                    className="shrink-0 size-10 rounded-full border-2 border-black hidden sm:flex items-center justify-center text-xl hover:bg-primary-blue hover:border-primary-blue hover:text-white duration-300"
                   >
                     <IoIosArrowForward />
                   </Link>
-                  <p className="line-clamp-3">{item?.shortDescription}</p>
                 </div>
-                <Link
-                  to={`/story/${item?._id}`}
-                  className="shrink-0 size-10 rounded-full border-2 border-black hidden sm:flex items-center justify-center text-xl hover:bg-primary-blue hover:border-primary-blue hover:text-white duration-300"
-                >
-                  <IoIosArrowForward />
-                </Link>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+      </div>
 
       {/* চিন্তা category posts block section */}
-      {thoughtCategoryStories && thoughtCategoryStories?.length > 0 && (
-        <div className="max-width py-[100px]">
-          <h2 className="text-center text-primary-blue text-lg lg:text-2xl mb-2 font-niladri">
-            চিন্তা
-          </h2>
-          <h1 className="text-center text-2xl md:text-3xl lg:text-[40px] lg:leading-[60px] xl:text-[60px] xl:leading-[80px] font-niladri">
-            শিল্পের গেরুয়া বসনগুলা খুইলা ফেল, <br className="hidden lg:block" />
-            শিল্পের মুখ থেকে জবান খুইতেছে
-          </h1>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 lg:gap-8 xl:gap-12 mt-10">
-            {thoughtCategoryStories?.map((item, i) => (
-              <CategoryCardWithButton
-                key={i}
-                thumbnail={item?.thumbnail?.url}
-                title={item?.title}
-                desc={item?.shortDescription}
-                link={item?._id}
-                darkMode={false}
-              />
-            ))}
-          </div>
+      <div className="max-width py-[100px]">
+        <h2 className="text-center text-primary-blue text-lg lg:text-2xl mb-2 font-niladri">
+          চিন্তা
+        </h2>
+        <h1 className="text-center text-2xl md:text-3xl lg:text-[40px] lg:leading-[60px] xl:text-[60px] xl:leading-[80px] font-niladri">
+          শিল্পের গেরুয়া বসনগুলা খুইলা ফেল, <br className="hidden lg:block" />
+          শিল্পের মুখ থেকে জবান খুইতেছে
+        </h1>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 lg:gap-8 xl:gap-12 mt-10">
+          {isArtCategoryLoading
+            ? Array.from({ length: 3 }).map((_, index) => (
+                <MostReadCardSkeleton key={index} dark={false} />
+              ))
+            : thoughtCategoryStories?.map((item, i) => (
+                <CategoryCardWithButton
+                  key={i}
+                  thumbnail={item?.thumbnail?.url}
+                  title={item?.title}
+                  desc={item?.shortDescription}
+                  link={item?._id}
+                  darkMode={false}
+                />
+              ))}
         </div>
-      )}
+      </div>
 
       <div
         className={thoughtCategoryStories?.length > 0 ? "" : "mt-[100px]"}
@@ -197,29 +204,31 @@ const HomePage = () => {
       )}
 
       {/* শিল্প category posts block section */}
-      {artCategoryStories && artCategoryStories?.length > 0 && (
-        <div className="max-width py-[60px] sm:py-[100px]">
-          <h2 className="text-center text-primary-blue text-lg lg:text-2xl mb-2 font-niladri">
-            শিল্প
-          </h2>
-          <h1 className="text-center text-2xl md:text-3xl lg:text-[40px] lg:leading-[60px] xl:text-[60px] xl:leading-[80px] font-niladri">
-            শিল্পের গেরুয়া বসনগুলা খুইলা ফেল, <br className="hidden lg:block" />
-            শিল্পের মুখ থেকে জবান খুইতেছে
-          </h1>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 lg:gap-8 xl:gap-12 mt-10">
-            {artCategoryStories?.map((item, i) => (
-              <CategoryCardWithButton
-                key={i}
-                thumbnail={item?.thumbnail?.url}
-                title={item?.title}
-                desc={item?.shortDescription}
-                link={item?._id}
-                darkMode={false}
-              />
-            ))}
-          </div>
+      <div className="max-width py-[60px] sm:py-[100px]">
+        <h2 className="text-center text-primary-blue text-lg lg:text-2xl mb-2 font-niladri">
+          শিল্প
+        </h2>
+        <h1 className="text-center text-2xl md:text-3xl lg:text-[40px] lg:leading-[60px] xl:text-[60px] xl:leading-[80px] font-niladri">
+          শিল্পের গেরুয়া বসনগুলা খুইলা ফেল, <br className="hidden lg:block" />
+          শিল্পের মুখ থেকে জবান খুইতেছে
+        </h1>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 lg:gap-8 xl:gap-12 mt-10">
+          {isArtCategoryLoading
+            ? Array.from({ length: 3 }).map((_, index) => (
+                <MostReadCardSkeleton key={index} dark={false} />
+              ))
+            : artCategoryStories?.map((item, i) => (
+                <CategoryCardWithButton
+                  key={i}
+                  thumbnail={item?.thumbnail?.url}
+                  title={item?.title}
+                  desc={item?.shortDescription}
+                  link={item?._id}
+                  darkMode={false}
+                />
+              ))}
         </div>
-      )}
+      </div>
 
       <div
         className={
