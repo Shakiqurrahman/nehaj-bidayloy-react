@@ -11,6 +11,8 @@ import Icon from "/public/icon.png";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+  const isAdmin = user?.role === "ADMIN";
 
   const [toggle, setToggle] = useState(false);
   const { openSearch } = useSelector((state) => state.utils);
@@ -159,12 +161,21 @@ const Header = () => {
               >
                 বিজ্ঞপ্তি
               </NavLink>
-              <NavLink
-                to={"/contact"}
-                className="hidden sm:block text-lg text-primary-blue hover:text-primary-golden duration-300"
-              >
-                যোগাযোগ
-              </NavLink>
+              {isAdmin ? (
+                <NavLink
+                  to={"/admin-dashboard"}
+                  className="hidden sm:block text-lg text-primary-blue hover:text-primary-golden duration-300"
+                >
+                  ড্যাশবোর্ড
+                </NavLink>
+              ) : (
+                <NavLink
+                  to={"/contact"}
+                  className="hidden sm:block text-lg text-primary-blue hover:text-primary-golden duration-300"
+                >
+                  যোগাযোগ
+                </NavLink>
+              )}
               <button
                 className="shrink-0 block lg:hidden"
                 onClick={() => setToggle(true)}
