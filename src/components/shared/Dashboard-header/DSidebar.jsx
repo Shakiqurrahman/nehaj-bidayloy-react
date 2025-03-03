@@ -15,7 +15,7 @@ const DSideBar = () => {
   return (
     <aside className="lg:w-[240px] relative flex-shrink-0">
       <ul
-        className={`text-black bg-white w-full md:w-[250px]  left-0  fixed top-24 h-full pt-4  shadow-lg lg:translate-x-0 ${
+        className={`text-black bg-white w-full md:w-[250px]  left-0 z-10 fixed top-24 h-full pt-4  shadow-lg lg:translate-x-0 ${
           activeHamburger
             ? "translate-x-0 duration-300"
             : "translate-x-[-100%] duration-300"
