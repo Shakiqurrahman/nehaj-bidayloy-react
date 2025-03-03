@@ -60,13 +60,15 @@ const PatchokroPage = () => {
             })
           )}
         </div>
-        <hr className="bg-[#EAECF0] mb-5 mt-10" />
-        {!isLoading && (
-          <Pagination
-            currentPage={currentPage}
-            onPageChange={handlePageChange}
-            totalPages={Number(meta?.totalPages) || 0}
-          />
+        {!isLoading && meta?.totalPages > 1 && (
+          <>
+            <hr className="bg-[#EAECF0] mb-5 mt-10" />
+            <Pagination
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+              totalPages={Number(meta?.totalPages) || 0}
+            />
+          </>
         )}
       </div>
     </div>

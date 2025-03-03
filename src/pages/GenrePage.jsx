@@ -151,13 +151,15 @@ const GenrePage = () => {
             ))
           )}
         </div>
-        <hr className="bg-[#EAECF0] mb-5 mt-10" />
-        {!isLoading && (
-          <Pagination
-            currentPage={currentPage}
-            totalPages={Number(meta?.totalPages) || 0}
-            onPageChange={handlePageChange}
-          />
+        {!isLoading && meta?.totalPages > 1 && (
+          <>
+            <hr className="bg-[#EAECF0] mb-5 mt-10" />
+            <Pagination
+              currentPage={currentPage}
+              totalPages={Number(meta?.totalPages) || 0}
+              onPageChange={handlePageChange}
+            />
+          </>
         )}
       </div>
     </>
