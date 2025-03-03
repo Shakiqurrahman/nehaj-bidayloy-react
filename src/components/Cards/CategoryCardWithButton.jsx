@@ -24,7 +24,7 @@ const CategoryCardWithButton = ({
         </div>
       )}
       <h1
-        className="font-niladri my-3 text-lg sm:text-2xl line-clamp-3 sm:line-clamp-2"
+        className="font-niladri my-3 text-lg sm:text-2xl line-clamp-3 sm:line-clamp-1"
         title={title}
       >
         {title}

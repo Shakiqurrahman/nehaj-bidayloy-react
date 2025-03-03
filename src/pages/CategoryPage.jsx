@@ -19,6 +19,7 @@ import theologyBgImage from "../assets/images/category-bg-images/theology.png";
 import thoughtBgImage from "../assets/images/category-bg-images/thought.png";
 import CategoryCardWithButton from "../components/Cards/CategoryCardWithButton";
 import TranslateCard from "../components/Cards/TranslateCard";
+import MostReadCardSkeleton from "../components/skeleton/MostReadCardSkeleton";
 import StoryCardSkeleton from "../components/skeleton/StoryCardSkeleton";
 
 const CategoryPage = () => {
@@ -112,17 +113,39 @@ const CategoryPage = () => {
       ></div>
 
       {/* category quotes section */}
-      {quotes && quotes?.length > 0 && (
-        <div className="max-width my-[60px] sm:my-[100px]">
+      <div className="max-width my-[60px] sm:my-[100px]">
+        {isQuotesLoading ? (
+          <h2 className="bg-gray-300 h-8 mx-auto w-[100px] rounded-lg mb-4"></h2>
+        ) : (
           <h2 className="text-lg lg:text-3xl font-niladri text-center text-primary-blue mb-2">
             {categoryInfo?.category}
           </h2>
+        )}
+        {isQuotesLoading ? (
+          <h1 className="bg-gray-300 h-8 mx-auto w-[250px] rounded-lg mb-10"></h1>
+        ) : (
           <h1 className="lg:w-[70%] mx-auto text-center text-2xl md:text-3xl lg:text-[40px] lg:leading-[60px] xl:text-[60px] xl:leading-[80px] font-niladri mb-10">
             {categoryInfo?.title}
           </h1>
-          <div className="mt-10">
-            <Slider {...settings}>
-              {quotes?.map((item, i) => (
+        )}
+        <div className="mt-10">
+          <Slider {...settings}>
+            {isQuotesLoading ? (
+              <>
+                <div className="animate-pulse">
+                  <div className="flex flex-wrap lg:flex-nowrap gap-5">
+                    <div className="w-full lg:w-1/2 shrink-0">
+                      <div className="size-full bg-gray-300 rounded-[30px]"></div>
+                    </div>
+                    <div className="w-full lg:w-1/2 rounded-[30px] text-center sm:text-start sm:border border-primary-blue p-6 sm:p-10 md:p-20 font-mainak-signature sm:text-lg md:text-2xl">
+                      <div className="h-6 bg-gray-300 rounded w-3/4 mb-3 sm:mb-10"></div>
+                      <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              quotes?.map((item, i) => (
                 <div key={i}>
                   <div className="flex flex-wrap lg:flex-nowrap gap-5">
                     <div className="w-full lg:w-1/2 shrink-0">
@@ -140,30 +163,36 @@ const CategoryPage = () => {
                     </div>
                   </div>
                 </div>
-              ))}
-            </Slider>
-          </div>
+              ))
+            )}
+          </Slider>
         </div>
-      )}
+      </div>
 
       <div
         className={quotes?.length > 0 ? "" : "mt-[60px] sm:mt-[100px]"}
       ></div>
 
       {/* সর্বাধিক পঠিত section */}
-      {mostReadPosts && mostReadPosts?.length > 0 && (
-        <div
-          className={`py-10 md:py-20 rounded-[30px] text-white px-4 ${categoryBgColor}`}
-        >
-          <div className="max-width">
-            <h2 className="text-center text-lg font-niladri">সর্বাধিক পঠিত</h2>
-            <p className="text-center w-full md:w-3/4 mx-auto sm:text-lg mt-5 mb-10">
-              নেহাজে প্রকাশিত চিন্তা বিষয়ক প্রবন্ধ, অনুবাদসমূহ থেইকা সবচে’
-              বেশীবার পঠিত লেখাগুলা আপনি পড়তে পারে এইখান থেকে। এই আ‍র্কাইভ
-              প্রতি মাসের পরিসংখ্যানের উপর নির্ভর করে রিশাফল হইবে।
-            </p>
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-[30px] gap-y-[60px]">
-              {mostReadPosts?.map((item, i) => (
+      <div
+        className={`py-10 md:py-20 rounded-[30px] text-white px-4 ${categoryBgColor}`}
+      >
+        <div className="max-width">
+          <h2 className="text-center text-lg font-niladri">সর্বাধিক পঠিত</h2>
+          <p className="text-center w-full md:w-3/4 mx-auto sm:text-lg mt-5 mb-10">
+            নেহাজে প্রকাশিত চিন্তা বিষয়ক প্রবন্ধ, অনুবাদসমূহ থেইকা সবচে’ বেশীবার
+            পঠিত লেখাগুলা আপনি পড়তে পারে এইখান থেকে। এই আ‍র্কাইভ প্রতি মাসের
+            পরিসংখ্যানের উপর নির্ভর করে রিশাফল হইবে।
+          </p>
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-[30px] gap-y-[60px]">
+            {isMostReadLoading ? (
+              <>
+                {Array.from({ length: 6 }).map((_, index) => (
+                  <MostReadCardSkeleton key={index} />
+                ))}
+              </>
+            ) : (
+              mostReadPosts?.map((item, i) => (
                 <CategoryCardWithButton
                   key={i}
                   thumbnail={item?.thumbnail?.url}
@@ -171,13 +200,13 @@ const CategoryPage = () => {
                   desc={item?.shortDescription}
                   link={item?._id}
                   categoryName={item?.category?.name}
-                  genreType={item?.genre?.প্রবন্ধ}
+                  genreType={item?.genre?.name}
                 />
-              ))}
-            </div>
+              ))
+            )}
           </div>
         </div>
-      )}
+      </div>
 
       {/* সমস্ত লেখা section */}
       <div className="my-[60px] sm:my-[100px] max-width">

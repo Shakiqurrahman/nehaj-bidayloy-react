@@ -14,6 +14,7 @@ import {
 import articleBgImage from "../assets/images/genre-bg-images/article.png";
 import notesBgImage from "../assets/images/genre-bg-images/notes.png";
 import translateBgImage from "../assets/images/genre-bg-images/translate.png";
+import MostReadCardSkeleton from "../components/skeleton/MostReadCardSkeleton";
 import StoryCardSkeleton from "../components/skeleton/StoryCardSkeleton";
 
 const GenrePage = () => {
@@ -84,19 +85,25 @@ const GenrePage = () => {
         </div>
       )}
       {/* সর্বাধিক পঠিত section */}
-      {mostReadPosts && mostReadPosts?.length > 0 && (
-        <div
-          className={`py-10 sm:py-20 px-4 rounded-[30px] text-white ${genreBgColor}`}
-        >
-          <div className="max-width">
-            <h2 className="text-center text-lg font-niladri">সর্বাধিক পঠিত</h2>
-            <p className="text-center w-full md:w-3/4 mx-auto sm:text-lg mt-5 mb-10">
-              নেহাজে প্রকাশিত চিন্তা বিষয়ক প্রবন্ধ, অনুবাদসমূহ থেইকা সবচে’
-              বেশীবার পঠিত লেখাগুলা আপনি পড়তে পারে এইখান থেকে। এই আ‍র্কাইভ
-              প্রতি মাসের পরিসংখ্যানের উপর নির্ভর করে রিশাফল হইবে।
-            </p>
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-[30px] gap-y-[60px]">
-              {mostReadPosts?.map((item, i) => (
+      <div
+        className={`py-10 sm:py-20 px-4 rounded-[30px] text-white ${genreBgColor}`}
+      >
+        <div className="max-width">
+          <h2 className="text-center text-lg font-niladri">সর্বাধিক পঠিত</h2>
+          <p className="text-center w-full md:w-3/4 mx-auto sm:text-lg mt-5 mb-10">
+            নেহাজে প্রকাশিত চিন্তা বিষয়ক প্রবন্ধ, অনুবাদসমূহ থেইকা সবচে’ বেশীবার
+            পঠিত লেখাগুলা আপনি পড়তে পারে এইখান থেকে। এই আ‍র্কাইভ প্রতি মাসের
+            পরিসংখ্যানের উপর নির্ভর করে রিশাফল হইবে।
+          </p>
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-[30px] gap-y-[60px]">
+            {isMostReadLoading ? (
+              <>
+                {Array.from({ length: 6 }).map((_, index) => (
+                  <MostReadCardSkeleton key={index} />
+                ))}
+              </>
+            ) : (
+              mostReadPosts?.map((item, i) => (
                 <CategoryCardWithButton
                   key={i}
                   thumbnail={item?.thumbnail?.url}
@@ -104,13 +111,13 @@ const GenrePage = () => {
                   desc={item?.shortDescription}
                   link={item?._id}
                   categoryName={item?.category?.name}
-                  genreType={item?.genre?.প্রবন্ধ}
+                  genreType={item?.genre?.name}
                 />
-              ))}
-            </div>
+              ))
+            )}
           </div>
         </div>
-      )}
+      </div>
       {/* সমস্ত লেখা section */}
       <div className="my-[60px] sm:my-[100px] max-width">
         <div className="flex items-baseline gap-5 mb-10">

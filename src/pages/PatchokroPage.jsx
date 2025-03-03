@@ -36,7 +36,7 @@ const PatchokroPage = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-x-[30px] gap-y-10">
           {isLoading ? (
             <>
-              {Array.from({ length: 9 }).map((_, index) => (
+              {Array.from({ length: 6 }).map((_, index) => (
                 <PathchokroCardSkeleton key={index} />
               ))}
             </>

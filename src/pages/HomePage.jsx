@@ -9,6 +9,7 @@ import HomeSinglePostCard from "../components/Cards/HomeSinglePostCard";
 import TranslateCard from "../components/Cards/TranslateCard";
 import RecentEventBanner from "../components/RecentEventBanner";
 import Hero from "../components/shared/Header/Hero";
+import CategoryCardSkeleton from "../components/skeleton/CategoryCardSkeleton";
 import {
   useGetCategoriesForHomePageQuery,
   useGetCategorySliderQuery,
@@ -21,11 +22,13 @@ import {
 import { useGet3StudyCircleQuery } from "../Redux/api/studyCircleApiSlice";
 
 const HomePage = () => {
-  const { data: latestStudyCircle } = useGet3StudyCircleQuery();
+  const { data: latestStudyCircle, isLoading: isLatestStudyLoading } =
+    useGet3StudyCircleQuery();
   const { data: randomQuotes } = useGetRandomQuotesQuery();
   const { data: categorySliderData } = useGetCategorySliderQuery();
   const { data: featuredStoryData } = useGetFeaturedStoryQuery();
-  const { data: categoryCardsData } = useGetCategoriesForHomePageQuery();
+  const { data: categoryCardsData, isLoading: isCategoryDataLoading } =
+    useGetCategoriesForHomePageQuery();
   const { data: thoughtCategoryStories } =
     useGetSelectedStoriesByCategoryQuery("thought");
   const { data: artCategoryStories } =
@@ -54,15 +57,21 @@ const HomePage = () => {
       {/* Hero section */}
       <Hero />
       {/* Category Cards section */}
-      {categoryCardsData && categoryCardsData?.length > 0 && (
-        <div className="max-width my-[60px] sm:mt-[113px] sm:mb-[152px]">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-x-10 2xl:gap-x-[70px] md:gap-y-[46px]">
-            {categoryCardsData?.map((card, index) => (
+      <div className="max-width my-[60px] sm:mt-[113px] sm:mb-[152px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-x-10 2xl:gap-x-[70px] md:gap-y-[46px]">
+          {isCategoryDataLoading ? (
+            <>
+              {Array.from({ length: 6 }).map((_, index) => (
+                <CategoryCardSkeleton key={index} />
+              ))}
+            </>
+          ) : (
+            categoryCardsData?.map((card, index) => (
               <HomeCategoryCard key={index} data={card} />
-            ))}
-          </div>
+            ))
+          )}
         </div>
-      )}
+      </div>
 
       <div
         className={
@@ -89,15 +98,15 @@ const HomePage = () => {
         </div>
       )}
       {/* সাম্প্রতিক পাঠচক্র section */}
-      {latestStudyCircle && latestStudyCircle?.length > 0 && (
-        <RecentEventBanner
-          title="সাম্প্রতিক পাঠচক্র"
-          subTitle="নেহাজ প্রতি পাক্ষিকে একটা করে পাঠচক্রের আয়োজন করে। আগ্রহীগন
+      <RecentEventBanner
+        title="সাম্প্রতিক পাঠচক্র"
+        subTitle="নেহাজ প্রতি পাক্ষিকে একটা করে পাঠচক্রের আয়োজন করে। আগ্রহীগন
           পাঠচক্রের বিজ্ঞপ্তি মোতাবেক নেহাজের উক্ত পাঠচক্রে যুক্ত হইতে পারবেন।
           বিজ্ঞপ্তিতে ক্লিকের মাধ্যমে আপনি এক্টিভ সেশনের জুম লিংক-এ যেতে পারবে।"
-          data={latestStudyCircle}
-        />
-      )}
+        data={latestStudyCircle}
+        isLoading={isLatestStudyLoading}
+      />
+
       {/* নির্বাচিত লেখা section */}
       {featuredStoryData && featuredStoryData?.length > 0 && (
         <div className="max-width">
