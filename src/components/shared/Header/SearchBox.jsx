@@ -87,7 +87,7 @@ export const SearchBox = () => {
                   key={idx}
                 >
                   <div className="flex items-center gap-3">
-                    <FaAnglesRight />
+                    <FaAnglesRight className="shrink-0" />
                     <div className="flex flex-col">
                       <h2>{res?.title}</h2>
                       <div className="flex items-center text-[11px] leading-normal text-gray-500">
