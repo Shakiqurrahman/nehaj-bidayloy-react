@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import StudyCircleCard from "../../components/Dashboard/StudyCircleCard";
+import Pagination from "../../components/Pagination";
 import { useFetchStudyCircleQuery } from "../../Redux/api/studyCircleApiSlice";
 import Loading from "../../utils/Loading";
 
 const AllStudyCircle = () => {
   const { data: response, isLoading } = useFetchStudyCircleQuery();
   const allPosts = response?.data || [];
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   return isLoading ? (
     <div className="min-h-[calc(100vh_-_96px)]">
@@ -38,6 +45,12 @@ const AllStudyCircle = () => {
         ) : (
           <p className="text-center">No Data Found!</p>
         )}
+        <hr className="bg-[#EAECF0] mb-5 mt-10" />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={5}
+          onPageChange={handlePageChange}
+        />
       </section>
     </>
   );

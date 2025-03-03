@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { FiEdit, FiPlusCircle } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import Pagination from "../../components/Pagination";
 import {
   useDeleteQuoteMutation,
   useFetchQuotesQuery,
@@ -13,6 +14,12 @@ const AllQuotes = () => {
   const { data: quotesResponse, isLoading } = useFetchQuotesQuery();
   const { quotes } = quotesResponse || {};
   const [DeleteQuote] = useDeleteQuoteMutation();
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   const handleDelete = async (quoteId) => {
     if (quoteId) {
@@ -93,6 +100,12 @@ const AllQuotes = () => {
       ) : (
         <p className="text-center">No Data Found!</p>
       )}
+      <hr className="bg-[#EAECF0] mb-5 mt-10" />
+      <Pagination
+        currentPage={currentPage}
+        totalPages={5}
+        onPageChange={handlePageChange}
+      />
     </section>
   );
 };

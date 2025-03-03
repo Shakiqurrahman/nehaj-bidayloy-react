@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiEdit, FiPlusCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Loading from "../../utils/Loading";
@@ -10,12 +10,19 @@ import {
   useFetchNoticeQuery,
 } from "../../Redux/api/noticeApiSlice";
 import noticeBgImage from "../../assets/images/noticeImage.png";
+import Pagination from "../../components/Pagination";
 
 const AllNotice = () => {
   const { data: response, isLoading } = useFetchNoticeQuery();
   const notices = response?.data || [];
 
   const [DeleteNotice] = useDeleteNoticeMutation();
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   const handleDelete = async (id) => {
     if (id) {
@@ -83,6 +90,12 @@ const AllNotice = () => {
         ) : (
           <p className="text-center">No Data Found!</p>
         )}
+        <hr className="bg-[#EAECF0] mb-5 mt-10" />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={5}
+          onPageChange={handlePageChange}
+        />
       </section>
     </>
   );
