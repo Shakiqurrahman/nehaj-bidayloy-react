@@ -3,8 +3,15 @@ import { apiSlice } from "./apiSlice";
 export const authorApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     fetchAuthors: builder.query({
-      query: () => "/authors",
-      transformResponse: (response) => response?.authors,
+      query: (arg = {}) => {
+        const { page, limit } = arg;
+
+        let queryParams = new URLSearchParams();
+        if (page) queryParams.append("page", page);
+        if (page || limit) queryParams.append("limit", 9);
+
+        return `/authors?${queryParams.toString()}`;
+      },
       providesTags: ["authors"],
     }),
     createAuthor: builder.mutation({

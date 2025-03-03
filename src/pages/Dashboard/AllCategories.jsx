@@ -24,7 +24,9 @@ const AllCategories = () => {
   };
 
   return isLoading ? (
-    <Loading />
+    <div className="min-h-[calc(100vh_-_96px)]">
+      <Loading />
+    </div>
   ) : (
     <>
       <section className="min-h-[calc(100vh_-_96px)]">

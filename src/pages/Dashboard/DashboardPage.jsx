@@ -12,7 +12,9 @@ const DashboardPage = () => {
   const { data: overAllData, isLoading } = useGetOverAllDataQuery();
 
   return isLoading ? (
-    <Loading />
+    <div className="min-h-[calc(100vh_-_96px)]">
+      <Loading />
+    </div>
   ) : (
     <section className="w-full min-h-[calc(100vh_-_96px)]">
       <div>

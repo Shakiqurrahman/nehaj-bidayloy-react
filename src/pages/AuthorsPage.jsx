@@ -5,9 +5,12 @@ import AuthorCardSkeleton from "../components/skeleton/AuthorCardSkeleton";
 import { useFetchAuthorsQuery } from "../Redux/api/authorApiSlice";
 
 const AuthorsPage = () => {
-  const { data: authors, isLoading } = useFetchAuthorsQuery();
-
   const [currentPage, setCurrentPage] = useState(1);
+  const { data: response, isLoading } = useFetchAuthorsQuery({
+    page: Number(currentPage) || 1,
+  });
+
+  const { meta, data: authors } = response || {};
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -32,14 +35,13 @@ const AuthorsPage = () => {
             <p className="text-center">No authors found!</p>
           )}
         </div>
-        {authors?.length > 20 && (
+        {meta?.totalPages > 1 && !isLoading && (
           <>
             <hr className="bg-[#EAECF0] mb-5 mt-10" />
             <Pagination
               currentPage={currentPage}
-              itemsPerPage={10}
               onPageChange={handlePageChange}
-              totalItems={100}
+              totalPages={Number(meta?.totalPages) || 0}
             />
           </>
         )}

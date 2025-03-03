@@ -6,10 +6,13 @@ import AuthorsCard from "../../components/Dashboard/AuthorsCard";
 import Loading from "../../utils/Loading";
 
 const AllAuthor = () => {
-  const { data: authors, isLoading } = useFetchAuthorsQuery();
+  const { data: response, isLoading } = useFetchAuthorsQuery();
+  const { data: authors } = response || {};
 
   return isLoading ? (
-    <Loading />
+    <div className="min-h-[calc(100vh_-_96px)]">
+      <Loading />
+    </div>
   ) : (
     <>
       <section className="min-h-[calc(100vh_-_96px)]">

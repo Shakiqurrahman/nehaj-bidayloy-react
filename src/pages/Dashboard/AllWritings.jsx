@@ -9,7 +9,9 @@ const AllWritings = () => {
   const { data: response, isLoading } = useFetchStoriesQuery();
   const stories = response?.data;
   return isLoading ? (
-    <Loading />
+    <div className="min-h-[calc(100vh_-_96px)]">
+      <Loading />
+    </div>
   ) : (
     <>
       <section className="min-h-[calc(100vh_-_96px)]">
