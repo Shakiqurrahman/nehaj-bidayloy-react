@@ -5,6 +5,7 @@ import { useGetSingleStoryQuery } from "../Redux/api/storyApiSlice";
 import commentAvatar from "../assets/images/commentAvatar.png";
 import CategoryCard from "../components/Cards/CategoryCard";
 import { CommentForm } from "../components/CommentForm";
+import SingleStorySkeleton from "../components/skeleton/SingleStorySkeleton";
 import { convertToBanglaDate } from "../utils/convertToBanglaDate";
 import { markStoryAsRead } from "../utils/markAsReadStory";
 
@@ -67,7 +68,9 @@ const SingleBlogPost = () => {
 
   const sanitizedContent = DOMPurify.sanitize(storyData?.content || "");
 
-  return (
+  return isLoading ? (
+    <SingleStorySkeleton />
+  ) : (
     <div className="pt-[200px]">
       <div className="max-width">
         <div className="flex items-center gap-2">
