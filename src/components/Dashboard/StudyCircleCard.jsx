@@ -61,8 +61,10 @@ const StudyCircleCard = ({ data }) => {
       <Link
         to={`/study-circle/${data?._id}`}
         className="flex items-start gap-5 font-niladri text-lg lg:text-2xl text-primary-blue line-clamp-2"
+        title={data?.title}
       >
-        {data?.title} <MdArrowOutward className="shrink-0" />
+        <span className="line-clamp-1">{data?.title}</span>{" "}
+        <MdArrowOutward className="shrink-0" />
       </Link>
       <p className="line-clamp-3 my-5">{data?.description}</p>
       <div className="flex items-center gap-2">

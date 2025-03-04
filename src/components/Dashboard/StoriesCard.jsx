@@ -47,7 +47,10 @@ const StoriesCard = ({ storyData }) => {
         className="w-full block object-cover"
         alt={storyData?.thumbnail?.name}
       />
-      <Link className="line-clamp-1 font-ador text-lg text-primary-blue mt-5">
+      <Link
+        className="line-clamp-1 font-ador text-lg text-primary-blue mt-5"
+        title={storyData?.title}
+      >
         {storyData?.title}
       </Link>
       <p className="line-clamp-2 my-3">{storyData?.shortDescription}</p>
