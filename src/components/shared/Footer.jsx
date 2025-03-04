@@ -20,7 +20,7 @@ const Footer = () => {
               কর্তৃপক্ষের অনুমতি ছাড়া কোথাও প্রকাশ করা অবৈধ৷
             </p>
           </div>
-          <div className="pr-5 sm:pr-0 w-full md:w-auto shrink-0 flex flex-col items-center md:items-start gap-3 sm:gap-[25px]">
+          <div className="w-full md:w-auto shrink-0 flex flex-col items-center md:items-start gap-3 sm:gap-[25px]">
             <h1 className="text-lg sm:text-2xl font-niladri">বিষয়</h1>
             <ul className="flex md:flex-col gap-[10px]">
               <li>
@@ -102,7 +102,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="pr-5 sm:pr-0 w-full md:w-auto shrink-0 flex flex-col items-center md:items-start gap-3 sm:gap-[25px]">
+          <div className="w-full md:w-auto shrink-0 flex flex-col items-center md:items-start gap-3 sm:gap-[25px]">
             <h1 className="text-lg sm:text-2xl font-niladri">
               গুরুত্বপূর্ণ লিংক
             </h1>
