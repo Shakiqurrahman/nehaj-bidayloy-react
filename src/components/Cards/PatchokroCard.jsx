@@ -18,8 +18,9 @@ const PatchokroCard = ({ date, title, thumbnail, desc, session, link }) => {
       <Link
         to={`/study-circle/${link}`}
         className="flex items-start gap-5 font-niladri text-lg lg:text-2xl text-primary-blue hover:text-primary-golden duration-300"
+        title={title}
       >
-        <span className="line-clamp-2">{title}</span>{" "}
+        <span className="line-clamp-1">{title}</span>{" "}
         <MdArrowOutward className="shrink-0" />
       </Link>
       <p className="line-clamp-5 sm:line-clamp-3 my-5 text-sm sm:text-base">
