@@ -4,6 +4,8 @@ import { IoClose } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import useOutsideClick from "../../../hooks/useOutsideClick";
+import { useGetCategoriesQuery } from "../../../Redux/api/categoryApiSlice";
+import { useGetGenresQuery } from "../../../Redux/api/genreApiSlice";
 import { setOpenSearch } from "../../../Redux/features/utilsSlice";
 import Logo from "/public/icon.png";
 
@@ -11,6 +13,9 @@ const SidePanel = ({ open, close }) => {
   const dispatch = useDispatch();
 
   const { openSearch } = useSelector((state) => state.utils);
+
+  const { data: categoriesData } = useGetCategoriesQuery();
+  const { data: genreData } = useGetGenresQuery();
 
   const boxRef = useRef(null);
   const dropdownsRef = useRef({});
@@ -80,54 +85,17 @@ const SidePanel = ({ open, close }) => {
                     : 0,
               }}
             >
-              <li>
-                <NavLink
-                  to={"/category/thought"}
-                  className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full"
-                >
-                  চিন্তা
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to={"/category/history"}
-                  className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full"
-                >
-                  ইতিহাস
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to={"/category/literary"}
-                  className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full"
-                >
-                  সাহিত্য
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to={"/category/art"}
-                  className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full"
-                >
-                  শিল্প
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to={"/category/cinema"}
-                  className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full"
-                >
-                  সিনেমা
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to={"/category/theology"}
-                  className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full"
-                >
-                  ধর্মতত্ত্ব
-                </NavLink>
-              </li>
+              {categoriesData &&
+                categoriesData?.map((category, i) => (
+                  <li key={i}>
+                    <NavLink
+                      to={`/category/${category?.categorySlug}`}
+                      className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full"
+                    >
+                      {category?.category}
+                    </NavLink>
+                  </li>
+                ))}
             </ul>
           </li>
           <li className="relative group overflow-hidden">
@@ -149,30 +117,17 @@ const SidePanel = ({ open, close }) => {
                     : 0,
               }}
             >
-              <li>
-                <NavLink
-                  to={"/genre/article"}
-                  className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full"
-                >
-                  প্রবন্ধ
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to={"/genre/notes"}
-                  className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full"
-                >
-                  নোটস
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to={"/genre/translate"}
-                  className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full"
-                >
-                  অনুবাদ
-                </NavLink>
-              </li>
+              {genreData &&
+                genreData?.map((genre, i) => (
+                  <li key={i}>
+                    <NavLink
+                      to={`/genre/${genre?.genreSlug}`}
+                      className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full"
+                    >
+                      {genre?.genre}
+                    </NavLink>
+                  </li>
+                ))}
             </ul>
           </li>
           <li>

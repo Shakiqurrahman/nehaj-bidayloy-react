@@ -2,9 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import AuthorLogo from "../../assets/images/Footer/Footer-Author.png";
 import MaskutLogo from "../../assets/images/Footer/Footer-Nehaj-Maskut.png";
+import { useGetCategoriesQuery } from "../../Redux/api/categoryApiSlice";
+import { useGetGenresQuery } from "../../Redux/api/genreApiSlice";
 import WhiteLogo from "/public/nehaj-logo-white.png";
 
 const Footer = () => {
+  const { data: categoriesData } = useGetCategoriesQuery();
+  const { data: genreData } = useGetGenresQuery();
+
   return (
     <footer className="bg-primary-blue rounded-[30px] mt-[60px] sm:mt-32 text-white pt-[78px] pb-[33px] px-5">
       <div className="max-width">
@@ -23,83 +28,33 @@ const Footer = () => {
           <div className="w-full md:w-auto shrink-0 flex flex-col items-center md:items-start gap-3 sm:gap-[25px]">
             <h1 className="text-lg sm:text-2xl font-niladri">বিষয়</h1>
             <ul className="flex md:flex-col gap-[10px]">
-              <li>
-                <Link
-                  to={"/category/thought"}
-                  className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
-                >
-                  চিন্তা
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to={"/category/history"}
-                  className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
-                >
-                  ইতিহাস
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to={"/category/literary"}
-                  className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
-                >
-                  সাহিত্য
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to={"/category/art"}
-                  className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
-                >
-                  শিল্প
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to={"/category/cinema"}
-                  className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
-                >
-                  সিনেমা
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to={"/category/theology"}
-                  className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
-                >
-                  ধর্মতত্ত্ব
-                </Link>
-              </li>
+              {categoriesData &&
+                categoriesData?.map((category, i) => (
+                  <li key={i}>
+                    <Link
+                      to={`/category/${category?.categorySlug}`}
+                      className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
+                    >
+                      {category?.category}
+                    </Link>
+                  </li>
+                ))}
             </ul>
           </div>
           <div className="w-full md:w-auto shrink-0 flex flex-col items-center md:items-start gap-3 sm:gap-[25px]">
             <h1 className="text-lg sm:text-2xl font-niladri">ধরণ</h1>
             <ul className="flex md:flex-col gap-[10px]">
-              <li>
-                <Link
-                  to={"/genre/article"}
-                  className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
-                >
-                  প্রবন্ধ
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to={"/genre/notes"}
-                  className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
-                >
-                  নোটস
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to={"/genre/translate"}
-                  className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
-                >
-                  অনুবাদ
-                </Link>
-              </li>
+              {genreData &&
+                genreData?.map((genre, i) => (
+                  <li key={i}>
+                    <Link
+                      to={`/genre/${genre?.genreSlug}`}
+                      className="text-white text-base sm:text-lg hover:text-alert-orange duration-300"
+                    >
+                      {genre?.genre}
+                    </Link>
+                  </li>
+                ))}
             </ul>
           </div>
           <div className="w-full md:w-auto shrink-0 flex flex-col items-center md:items-start gap-3 sm:gap-[25px]">

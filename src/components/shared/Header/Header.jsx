@@ -3,6 +3,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { IoIosArrowDown } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import { useGetCategoriesQuery } from "../../../Redux/api/categoryApiSlice";
+import { useGetGenresQuery } from "../../../Redux/api/genreApiSlice";
 import { setOpenSearch } from "../../../Redux/features/utilsSlice";
 import { SearchBox } from "./SearchBox";
 import SidePanel from "./SidePanel";
@@ -13,6 +15,9 @@ const Header = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const isAdmin = user?.role === "ADMIN";
+
+  const { data: categoriesData } = useGetCategoriesQuery();
+  const { data: genreData } = useGetGenresQuery();
 
   const [toggle, setToggle] = useState(false);
   const { openSearch } = useSelector((state) => state.utils);
@@ -48,54 +53,17 @@ const Header = () => {
                   বিষয় <IoIosArrowDown />
                 </div>
                 <ul className="absolute top-[32px] left-0 space-y-3 bg-primary-white w-[150px] py-5 rounded-lg shadow group-hover:opacity-100 opacity-0 invisible group-hover:visible duration-300">
-                  <li>
-                    <NavLink
-                      to={"/category/thought"}
-                      className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full hover:pl-5"
-                    >
-                      চিন্তা
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to={"/category/history"}
-                      className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full hover:pl-5"
-                    >
-                      ইতিহাস
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to={"/category/literary"}
-                      className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full hover:pl-5"
-                    >
-                      সাহিত্য
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to={"/category/art"}
-                      className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full hover:pl-5"
-                    >
-                      শিল্প
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to={"/category/cinema"}
-                      className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full hover:pl-5"
-                    >
-                      সিনেমা
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to={"/category/theology"}
-                      className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full hover:pl-5"
-                    >
-                      ধর্মতত্ত্ব
-                    </NavLink>
-                  </li>
+                  {categoriesData &&
+                    categoriesData?.map((category, i) => (
+                      <li key={i}>
+                        <NavLink
+                          to={`/category/${category?.categorySlug}`}
+                          className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full hover:pl-5"
+                        >
+                          {category?.category}
+                        </NavLink>
+                      </li>
+                    ))}
                 </ul>
               </li>
               <li className="relative group">
@@ -103,30 +71,17 @@ const Header = () => {
                   ধরণ <IoIosArrowDown />
                 </div>
                 <ul className="absolute top-[32px] left-0 space-y-3 bg-primary-white w-[120px] py-5 rounded-lg shadow group-hover:opacity-100 opacity-0 invisible group-hover:visible duration-300">
-                  <li>
-                    <NavLink
-                      to={"/genre/article"}
-                      className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full hover:pl-5"
-                    >
-                      প্রবন্ধ
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to={"/genre/notes"}
-                      className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full hover:pl-5"
-                    >
-                      নোটস
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to={"/genre/translate"}
-                      className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full hover:pl-5"
-                    >
-                      অনুবাদ
-                    </NavLink>
-                  </li>
+                  {genreData &&
+                    genreData?.map((genre, i) => (
+                      <li key={i}>
+                        <NavLink
+                          to={`/genre/${genre?.genreSlug}`}
+                          className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full hover:pl-5"
+                        >
+                          {genre?.genre}
+                        </NavLink>
+                      </li>
+                    ))}
                 </ul>
               </li>
               <li>
