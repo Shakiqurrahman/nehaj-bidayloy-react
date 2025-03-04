@@ -13,6 +13,8 @@ const SidePanel = ({ open, close }) => {
   const dispatch = useDispatch();
 
   const { openSearch } = useSelector((state) => state.utils);
+  const { user } = useSelector((state) => state.user);
+  const isAdmin = user?.role === "ADMIN";
 
   const { data: categoriesData } = useGetCategoriesQuery();
   const { data: genreData } = useGetGenresQuery();
@@ -91,6 +93,7 @@ const SidePanel = ({ open, close }) => {
                     <NavLink
                       to={`/category/${category?.categorySlug}`}
                       className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full"
+                      onClick={close}
                     >
                       {category?.category}
                     </NavLink>
@@ -123,6 +126,7 @@ const SidePanel = ({ open, close }) => {
                     <NavLink
                       to={`/genre/${genre?.genreSlug}`}
                       className="text-lg text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full"
+                      onClick={close}
                     >
                       {genre?.genre}
                     </NavLink>
@@ -134,6 +138,7 @@ const SidePanel = ({ open, close }) => {
             <NavLink
               to={"/study-circle"}
               className="text-lg text-primary-blue hover:text-primary-golden duration-300 block w-full"
+              onClick={close}
             >
               পাঠচক্র
             </NavLink>
@@ -142,6 +147,7 @@ const SidePanel = ({ open, close }) => {
             <NavLink
               to={"/author"}
               className="text-lg text-primary-blue hover:text-primary-golden duration-300 block w-full"
+              onClick={close}
             >
               লেখক
             </NavLink>
@@ -150,6 +156,7 @@ const SidePanel = ({ open, close }) => {
             <NavLink
               to={"/about-us"}
               className="text-lg text-primary-blue hover:text-primary-golden duration-300 block w-full"
+              onClick={close}
             >
               পরিচয়
             </NavLink>
@@ -158,18 +165,32 @@ const SidePanel = ({ open, close }) => {
             <NavLink
               to={"/notice"}
               className="block text-lg text-primary-blue hover:text-primary-golden duration-300 w-full"
+              onClick={close}
             >
               বিজ্ঞপ্তি
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to={"/contact"}
-              className="block text-lg text-primary-blue hover:text-primary-golden duration-300 w-full"
-            >
-              যোগাযোগ
-            </NavLink>
-          </li>
+          {isAdmin ? (
+            <li>
+              <NavLink
+                to={"/admin-dashboard"}
+                className="block text-lg text-primary-blue hover:text-primary-golden duration-300 w-full"
+                onClick={close}
+              >
+                ড্যাশবোর্ড
+              </NavLink>
+            </li>
+          ) : (
+            <li>
+              <NavLink
+                to={"/contact"}
+                className="block text-lg text-primary-blue hover:text-primary-golden duration-300 w-full"
+                onClick={close}
+              >
+                যোগাযোগ
+              </NavLink>
+            </li>
+          )}
         </ul>
       </div>
     </div>
