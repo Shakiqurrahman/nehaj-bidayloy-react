@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FaAnglesRight } from "react-icons/fa6";
 import { HiMinusSm } from "react-icons/hi";
 import { IoMdReturnLeft } from "react-icons/io";
@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import useOutsideClick from "../../../hooks/useOutsideClick";
 import { useLazyGetSearchSuggessionsQuery } from "../../../Redux/api/userApiSlice";
 import { setOpenSearch } from "../../../Redux/features/utilsSlice";
+import { debounce } from "lodash";
 
 export const SearchBox = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,17 @@ export const SearchBox = () => {
   const [textInput, setTextInput] = useState("");
   const [triggerSearch, { data: suggessionsData, isFetching }] =
     useLazyGetSearchSuggessionsQuery();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const handleSearch = useCallback(
+      debounce((query) => {
+        if (query.length >= 2) {
+          triggerSearch({ searchTerm: query });
+        }
+      }, 300),
+      [triggerSearch]
+    );
+
   useEffect(() => {
     if (openSearch && textRef.current) {
       textRef.current.focus();
@@ -28,10 +40,7 @@ export const SearchBox = () => {
   const handleInput = (e) => {
     const value = e.target.value;
     setTextInput(value);
-
-    if (value.length >= 2) {
-      triggerSearch({ searchTerm: value });
-    }
+    handleSearch(value);
   };
 
   const handleClearInput = () => {
@@ -119,7 +128,7 @@ export const SearchBox = () => {
             textInput.length >= 2 &&
             suggessionsData?.length === 0 && (
               <p className="text-center mt-5 mb-2 font-poppins">
-                Nothing Found!
+                Sorry, we couldn’t find anything matching your search.
               </p>
             )}
         </div>

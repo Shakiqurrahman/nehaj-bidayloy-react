@@ -9,7 +9,7 @@ const userApiSlice = apiSlice.injectEndpoints({
         if (searchTerm) queryParams.append("searchTerm", searchTerm);
         return `/search?${queryParams.toString()}`;
       },
-      transformResponse: (response) => response?.data?.stories,
+      transformResponse: (response) => response?.data,
     }),
 
     fetchUserData: builder.query({
