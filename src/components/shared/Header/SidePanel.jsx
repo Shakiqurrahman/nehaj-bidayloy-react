@@ -7,7 +7,7 @@ import useOutsideClick from "../../../hooks/useOutsideClick";
 import { useGetCategoriesQuery } from "../../../Redux/api/categoryApiSlice";
 import { useGetGenresQuery } from "../../../Redux/api/genreApiSlice";
 import { setOpenSearch } from "../../../Redux/features/utilsSlice";
-import Logo from "/public/icon.png";
+import Logo from "/icon.png";
 
 const SidePanel = ({ open, close }) => {
   const dispatch = useDispatch();

@@ -4,7 +4,7 @@ import AuthorLogo from "../../assets/images/Footer/Footer-Author.png";
 import MaskutLogo from "../../assets/images/Footer/Footer-Nehaj-Maskut.png";
 import { useGetCategoriesQuery } from "../../Redux/api/categoryApiSlice";
 import { useGetGenresQuery } from "../../Redux/api/genreApiSlice";
-import WhiteLogo from "/public/nehaj-logo-white.png";
+import WhiteLogo from "/nehaj-logo-white.png";
 
 const Footer = () => {
   const { data: categoriesData } = useGetCategoriesQuery();

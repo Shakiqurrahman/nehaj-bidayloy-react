@@ -8,8 +8,8 @@ import { useGetGenresQuery } from "../../../Redux/api/genreApiSlice";
 import { setOpenSearch } from "../../../Redux/features/utilsSlice";
 import { SearchBox } from "./SearchBox";
 import SidePanel from "./SidePanel";
-import Logo from "/public/Nehaj_Logo.png";
-import Icon from "/public/icon.png";
+import Logo from "/Nehaj_Logo.png";
+import Icon from "/icon.png";
 
 const Header = () => {
   const dispatch = useDispatch();
