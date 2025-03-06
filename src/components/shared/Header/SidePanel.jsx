@@ -53,7 +53,7 @@ const SidePanel = ({ open, close }) => {
       >
         <div className="flex items-center gap-3">
           <Link to={"/"}>
-            <img src={Logo} alt="Nehaj Logo" />
+            <img src={Logo} alt="Nehaj Logo" className="w-[50px]" />
           </Link>
           <button
             type="button"
