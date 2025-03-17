@@ -6,7 +6,7 @@ import { setUserData } from "../../../Redux/features/userSlice";
 import { setActiveHamburgerD } from "../../../Redux/features/utilsSlice";
 import defaultAvatar from "../../../assets/images/no-profile-picture.svg";
 import DropdownProfile from "../../Dashboard/DropdownProfile";
-import ProfileModal from "../../profileModal";
+import ProfileModal from "../../ProfileModal";
 import Logo from "/Nehaj_Logo.png";
 
 const DHeader = () => {
