@@ -2,7 +2,6 @@ import React from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import onubadCardBgImage from "../assets/images/onubadCardBgImage.png";
 import CategoryCardWithButton from "../components/Cards/CategoryCardWithButton";
 import FeaturedStoryCardSkeleton from "../components/Cards/FeaturedStoryCardSkeleton";
 import HomeCategoryCard from "../components/Cards/HomeCategoryCard";
@@ -16,6 +15,7 @@ import {
   useGetCategoriesForHomePageQuery,
   useGetCategorySliderQuery,
 } from "../Redux/api/categoryApiSlice";
+import { useGetGenreBannerQuery } from "../Redux/api/genreApiSlice";
 import { useGetRandomQuotesQuery } from "../Redux/api/quotesApiSlice";
 import {
   useGetFeaturedStoryQuery,
@@ -37,12 +37,7 @@ const HomePage = () => {
   const { data: artCategoryStories, isLoading: isArtCategoryLoading } =
     useGetSelectedStoriesByCategoryQuery("art");
 
-  const translateCardData = {
-    bgImage: onubadCardBgImage,
-    title: "অনুবাদ",
-    desc: `"নেহাজ করে জানতে হয়"। মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল, যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়।`,
-    link: "translate",
-  };
+  const { data: translateCardData } = useGetGenreBannerQuery();
 
   const settings = {
     dots: categorySliderData?.length > 6 ? false : true,
@@ -195,10 +190,10 @@ const HomePage = () => {
       {translateCardData && (
         <div className="max-width">
           <TranslateCard
-            bgImage={translateCardData?.bgImage}
-            title={translateCardData?.title}
-            desc={translateCardData?.desc}
-            link={translateCardData?.link}
+            bgImage={translateCardData?.thumbnail?.url}
+            title={`${translateCardData?.category?.name} || ${translateCardData?.genre?.name}`}
+            desc={translateCardData?.shortDescription}
+            link={`/story/${translateCardData?._id}`}
           />
         </div>
       )}

@@ -16,8 +16,9 @@ const Header = () => {
   const { user } = useSelector((state) => state.user);
   const isAdmin = user?.role === "ADMIN";
 
-  const { data: categoriesData } = useGetCategoriesQuery();
-  const { data: genreData } = useGetGenresQuery();
+  const { data: categoriesData, isLoading: isCategoryLoading } =
+    useGetCategoriesQuery();
+  const { data: genreData, isLoading: isGenreLoading } = useGetGenresQuery();
 
   const [toggle, setToggle] = useState(false);
   const { openSearch } = useSelector((state) => state.utils);
@@ -53,7 +54,11 @@ const Header = () => {
                   বিষয় <IoIosArrowDown />
                 </div>
                 <ul className="absolute top-[32px] left-0 space-y-3 bg-primary-white w-[150px] py-5 rounded-lg shadow group-hover:opacity-100 opacity-0 invisible group-hover:visible duration-300">
-                  {categoriesData &&
+                  {isCategoryLoading ? (
+                    <li className="text-base text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full hover:pl-5">
+                      Loading...
+                    </li>
+                  ) : (
                     categoriesData?.map((category, i) => (
                       <li key={i}>
                         <NavLink
@@ -63,7 +68,8 @@ const Header = () => {
                           {category?.category}
                         </NavLink>
                       </li>
-                    ))}
+                    ))
+                  )}
                 </ul>
               </li>
               <li className="relative group">
@@ -71,7 +77,11 @@ const Header = () => {
                   ধরণ <IoIosArrowDown />
                 </div>
                 <ul className="absolute top-[32px] left-0 space-y-3 bg-primary-white w-[120px] py-5 rounded-lg shadow group-hover:opacity-100 opacity-0 invisible group-hover:visible duration-300">
-                  {genreData &&
+                  {isGenreLoading ? (
+                    <li className="text-base text-primary-blue hover:text-primary-golden duration-300 px-3 block w-full hover:pl-5">
+                      Loading...
+                    </li>
+                  ) : (
                     genreData?.map((genre, i) => (
                       <li key={i}>
                         <NavLink
@@ -81,7 +91,8 @@ const Header = () => {
                           {genre?.genre}
                         </NavLink>
                       </li>
-                    ))}
+                    ))
+                  )}
                 </ul>
               </li>
               <li>

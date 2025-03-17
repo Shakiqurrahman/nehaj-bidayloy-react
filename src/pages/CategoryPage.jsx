@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import CategoryCard from "../components/Cards/CategoryCard";
+import Pagination from "../components/Pagination";
 import { useFetchQuotesQuery } from "../Redux/api/quotesApiSlice";
 import {
   useFetchStoriesQuery,
   useGetMostReadStoriesQuery,
 } from "../Redux/api/storyApiSlice";
-import onubadCardBgImage from "../assets/images/onubadCardBgImage.png";
-import CategoryCard from "../components/Cards/CategoryCard";
-import Pagination from "../components/Pagination";
 
 // category bg image imports
 import Slider from "react-slick";
@@ -21,6 +20,7 @@ import CategoryCardWithButton from "../components/Cards/CategoryCardWithButton";
 import TranslateCard from "../components/Cards/TranslateCard";
 import MostReadCardSkeleton from "../components/skeleton/MostReadCardSkeleton";
 import StoryCardSkeleton from "../components/skeleton/StoryCardSkeleton";
+import { useGetGenreBannerQuery } from "../Redux/api/genreApiSlice";
 
 const CategoryPage = () => {
   const { categorySlug } = useParams();
@@ -57,12 +57,16 @@ const CategoryPage = () => {
     setCurrentPage(page);
   };
 
-  const translateCardData = {
-    bgImage: onubadCardBgImage,
-    title: "অনুবাদ",
-    desc: `"নেহাজ করে জানতে হয়"। মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল, যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়।`,
-    link: "",
-  };
+  const { data: translateCardData } = useGetGenreBannerQuery(
+    {
+      category: categorySlug,
+    },
+    {
+      skip: !categorySlug,
+    }
+  );
+
+  console.log(translateCardData);
 
   const settings = {
     dots: true,
@@ -257,10 +261,10 @@ const CategoryPage = () => {
       {translateCardData && (
         <div>
           <TranslateCard
-            bgImage={translateCardData?.bgImage}
-            title={translateCardData?.title}
-            desc={translateCardData?.desc}
-            link={translateCardData?.link}
+            bgImage={translateCardData?.thumbnail?.url}
+            title={`${translateCardData?.category?.name} || ${translateCardData?.genre?.name}`}
+            desc={translateCardData?.shortDescription}
+            link={`/story/${translateCardData?._id}`}
           />
         </div>
       )}

@@ -33,6 +33,20 @@ const genreApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["genre"],
     }),
+
+    getGenreBanner: builder.query({
+      query: (args = {}) => {
+        const { category, genre } = args;
+
+        let queryParams = new URLSearchParams();
+        if (category) queryParams.append("category", category);
+        if (genre) queryParams.append("genre", genre);
+
+        return `/genre/banner?${queryParams.toString()}`;
+      },
+
+      transformResponse: (response) => response?.data,
+    }),
   }),
 });
 
@@ -41,4 +55,5 @@ export const {
   useCreateGenreMutation,
   useUpdateGenreMutation,
   useDeleteGenreMutation,
+  useGetGenreBannerQuery,
 } = genreApiSlice;

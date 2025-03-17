@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import onubadCardBgImage from "../assets/images/onubadCardBgImage.png";
 import CategoryCard from "../components/Cards/CategoryCard";
 import CategoryCardWithButton from "../components/Cards/CategoryCardWithButton";
 import TranslateCard from "../components/Cards/TranslateCard";
@@ -16,6 +15,7 @@ import notesBgImage from "../assets/images/genre-bg-images/notes.png";
 import translateBgImage from "../assets/images/genre-bg-images/translate.png";
 import MostReadCardSkeleton from "../components/skeleton/MostReadCardSkeleton";
 import StoryCardSkeleton from "../components/skeleton/StoryCardSkeleton";
+import { useGetGenreBannerQuery } from "../Redux/api/genreApiSlice";
 
 const GenrePage = () => {
   const { genreSlug } = useParams();
@@ -44,12 +44,14 @@ const GenrePage = () => {
     setCurrentPage(page);
   };
 
-  const translateCardData = {
-    bgImage: onubadCardBgImage,
-    title: "অনুবাদ",
-    desc: `"নেহাজ করে জানতে হয়"। মানুষের মাঝে নিহিত যে অমিত সম্ভাবনা বা পটেনশিয়াল, যে "ভাষাময়" অস্তিত্ব মানুষের যাপনরে "পার্টিকুলার" আর সার্থক কইরা তোলে, যার জোরে মানুষ নিঃশেষিত না হইতে সক্ষম কোনো বাঁধাধরা নিয়ম শৃঙ্খলায়।`,
-    link: "",
-  };
+  const { data: translateCardData } = useGetGenreBannerQuery(
+    {
+      genre: genreSlug,
+    },
+    {
+      skip: !genreSlug,
+    }
+  );
 
   const genreBgColor =
     genreSlug === "article"
@@ -73,14 +75,14 @@ const GenrePage = () => {
         className="h-[500px] sm:h-[600px] lg:h-[1000px] object-center object-cover shadow-sm rounded-[30px]"
         style={{ backgroundImage: `url(${genreBgImage})` }}
       ></div>
-      {/* অনুবাদ card section */}
+      {/* genre banner section */}
       {translateCardData && (
         <div className="my-[60px] sm:my-[100px]">
           <TranslateCard
-            bgImage={translateCardData?.bgImage}
-            title={translateCardData?.title}
-            desc={translateCardData?.desc}
-            link={translateCardData?.link}
+            bgImage={translateCardData?.thumbnail?.url}
+            title={`সাম্প্রতিক ${translateCardData?.genre?.name} || ${translateCardData?.category?.name}`}
+            desc={translateCardData?.shortDescription}
+            link={`/story/${translateCardData?._id}`}
           />
         </div>
       )}
