@@ -6,6 +6,7 @@ import { setUserData } from "../../../Redux/features/userSlice";
 import { setActiveHamburgerD } from "../../../Redux/features/utilsSlice";
 import defaultAvatar from "../../../assets/images/no-profile-picture.svg";
 import DropdownProfile from "../../Dashboard/DropdownProfile";
+import ProfileModal from "../../profileModal";
 import Logo from "/Nehaj_Logo.png";
 
 const DHeader = () => {
@@ -15,6 +16,7 @@ const DHeader = () => {
   const { user } = useSelector((state) => state.user);
   const { data: userData } = useFetchUserDataQuery();
   const [openProfile, setOpenProfile] = useState(false);
+  const [openProfileModal, setOpenProfileModal] = useState(false);
 
   const handleHamburgerMenu = () => {
     dispatch(setActiveHamburgerD(!activeHamburger));
@@ -79,7 +81,13 @@ const DHeader = () => {
               alt={user?.fullName}
             />
             {openProfile && (
-              <DropdownProfile close={() => setOpenProfile(false)} />
+              <DropdownProfile
+                close={() => setOpenProfile(false)}
+                setOpenProfileModal={setOpenProfileModal}
+              />
+            )}
+            {openProfileModal && (
+              <ProfileModal close={() => setOpenProfileModal(false)} />
             )}
           </div>
         </div>
