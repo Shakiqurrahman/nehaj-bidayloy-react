@@ -4,13 +4,13 @@ export const storyApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     fetchStories: builder.query({
       query: (arg = {}) => {
-        const { page, limit, category = "", genre = "" } = arg;
+        const { page, limit = 6, category = "", genre = "" } = arg;
 
         let queryParams = new URLSearchParams();
         if (category) queryParams.append("category", category);
         if (genre) queryParams.append("genre", genre);
         if (page) queryParams.append("page", page);
-        if (page || limit) queryParams.append("limit", 6);
+        if (page || limit) queryParams.append("limit", limit);
 
         return `/stories?${queryParams.toString()}`;
       },

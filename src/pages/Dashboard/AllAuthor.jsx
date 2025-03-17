@@ -7,10 +7,12 @@ import Pagination from "../../components/Pagination";
 import Loading from "../../utils/Loading";
 
 const AllAuthor = () => {
-  const { data: response, isLoading } = useFetchAuthorsQuery();
-  const { data: authors } = response || {};
-
   const [currentPage, setCurrentPage] = useState(1);
+  const { data: response, isLoading } = useFetchAuthorsQuery({
+    page: Number(currentPage) || 1,
+    limit: 12,
+  });
+  const { data: authors, meta } = response || {};
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -45,11 +47,16 @@ const AllAuthor = () => {
           <p className="text-center">No Data Found!</p>
         )}
         <hr className="bg-[#EAECF0] mb-5 mt-10" />
-        <Pagination
-          currentPage={currentPage}
-          totalPages={5}
-          onPageChange={handlePageChange}
-        />
+        {!isLoading && meta?.totalPages > 1 && (
+          <>
+            <hr className="bg-[#EAECF0] mb-5 mt-10" />
+            <Pagination
+              currentPage={currentPage}
+              totalPages={Number(meta?.totalPages) || 0}
+              onPageChange={handlePageChange}
+            />
+          </>
+        )}
       </section>
     </>
   );

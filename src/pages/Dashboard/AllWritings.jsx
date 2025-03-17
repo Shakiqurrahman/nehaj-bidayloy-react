@@ -7,10 +7,12 @@ import { useFetchStoriesQuery } from "../../Redux/api/storyApiSlice";
 import Loading from "../../utils/Loading";
 
 const AllWritings = () => {
-  const { data: response, isLoading } = useFetchStoriesQuery();
-  const stories = response?.data;
-
   const [currentPage, setCurrentPage] = useState(1);
+  const { data: response, isLoading } = useFetchStoriesQuery({
+    page: Number(currentPage) || 1,
+    limit: 12,
+  });
+  const { data: stories, meta } = response || {};
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -43,12 +45,16 @@ const AllWritings = () => {
         ) : (
           <p className="text-center">No Data Found!</p>
         )}
-        <hr className="bg-[#EAECF0] mb-5 mt-10" />
-        <Pagination
-          currentPage={currentPage}
-          totalPages={5}
-          onPageChange={handlePageChange}
-        />
+        {!isLoading && meta?.totalPages > 1 && (
+          <>
+            <hr className="bg-[#EAECF0] mb-5 mt-10" />
+            <Pagination
+              currentPage={currentPage}
+              totalPages={Number(meta?.totalPages) || 0}
+              onPageChange={handlePageChange}
+            />
+          </>
+        )}
       </section>
     </>
   );

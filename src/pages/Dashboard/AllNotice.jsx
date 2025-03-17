@@ -13,12 +13,14 @@ import noticeBgImage from "../../assets/images/noticeImage.png";
 import Pagination from "../../components/Pagination";
 
 const AllNotice = () => {
-  const { data: response, isLoading } = useFetchNoticeQuery();
-  const notices = response?.data || [];
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data: response, isLoading } = useFetchNoticeQuery({
+    page: Number(currentPage) || 1,
+    limit: 12,
+  });
+  const { data: notices, meta } = response || {};
 
   const [DeleteNotice] = useDeleteNoticeMutation();
-
-  const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -90,12 +92,16 @@ const AllNotice = () => {
         ) : (
           <p className="text-center">No Data Found!</p>
         )}
-        <hr className="bg-[#EAECF0] mb-5 mt-10" />
-        <Pagination
-          currentPage={currentPage}
-          totalPages={5}
-          onPageChange={handlePageChange}
-        />
+        {!isLoading && meta?.totalPages > 1 && (
+          <>
+            <hr className="bg-[#EAECF0] mb-5 mt-10" />
+            <Pagination
+              currentPage={currentPage}
+              totalPages={Number(meta?.totalPages) || 0}
+              onPageChange={handlePageChange}
+            />
+          </>
+        )}
       </section>
     </>
   );

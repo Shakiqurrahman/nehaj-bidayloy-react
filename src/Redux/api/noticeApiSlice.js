@@ -4,11 +4,11 @@ export const noticeApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     fetchNotice: builder.query({
       query: (arg = {}) => {
-        const { page, limit } = arg;
+        const { page, limit = 6 } = arg;
 
         let queryParams = new URLSearchParams();
         if (page) queryParams.append("page", page);
-        if (page || limit) queryParams.append("limit", 6);
+        if (page || limit) queryParams.append("limit", limit);
 
         return `/notices?${queryParams.toString()}`;
       },

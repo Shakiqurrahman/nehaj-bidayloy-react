@@ -4,11 +4,11 @@ export const authorApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     fetchAuthors: builder.query({
       query: (arg = {}) => {
-        const { page, limit } = arg;
+        const { page, limit = 9 } = arg;
 
         let queryParams = new URLSearchParams();
         if (page) queryParams.append("page", page);
-        if (page || limit) queryParams.append("limit", 9);
+        if (page || limit) queryParams.append("limit", limit);
 
         return `/authors?${queryParams.toString()}`;
       },
