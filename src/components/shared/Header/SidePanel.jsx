@@ -22,7 +22,7 @@ const SidePanel = ({ open, close }) => {
   const boxRef = useRef(null);
   const dropdownsRef = useRef({});
 
-  const [openDropdown, setOpenDropdown] = useState("category");
+  const [openDropdown, setOpenDropdown] = useState("");
 
   useEffect(() => {
     if (open) {
