@@ -19,6 +19,7 @@ const Pagination = ({
       // Scroll to the target element after page change
       setTimeout(() => {
         if (scrollRef?.current) {
+          scrollRef.current.style.scrollMarginTop = "40px";
           scrollRef?.current?.scrollIntoView({
             behavior: "smooth",
             block: "start", // Align to the top of the element
