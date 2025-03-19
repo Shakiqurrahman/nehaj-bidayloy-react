@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import StoriesCard from "../../components/Dashboard/StoriesCard";
@@ -7,6 +7,8 @@ import { useFetchStoriesQuery } from "../../Redux/api/storyApiSlice";
 import Loading from "../../utils/Loading";
 
 const AllWritings = () => {
+  const cardsBlockRef = useRef(null);
+
   const [currentPage, setCurrentPage] = useState(1);
   const { data: response, isLoading } = useFetchStoriesQuery({
     page: Number(currentPage) || 1,
@@ -37,7 +39,10 @@ const AllWritings = () => {
         </div>
         <span className="block w-full h-px bg-black/20 my-5"></span>
         {stories && stories?.length > 0 ? (
-          <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
+          <div
+            ref={cardsBlockRef}
+            className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5"
+          >
             {stories?.map((story, idx) => (
               <StoriesCard key={idx} storyData={story} />
             ))}
@@ -52,6 +57,7 @@ const AllWritings = () => {
               currentPage={currentPage}
               totalPages={Number(meta?.totalPages) || 0}
               onPageChange={handlePageChange}
+              scrollRef={cardsBlockRef}
             />
           </>
         )}

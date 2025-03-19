@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FiEdit, FiPlusCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Loading from "../../utils/Loading";
@@ -13,6 +13,8 @@ import noticeBgImage from "../../assets/images/noticeImage.png";
 import Pagination from "../../components/Pagination";
 
 const AllNotice = () => {
+  const cardsBlockRef = useRef(null);
+
   const [currentPage, setCurrentPage] = useState(1);
   const { data: response, isLoading } = useFetchNoticeQuery({
     page: Number(currentPage) || 1,
@@ -59,7 +61,10 @@ const AllNotice = () => {
         </div>
         <span className="block w-full h-px bg-black/20 my-5"></span>
         {notices && notices?.length > 0 ? (
-          <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
+          <div
+            ref={cardsBlockRef}
+            className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5"
+          >
             {notices?.map((note, idx) => (
               <div
                 key={idx}
@@ -99,6 +104,7 @@ const AllNotice = () => {
               currentPage={currentPage}
               totalPages={Number(meta?.totalPages) || 0}
               onPageChange={handlePageChange}
+              scrollRef={cardsBlockRef}
             />
           </>
         )}

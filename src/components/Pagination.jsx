@@ -7,6 +7,7 @@ const Pagination = ({
   // itemsPerPage,
   currentPage,
   onPageChange,
+  scrollRef,
 }) => {
   // Calculate total number of pages
   // const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -14,6 +15,16 @@ const Pagination = ({
   const handlePageClick = (page) => {
     if (page !== currentPage && page >= 1 && page <= totalPages) {
       onPageChange(page);
+
+      // Scroll to the target element after page change
+      setTimeout(() => {
+        if (scrollRef?.current) {
+          scrollRef?.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start", // Align to the top of the element
+          });
+        }
+      }, 100); // 100ms delay
     }
   };
 

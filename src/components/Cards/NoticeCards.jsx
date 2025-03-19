@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Pagination from "../Pagination";
 
 const NoticeCards = ({
@@ -8,12 +8,14 @@ const NoticeCards = ({
   meta,
   isLoading,
 }) => {
+  const cardsBlockRef = useRef(null);
+
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
   return (
-    <section className="max-width">
+    <section ref={cardsBlockRef} className="max-width">
       <h1 className="section_title">সমস্ত বিজ্ঞপ্তিসমূহ</h1>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8">
         {isLoading ? (
@@ -44,6 +46,7 @@ const NoticeCards = ({
             currentPage={currentPage}
             onPageChange={handlePageChange}
             totalPages={Number(meta?.totalPages) || 0}
+            scrollRef={cardsBlockRef}
           />
         </>
       )}

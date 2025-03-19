@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import StudyCircleCard from "../../components/Dashboard/StudyCircleCard";
@@ -7,6 +7,8 @@ import { useFetchStudyCircleQuery } from "../../Redux/api/studyCircleApiSlice";
 import Loading from "../../utils/Loading";
 
 const AllStudyCircle = () => {
+  const cardsBlockRef = useRef(null);
+
   const [currentPage, setCurrentPage] = useState(1);
   const { data: response, isLoading } = useFetchStudyCircleQuery({
     page: Number(currentPage) || 1,
@@ -39,7 +41,10 @@ const AllStudyCircle = () => {
         </div>
         <span className="block w-full h-px bg-black/20 my-5"></span>
         {allPosts && allPosts?.length > 0 ? (
-          <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
+          <div
+            ref={cardsBlockRef}
+            className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5"
+          >
             {allPosts?.map((item, i) => (
               <StudyCircleCard key={i} data={item} />
             ))}
@@ -54,6 +59,7 @@ const AllStudyCircle = () => {
               currentPage={currentPage}
               totalPages={Number(meta?.totalPages) || 0}
               onPageChange={handlePageChange}
+              scrollRef={cardsBlockRef}
             />
           </>
         )}

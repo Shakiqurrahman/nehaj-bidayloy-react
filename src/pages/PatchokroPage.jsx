@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import PatchokroCard from "../components/Cards/PatchokroCard";
 import Pagination from "../components/Pagination";
 import RecentEventBanner from "../components/RecentEventBanner";
@@ -9,6 +9,8 @@ import {
 } from "../Redux/api/studyCircleApiSlice";
 
 const PatchokroPage = () => {
+  const cardsBlockRef = useRef(null);
+
   const [currentPage, setCurrentPage] = useState(1);
   const { data: latest } = useGet3StudyCircleQuery();
   const { data: response, isLoading } = useFetchStudyCircleQuery({
@@ -29,7 +31,7 @@ const PatchokroPage = () => {
         isLoading={isLoading}
       />
       {/* সমস্ত পাঠচক্র section */}
-      <div className="my-[60px] sm:my-[100px] max-width">
+      <div ref={cardsBlockRef} className="my-[60px] sm:my-[100px] max-width">
         <h1 className="font-niladri text-primary-blue text-2xl mb-10">
           সমস্ত পাঠচক্র
         </h1>
@@ -67,6 +69,7 @@ const PatchokroPage = () => {
               currentPage={currentPage}
               onPageChange={handlePageChange}
               totalPages={Number(meta?.totalPages) || 0}
+              scrollRef={cardsBlockRef}
             />
           </>
         )}

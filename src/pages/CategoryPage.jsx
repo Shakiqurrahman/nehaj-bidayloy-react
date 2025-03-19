@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import CategoryCard from "../components/Cards/CategoryCard";
 import Pagination from "../components/Pagination";
@@ -24,7 +24,11 @@ import { useGetGenreBannerQuery } from "../Redux/api/genreApiSlice";
 
 const CategoryPage = () => {
   const { categorySlug } = useParams();
+
+  const cardsBlockRef = useRef(null);
+
   const [currentPage, setCurrentPage] = useState(1);
+
   const { data: response, isLoading } = useFetchStoriesQuery(
     {
       category: categorySlug,
@@ -65,8 +69,6 @@ const CategoryPage = () => {
       skip: !categorySlug,
     }
   );
-
-  console.log(translateCardData);
 
   const settings = {
     dots: true,
@@ -213,7 +215,7 @@ const CategoryPage = () => {
       </div>
 
       {/* সমস্ত লেখা section */}
-      <div className="my-[60px] sm:my-[100px] max-width">
+      <div ref={cardsBlockRef} className="my-[60px] sm:my-[100px] max-width">
         <div className="flex items-baseline gap-5 mb-10">
           <h1 className="font-niladri text-primary-blue text-2xl shrink-0">
             সমস্ত লেখা
@@ -252,6 +254,7 @@ const CategoryPage = () => {
               currentPage={currentPage}
               totalPages={Number(meta?.totalPages) || 0}
               onPageChange={handlePageChange}
+              scrollRef={cardsBlockRef}
             />
           </>
         )}

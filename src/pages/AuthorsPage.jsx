@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import AuthorCard from "../components/Cards/AuthorCard";
 import Pagination from "../components/Pagination";
 import AuthorCardSkeleton from "../components/skeleton/AuthorCardSkeleton";
 import { useFetchAuthorsQuery } from "../Redux/api/authorApiSlice";
 
 const AuthorsPage = () => {
+  const cardsBlockRef = useRef(null);
+
   const [currentPage, setCurrentPage] = useState(1);
   const { data: response, isLoading } = useFetchAuthorsQuery({
     page: Number(currentPage) || 1,
@@ -18,7 +20,7 @@ const AuthorsPage = () => {
 
   return (
     <section className="pt-[180px] sm:pb-[70px] max-width">
-      <div>
+      <div ref={cardsBlockRef}>
         <h1 className="section_title">নেহাজের লেখকবৃন্দ</h1>
         <div className="grid grid-cols-3 gap-4 sm:gap-8">
           {isLoading ? (
@@ -42,6 +44,7 @@ const AuthorsPage = () => {
               currentPage={currentPage}
               onPageChange={handlePageChange}
               totalPages={Number(meta?.totalPages) || 0}
+              scrollRef={cardsBlockRef}
             />
           </>
         )}

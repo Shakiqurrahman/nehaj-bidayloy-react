@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useFetchAuthorsQuery } from "../../Redux/api/authorApiSlice";
@@ -7,6 +7,8 @@ import Pagination from "../../components/Pagination";
 import Loading from "../../utils/Loading";
 
 const AllAuthor = () => {
+  const cardsBlockRef = useRef(null);
+
   const [currentPage, setCurrentPage] = useState(1);
   const { data: response, isLoading } = useFetchAuthorsQuery({
     page: Number(currentPage) || 1,
@@ -38,7 +40,10 @@ const AllAuthor = () => {
         <span className="block w-full h-px bg-black/20 my-5"></span>
 
         {authors && authors?.length > 0 ? (
-          <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
+          <div
+            ref={cardsBlockRef}
+            className="mt-4 grid md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5"
+          >
             {authors?.slice(0, 15).map((author, idx) => (
               <AuthorsCard key={idx} authorData={author} />
             ))}
@@ -54,6 +59,7 @@ const AllAuthor = () => {
               currentPage={currentPage}
               totalPages={Number(meta?.totalPages) || 0}
               onPageChange={handlePageChange}
+              scrollRef={cardsBlockRef}
             />
           </>
         )}
